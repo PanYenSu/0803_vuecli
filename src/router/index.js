@@ -37,6 +37,24 @@ const routes = [
     path: '/login',
     component: () => import('../views/Login.vue'),
   },
+  {
+    path: '/admin/',
+    component: () => import('../views/dashboard/Dashboard.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('../views/dashboard/Admin.vue'),
+      },
+      {
+        path: '/admin/products',
+        component: () => import('../views/dashboard/Products.vue'),
+      },
+      {
+        path: '/admin/coupons',
+        component: () => import('../views/dashboard/Coupons.vue'),
+      },
+    ],
+  },
 ];
 
 const router = new VueRouter({
