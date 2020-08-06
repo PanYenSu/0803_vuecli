@@ -4,7 +4,7 @@
          <div class="col-6">
            <img :src="product.imageUrl[0]" class="img-fluid" alt=''>
          </div>
-         <div class="col-6">
+         <div class="col-5 info">
            <h3 class="title">
              {{ product.title }}
            </h3>
@@ -18,18 +18,18 @@
                {{ product.description }}
              </footer>
            </blockquote> -->
-
            <div class="d-flex justify-content-between align-items-baseline ">
-             <div v-if="!product.price" class="h4">
+             <div v-if="!product.price" class="h4" style="display:inline;">
                NT {{ product.origin_price }} 元
              </div>
-             <del v-if="product.price" class="h6 col-6">原價 NT {{ product.origin_price }} 元</del>
+             <del v-if="product.price" class="h6 col-6">
+               原價 {{ product.origin_price | currency }} 元</del>
              <div v-if="product.price" class="h4 text-danger">
-               特價 NT {{ product.price }} 元
+               特價 {{ product.price | currency }} 元
              </div>
            </div>
            <form class="">
-<div class="form-grou mb-3 mx-2 ">
+          <div class="form-grou mb-3 mx-2">
            <select v-model="product.num" name class="form-control " style="width:80%;">
              <option value="0" disabled selected>
                請選擇數量
@@ -39,12 +39,12 @@
              </option>
            </select>
 </div>
-<div class="form-group mb-2 form-inline">
-  <div v-if="product.num" class="text-muted text-nowrap mr-3">
+<div class="form-group mb-3 mx-2">
+  <!-- <div v-if="product.num" class="text-muted text-nowrap mr-3">
              小計
              <strong>{{ product.num * product.price }}</strong> 元
-        </div>
-  <button type="button" class="btn btn-secondary ml-auto mb-2 ">
+        </div> -->
+  <button type="button" class="btn btn-secondary mb-3 mx-2 " style="width:80%;">
   <!-- <i v-if="product.id === status.loadingItem" class="spinner-border spinner-border-sm"></i> -->
 <!-- <i v-if="status.loadingItem === item.id" class="spinner-grow spinner-grow-sm"></i> -->
              加到購物車
