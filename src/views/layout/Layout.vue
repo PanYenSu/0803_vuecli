@@ -1,7 +1,8 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-            <router-link to="/" class="navbar-brand">ChaChaBo</router-link>
+            <router-link to="/" class="navbar-brand" rel="stylesheet" id='titlefont'>
+            ChaChaBo</router-link>
             <button
           class="navbar-toggler"
           type="button"
@@ -52,3 +53,16 @@
         <!-- </section> -->
 </div>
 </template>
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Ranchers&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ruslan+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+#titlefont {
+  /* font-family: 'Ranchers', cursive; */
+  font-family: 'Ruslan Display', cursive;
+  /* font-family: 'Permanent Marker', cursive; */
+  font-size: 36px;
+}
+
+</style>

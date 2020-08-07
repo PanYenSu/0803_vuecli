@@ -1,57 +1,65 @@
 <template>
     <div class="container">
-        <div class="content row mt-3">
+        <div class="row align-items-center">
          <div class="col-6">
            <img :src="product.imageUrl[0]" class="img-fluid" alt=''>
          </div>
-         <div class="col-5 info">
-           <h3 class="title">
+           <!-- <h3 class="title">
              {{ product.title }}
-           </h3>
-      <!-- blockquote 無法實現 -->
-           <p class="font-weight-bold" v-html="product.content"></p>
-           <p class="font-weight-light text-right" > - {{ product.description }}</p>
+           </h3> -->
+<!-- demo star -->
+<div class="col-md-5">
+          <!-- <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-white px-0 mb-0">
+              <li class="breadcrumb-item"><router-link :to="`/products`">
+                <i class="text-muted"> Products</i>
+                </router-link></li>
+              <li class="breadcrumb-item"><router-link :to="`/product/${product.id}`">
+                <i v-if="status.loadingItem === item.id" class="spinner-grow spinner-grow-sm">
+                  {{ product.title }} Detail</i>
+                </router-link></li>
+            </ol>
+          </nav> -->
 
+          <h2 class="font-weight-bold h1 mb-1">{{ product.title }}</h2>
+
+          <p class="font-weight-bold text-left" v-html="product.content"></p>
+          <p v-if='!product.price' class="h4 font-weight-bold text-right">
+            {{ product.price | currency }} 元</p>
+          <p v-if="product.price" class="mb-0 text-muted text-right"><del>
+            NT{{ product.origin_price | currency }}</del></p>
+          <p v-if="product.price" class="h4 font-weight-bold text-right">
+            NT{{ product.price | currency }}</p>
+          <div class="d-flex align-items-center">
+            <div class="input-group my-3 mr-2 bg-light rounded">
+              <div class="input-group-prepend">
+                <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon1">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+              <input type="text"
+                class="form-control border-0 text-center my-auto shadow-none bg-light"
+                placeholder="" aria-label="Example text with button addon"
+                aria-describedby="button-addon1" value="1">
+              <div class="input-group-append">
+                <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon2">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </div>
+            <a href="#" class="btn btn-dark btn-block py-2" @click.prevent="addToCart">加到購物車</a>
+          </div>
+          <p class="font-weight-light text-left" > - {{ product.description }}</p>
+        </div>
+
+<!-- demo end -->
+      <!-- blockquote 無法實現 -->
            <!-- <blockquote class="blockquote">
              <p class="col-sm-9" v-html="product.content"></p>
              <footer class="blockquote-footer text-right" >
                {{ product.description }}
              </footer>
            </blockquote> -->
-           <div class="d-flex justify-content-between align-items-baseline ">
-             <div v-if="!product.price" class="h4" style="display:inline;">
-               NT {{ product.origin_price }} 元
-             </div>
-             <del v-if="product.price" class="h6 col-6">
-               原價 {{ product.origin_price | currency }} 元</del>
-             <div v-if="product.price" class="h4 text-danger">
-               特價 {{ product.price | currency }} 元
-             </div>
-           </div>
-           <form class="">
-          <div class="form-grou mb-3 mx-2">
-           <select v-model="product.num" name class="form-control " style="width:80%;">
-             <option value="0" disabled selected>
-               請選擇數量
-             </option>
-             <option v-for="num in 10" :key="num" :value="num">
-               選購 {{ num }} {{ product.unit }}
-             </option>
-           </select>
-</div>
-<div class="form-group mb-3 mx-2">
-  <!-- <div v-if="product.num" class="text-muted text-nowrap mr-3">
-             小計
-             <strong>{{ product.num * product.price }}</strong> 元
-        </div> -->
-  <button type="button" class="btn btn-secondary mb-3 mx-2 " style="width:80%;">
-  <!-- <i v-if="product.id === status.loadingItem" class="spinner-border spinner-border-sm"></i> -->
-<!-- <i v-if="status.loadingItem === item.id" class="spinner-grow spinner-grow-sm"></i> -->
-             加到購物車
-           </button>
-         </div>
-           </form>
-         </div>
        </div>
     </div>
 </template>
@@ -63,6 +71,10 @@ export default {
         num: 1,
       },
     };
+  },
+  methods: {
+    addToCart() {
+    },
   },
   created() {
     console.log(this.$route);
@@ -77,3 +89,8 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+/* @import '../node_modules/bootstrap/scss/functions';
+@import '../node_modules/bootstrap/scss/bootstrap'; */
+</style>

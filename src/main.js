@@ -6,6 +6,8 @@ import VueAxios from 'vue-axios';
 import Loading from 'vue-loading-overlay';
 // Import stylesheet
 import 'vue-loading-overlay/dist/vue-loading.css';
+import '@fortawesome/fontawesome-free/css/all.css';
+
 import App from './App.vue';
 import router from './router';
 
