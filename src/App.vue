@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <loading :active.sync="isLoading"></loading>
+    <Toast/>
     <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
@@ -9,7 +10,12 @@
   </div>
 </template>
 <script>
+import Toast from '@/components/Toasts.vue';
+
 export default {
+  components: {
+    Toast,
+  },
   data() {
     return {
       isLoading: false,

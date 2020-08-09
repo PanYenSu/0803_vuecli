@@ -2,6 +2,16 @@ import Vue from 'vue';
 import 'bootstrap';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import jquery from 'jquery';
+import {
+  ValidationObserver,
+  ValidationProvider, configure, localize, extend,
+} from 'vee-validate'; // 驗證套件
+import * as rules from 'vee-validate/dist/rules'; // 規則檔案（ex: email...）
+import zhTW from 'vee-validate/dist/locale/zh_TW.json'; // 語系檔案
+// import 'bootstrap';
+// Bus
+import './bus';
 // Import component
 import Loading from 'vue-loading-overlay';
 // Import stylesheet
@@ -11,11 +21,27 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import App from './App.vue';
 import router from './router';
 
+window.$ = jquery;
+
 Vue.config.productionTip = false;
 
 Vue.use(VueAxios, axios);
 
 Vue.component('Loading', Loading);
+
+// vee-validate
+Object.keys(rules).forEach((rule) => {
+  extend(rule, rules[rule]);
+}); // 所有驗證規則
+configure({
+  classes: {
+    valid: 'is-valid',
+    invalid: 'is-invalid',
+  },
+});
+localize('tw', zhTW);
+Vue.component('ValidationObserver', ValidationObserver);
+Vue.component('ValidationProvider', ValidationProvider);
 
 Vue.filter('currency', (num) => {
   const n = Number(num);
