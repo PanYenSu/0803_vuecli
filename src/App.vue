@@ -38,9 +38,10 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~bootstrap/scss/bootstrap';
-@import '../node_modules/bootstrap/scss/functions';
-@import '../node_modules/bootstrap/scss/bootstrap';
+@import './assets/all';
+// @import '~bootstrap/scss/bootstrap';
+// @import '../node_modules/bootstrap/scss/functions';
+// @import '../node_modules/bootstrap/scss/bootstrap';
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

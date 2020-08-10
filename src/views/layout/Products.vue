@@ -58,6 +58,7 @@
 </template>
 
 <script>
+/* global $ */
 export default {
   data() {
     return {
@@ -79,6 +80,7 @@ export default {
         console.log(res);
         this.isLoading = false;
         this.products = res.data.data;
+        console.log($('button'));
       });
   },
 };
