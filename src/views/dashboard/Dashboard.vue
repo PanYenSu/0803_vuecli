@@ -16,18 +16,21 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-            <router-link to="/admin/products" class="nav-link">Products</router-link>
+            <router-link to="/admin/products" class="nav-link">產品列表</router-link>
             <!-- <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> -->
         </li>
         <li class="nav-item">
-            <router-link to='/admin/coupons' class="nav-link">Coupons</router-link>
+            <router-link to='/admin/coupons' class="nav-link">優惠券列表</router-link>
         </li>
-        <!-- <li class="nav-item">
-            <router-link to='/products' class="nav-link">Products</router-link>
-        </li> -->
-        <!-- <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li> -->
+        <li class="nav-item">
+            <router-link to='/admin/storages' class="nav-link">圖片列表</router-link>
+        </li>
+        <li class="nav-item">
+            <router-link to='/admin/orders' class="nav-link">訂單列表</router-link>
+        </li>
+        <li class="nav-item">
+            <router-link to='/admin/customer_order' class="nav-link">模擬下單系統</router-link>
+        </li>
         </ul>
         <!-- <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -48,9 +51,13 @@
 
 <script>
 export default {
-  props: ['token'],
   data() {
-    return {};
+    return {
+      token: '',
+      uuid: process.env.VUE_APP_UUID,
+      api: process.env.VUE_APP_APIPATH,
+      isLoading: false,
+    };
   },
   methods: {
     logout() {
@@ -62,6 +69,20 @@ export default {
       });
     },
 
+  },
+  created() {
+    this.token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
+    // const url = `${this.api}/api/auth/check`;
+    // Axios 預設值
+    this.$http.defaults.headers.common.Authorization = `Bearer ${this.token}`;
+    // this.$http.post(url, { api_token: this.token })
+    //   .then((response) => {
+    //     if (!response.data.success) {
+    //       this.$router.push({
+    //         path: 'login',
+    //       });
+    //     }
+    //   });
   },
 };
 </script>

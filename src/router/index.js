@@ -34,6 +34,10 @@ const routes = [
     ],
   },
   {
+    path: '/backendhome',
+    component: () => import('../views/BackendHome.vue'),
+  },
+  {
     path: '/login',
     component: () => import('../views/Login.vue'),
   },
@@ -50,8 +54,23 @@ const routes = [
         component: () => import('../views/dashboard/Products.vue'),
       },
       {
+        path: '/admin/storages',
+        name: '圖片列表',
+        component: () => import('../views/dashboard/Storages.vue'),
+        meta: { requiresAuth: true },
+      },
+      {
         path: '/admin/coupons',
         component: () => import('../views/dashboard/Coupons.vue'),
+      },
+      {
+        path: '/admin/orders',
+        component: () => import('../views/dashboard/Orders.vue'),
+      },
+      {
+        path: '/admin/customer_order',
+        name: '用戶訂單',
+        component: () => import('../views/dashboard/Customer_order.vue'),
       },
     ],
   },
