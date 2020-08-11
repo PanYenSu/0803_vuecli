@@ -54,12 +54,28 @@
               </tr>
             </tbody>
           </table>
+          <!-- 分頁元件 -->
+          <Pagination :pages='pagination' @emitPage='getProducts' ></Pagination>
+          <!-- Modal -->
+          <div id="productModal" class="modal fade" tabindex="-1" role="dialog"
+              aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <Modal :api="api" :temp-product="tempProduct" :status='status'
+            @update="getProducts"></Modal>
+          </div>
 
     </div>
 </template>
 
 <script>
+/* global $ */
+import Pagination from '@/components/Pagination.vue';
+import Modal from '@/components/Modal.vue';
+
 export default {
+  components: {
+    Pagination,
+    Modal,
+  },
   data() {
     return {
       products: [],
@@ -68,25 +84,46 @@ export default {
       },
       pagination: {},
       token: '',
-      uuid: process.env.VUE_APP_UUID,
-      api: process.env.VUE_APP_APIPATH,
+      api: {
+        uuid: process.env.VUE_APP_UUID,
+        path: process.env.VUE_APP_APIPATH,
+      },
       isNew: '',
       loadingBtn: '',
+      status: {
+        fileUploading: false,
+      },
       isLoading: false,
-
     };
   },
-  openModal() {
-
-  },
-  updateCheckbox() {
-
-  },
   methods: {
+    openModal(isNew, item) {
+      switch (isNew) {
+        case 'new':
+          this.isNew = true;
+          this.tempProduct = {
+            imageUrl: [],
+          };
+          $('#productModal').modal('show');
+          break;
+        case 'edit':
+          this.isNew = false;
+          this.tempProduct = { ...item };
+          break;
+        case 'del':
+          this.tempProduct = { ...item };
+          break;
+        default:
+          break;
+      }
+    },
+    updateCheckbox() {
+
+    },
     getProducts(page = 1) {
       this.isLoading = true;
       console.log(page);
-      const url = `${this.api}${this.uuid}/admin/ec/products?page=${page}`;
+      const url = `${this.api.path}${this.api.uuid}/admin/ec/products?page=${page}`;
       this.$http.get(url).then((res) => {
         console.log(res);
         this.products = res.data.data;
