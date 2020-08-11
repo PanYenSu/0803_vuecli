@@ -45,7 +45,7 @@
         </span>
     </div>
   </nav>
-        <router-view/>
+        <router-view v-if="checkSuccess" :token="token"/>
 </div>
 </template>
 
@@ -56,33 +56,28 @@ export default {
       token: '',
       uuid: process.env.VUE_APP_UUID,
       api: process.env.VUE_APP_APIPATH,
+      checkSuccess: false,
       isLoading: false,
     };
   },
   methods: {
-    logout() {
-      const url = `${process.env.VUE_APP_APIPATH}auth/logout`;
-      this.$hppt.post(url, { api_token: this.token }).then(() => {
-        this.$router.push('/login');
-        document.cookie = 'hexToken=;expires=;';
-        console.log('token 已清除');
+    check() {
+      const url = `${this.api}auth/check`;
+      this.$http.post(url, { api_token: this.token }).then((response) => {
+        if (!response.data.success) {
+          this.$router.push({
+            path: 'login',
+          });
+        }
+        this.checkSuccess = true;
       });
     },
-
   },
   created() {
     this.token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
-    // const url = `${this.api}/api/auth/check`;
     // Axios 預設值
     this.$http.defaults.headers.common.Authorization = `Bearer ${this.token}`;
-    // this.$http.post(url, { api_token: this.token })
-    //   .then((response) => {
-    //     if (!response.data.success) {
-    //       this.$router.push({
-    //         path: 'login',
-    //       });
-    //     }
-    //   });
+    this.check();
   },
 };
 </script>
