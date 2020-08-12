@@ -1,5 +1,6 @@
 <template>
        <div class="modal-dialog modal-xl" role="document">
+         <!-- <loading :active.sync="isLoading"></loading> -->
       <div class="modal-content border-0">
         <div class="modal-header bg-dark text-white">
           <h5 id="exampleModalLabel" class="modal-title">
@@ -95,6 +96,8 @@
             取消
           </button>
           <button type="button" class="btn btn-primary" @click="updateProduct">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+             v-if="isLoading === true"></span>
             確認
           </button>
         </div>
@@ -102,14 +105,33 @@
     </div>
 </template>
 <script>
+/* global $ */
 export default {
   data() {
-    return {};
+    return {
+      isLoading: false,
+    };
   },
   props: ['tempProduct', 'api', 'status'],
   methods: {
     updateProduct() {
-
+      this.isLoading = true;
+      let url = `${this.api.path}${this.api.uuid}/admin/ec/product`;
+      let httpMethod = 'post';
+      if (this.tempProduct.id) {
+        url = `${this.api.path}${this.api.uuid}/admin/ec/product/${this.tempProduct.id}`;
+        httpMethod = 'patch';
+      }
+      this.$http[httpMethod](url, this.tempProduct)
+        .then(() => {
+          this.isLoading = false;
+          $('#productModal').modal('hide');
+          this.$emit('emitProduct');
+        }).catch((error) => {
+          this.isLoading = false;
+          $('#productModal').modal('hide');
+          console.log(error);
+        });
     },
     // 上傳檔案
     uploadFile() {

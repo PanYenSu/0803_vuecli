@@ -11,6 +11,7 @@
           @click="openModal('new')">建立新產品</button>
         </div>
         </div>
+        <hr>
           <!-- 產品列表 -->
           <table class="table">
             <thead class="thead-light">
@@ -44,9 +45,9 @@
                 <td>
                   <div class="btn-group">
                     <button :disabled='loadingBtn === item.id' @click="openModal('edit', item)"
-                    class="btn btn-outline-primary btn-sm">編輯</button>
-                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"
-                    v-if="loadingBtn === item.id"></span>
+                    class="btn btn-outline-primary btn-sm">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                    v-if="loadingBtn === item.id"></span>編輯</button>
                     <button @click="openModal('del', item)"
                     class="btn btn-outline-danger btn-sm">刪除</button>
                   </div>
@@ -56,11 +57,34 @@
           </table>
           <!-- 分頁元件 -->
           <Pagination :pages='pagination' @emitPage='getProducts' ></Pagination>
-          <!-- Modal -->
+          <!-- Product Modal -->
           <div id="productModal" class="modal fade" tabindex="-1" role="dialog"
               aria-labelledby="exampleModalLabel" aria-hidden="true">
             <Modal :api="api" :temp-product="tempProduct" :status='status'
-            @update="getProducts"></Modal>
+            @emitProduct="getProducts"></Modal>
+          </div>
+          <!-- Del Modal -->
+          <div id='delModal' class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                  <h5 class="modal-title">刪除產品</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  是否刪除
+                  <strong class="text-danger">{{ tempProduct.title }}</strong> 商品(刪除後將無法恢復)。
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                  <button @click="delProduct" type="button" class="btn btn-danger">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                              v-if="loadingBtn === tempProduct.id"></span>確認刪除</button>
+                </div>
+              </div>
+            </div>
           </div>
 
     </div>
@@ -107,11 +131,15 @@ export default {
           $('#productModal').modal('show');
           break;
         case 'edit':
+          this.loadingBtn = item.id;
           this.isNew = false;
           this.tempProduct = { ...item };
+          $('#productModal').modal('show');
+          this.loadingBtn = '';
           break;
         case 'del':
           this.tempProduct = { ...item };
+          $('#delModal').modal('show');
           break;
         default:
           break;
@@ -120,9 +148,22 @@ export default {
     updateCheckbox() {
 
     },
+    delProduct() {
+      this.loadingBtn = this.tempProduct.id;
+      const url = `${this.api.path}${this.api.uuid}/admin/ec/product/${this.tempProduct.id}`;
+      this.$http.delete(url).then(() => {
+        $('#delModal').modal('hide');
+        this.getProducts();
+        this.loadingBtn = '';
+      })
+        .catch((error) => {
+          console.log(error);
+          this.loadingBtn = '';
+        });
+    },
     getProducts(page = 1) {
       this.isLoading = true;
-      console.log(page);
+      // console.log(page);
       const url = `${this.api.path}${this.api.uuid}/admin/ec/products?page=${page}`;
       this.$http.get(url).then((res) => {
         console.log(res);
@@ -140,10 +181,12 @@ export default {
     },
   },
   created() {
+    // this.isLoading = true;
     // this.token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
     // // Axios 預設值
     // this.$http.defaults.headers.common.Authorization = `Bearer ${this.token}`;
     this.getProducts();
+    // this.isLoading = false;
   },
 };
 </script>
