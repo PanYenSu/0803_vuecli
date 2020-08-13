@@ -29,12 +29,12 @@
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="due_date">到期日</label>
-                  <input id="due_date" v-model="deadline_at.due_date"
+                  <input id="due_date" v-model="deadline.due_date"
                   type="text" class="form-control">
                 </div>
                 <div class="form-group col-md-6">
                   <label for="due_time">到期時間</label>
-                  <input id="due_time" v-model="deadline_at.due_time"
+                  <input id="due_time" v-model="deadline.due_time"
                   type="text" class="form-control">
                 </div>
               </div>
@@ -60,8 +60,8 @@
             取消
           </button>
           <button type="button" class="btn btn-primary" @click="updateCoupon">
-            <!-- <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
-             v-if="isLoading === true"></span> -->
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+             v-if="isLoading === true"></span>
             {{ status === 'new' ? '新增優惠卷' : '更新優惠券' }}
           </button>
         </div>
@@ -76,22 +76,23 @@ export default {
     return {
       uuid: process.env.VUE_APP_UUID,
       path: process.env.VUE_APP_APIPATH,
+      isLoading: false,
     };
   },
-  props: ['tempCoupon', 'status', 'deadline_at'],
+  props: ['tempCoupon', 'status', 'deadline'],
   methods: {
     updateCoupon() {
-      // this.isLoading = true;
+      this.isLoading = true;
       let url = `${this.path}${this.uuid}/admin/ec/coupon`;
       let httpMethod = 'post';
       if (this.status === 'edit') {
         url = `${this.path}${this.uuid}/admin/ec/coupon/${this.tempCoupon.id}`;
         httpMethod = 'patch';
       }
-      this.tempCoupon.deadline = `${this.deadline_at.due_date} ${this.deadline_at.due_time}`;
+      this.tempCoupon.deadline_at = `${this.deadline.due_date} ${this.deadline.due_time}`;
       this.$http[httpMethod](url, this.tempCoupon)
         .then(() => {
-          // this.isLoading = false;
+          this.isLoading = false;
           $('#couponModal').modal('hide');
           this.$emit('emitCoupon');
         }).catch((error) => {

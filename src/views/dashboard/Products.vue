@@ -32,8 +32,8 @@
                 <td>{{item.category}}</td>
                 <td>{{item.title}}</td>
                 <td><img height="30" :src="item.imageUrl[0]" alt="" ></td>
-                <td class="text-success">{{item.origin_price}}</td>
-                <td class="text">{{item.price}}</td>
+                <td class="text-success">{{item.origin_price | currency}}</td>
+                <td class="text">{{item.price | currency}}</td>
                 <td>
                   <input v-model="item.enabled" :id='item.id' type="checkbox"
                   class="form-check-input" @change="updateCheckbox(item)">
