@@ -18,6 +18,7 @@
               <tr class="table-active">
               <th width="100" scope="col">#</th>
               <th>名稱</th>
+              <th>優惠碼</th>
               <th>折扣百分比</th>
               <th>到期日</th>
               <th width="100">是否啟用</th>
@@ -28,6 +29,7 @@
               <tr v-for='(item, index) in coupons' :key='item.id'>
                 <th scope="row">{{index+1}}</th>
                 <td>{{item.title}}</td>
+                <td>{{item.code}}</td>
                 <td>{{item.percent}}</td>
                 <td>{{item.deadline.datetime}}</td>
                 <td>
@@ -56,8 +58,8 @@
        <!-- Coupons Modal -->
         <div id="couponModal" class="modal fade" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <CouponModal :temp-product="tempCoupon" :status='isNew'
-            @emitProduct="getCoupons"></CouponModal>
+            <CouponModal :temp-coupon="tempCoupon" :status='status' :deadline_at='deadline_at'>
+            </CouponModal>
         </div>
 
     </div>
@@ -75,34 +77,44 @@ export default {
   data() {
     return {
       coupons: [],
-      tempCoupon: {},
+      tempCoupon: {
+        deadline: '',
+      },
       pagination: {},
       uuid: process.env.VUE_APP_UUID,
       path: process.env.VUE_APP_APIPATH,
-      isNew: '',
+      status: '',
       loadingBtn: '',
       isLoading: '',
+      deadline_at: {
+        due_date: '',
+        due_time: '',
+      },
     };
   },
   methods: {
     updateCoupon() {
 
     },
-    openCouponModal(isNew, item) {
-      console.log($('#cm'));
-      switch (isNew) {
+    openCouponModal(status, item) {
+      // console.log($('#cm'));
+      this.status = status;
+      switch (status) {
         case 'new':
-          this.isNew = true;
           this.tempCoupon = {};
           $('#couponModal').modal('show');
           break;
-        case 'edit':
+        // 由於 const 與 let 宣告環境較特別，故需要在 case 外層宣告一個 {} 確保作用域
+        case 'edit': {
           this.loadingBtn = item.id;
-          this.isNew = false;
           this.tempCoupon = { ...item };
+          // 使用 split 切割相關時間戳
+          const dedlineAt = this.tempCoupon.deadline.datetime.split(' ');
+          [this.deadline_at.due_date, this.deadline_at.due_time] = dedlineAt;
           $('#couponModal').modal('show');
           this.loadingBtn = '';
           break;
+        }
         case 'del':
           this.tempCoupon = { ...item };
           // $('#delModal').modal('show');
@@ -118,6 +130,7 @@ export default {
       this.$http.get(url).then((res) => {
         console.log(res);
         this.coupons = res.data.data;
+        console.log(this.coupons[0].deadline.datetime);
         this.pagination = res.data.meta.pagination;
         this.isLoading = false;
       })
