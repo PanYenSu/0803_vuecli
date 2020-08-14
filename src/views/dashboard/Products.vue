@@ -38,6 +38,8 @@
                   <input v-model="item.enabled" :id='item.id' type="checkbox"
                   class="form-check-input" @change="updateCheckbox(item)">
                   <label :for="item.id">
+                    <i class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                              v-show="loadingBtn === item.id"></i>
                     <span v-if='item.enabled' class="text-success">啟用</span>
                     <span v-else>未啟用</span>
                   </label>
@@ -46,8 +48,10 @@
                   <div class="btn-group">
                     <button :disabled='loadingBtn === item.id' @click="openModal('edit', item)"
                     class="btn btn-outline-primary btn-sm">
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
-                    v-if="loadingBtn === item.id"></span>編輯</button>
+                    <!-- <span class="spinner-border spinner-border-sm"
+                    role="status" aria-hidden="true"
+                    v-if="loadingBtn === item.id"></span> -->
+                    編輯</button>
                     <button @click="openModal('del', item)"
                     class="btn btn-outline-danger btn-sm">刪除</button>
                   </div>
@@ -121,6 +125,18 @@ export default {
     };
   },
   methods: {
+    updateCheckbox(item) {
+      this.tempProduct = { ...item };
+      this.loadingBtn = this.tempProduct.id;
+      const url = `${this.api.path}${this.api.uuid}/admin/ec/product/${this.tempProduct.id}`;
+      this.$http.patch(url, item.enabled).then(() => {
+        // this.getProducts();
+        this.tempProduct = {
+          imageUrl: [],
+        };
+        this.loadingBtn = '';
+      });
+    },
     openModal(isNew, item) {
       switch (isNew) {
         case 'new':
@@ -145,9 +161,6 @@ export default {
           break;
       }
     },
-    updateCheckbox() {
-
-    },
     delProduct() {
       this.loadingBtn = this.tempProduct.id;
       const url = `${this.api.path}${this.api.uuid}/admin/ec/product/${this.tempProduct.id}`;
@@ -170,8 +183,6 @@ export default {
         this.products = res.data.data;
         this.pagination = res.data.meta.pagination;
         this.isLoading = false;
-
-      //   this.tempProduct = { imageUrl: [], };
       //   $('#productModal').modal('hide');
       })
         .catch((error) => {

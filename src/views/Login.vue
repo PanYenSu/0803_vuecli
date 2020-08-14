@@ -46,7 +46,6 @@ export default {
       this.$http.post(api, this.user)
         .then((response) => {
           this.isLoading = false;
-          console.log(response);
           const { token } = response.data;
           const { expired } = response.data;
           // token

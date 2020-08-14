@@ -33,11 +33,15 @@
                 <td>{{item.percent}}</td>
                 <td>{{item.deadline.datetime}}</td>
                 <td>
-                  <input id="is_enabled"
+                  <input :id="item.id"
                   v-model="item.enabled" type="checkbox"
                   class="form-check-input" @change="updateCheckbox(item)">
+                  <label :for="item.id">
+                    <i class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                              v-show="loadingBtn === item.id"></i>
                     <span v-if='item.enabled' class="text-success">啟用</span>
                     <span v-else>未啟用</span>
+                  </label>
                 </td>
                 <td>
                   <div class="btn-group">
@@ -121,12 +125,12 @@ export default {
   },
   methods: {
     updateCheckbox(item) {
-      // !this.tempProduct.enabled
-      const url = `${this.path}${this.uuid}/admin/ec/coupon/${this.tempCoupon.id}`;
-      this.tempProduct = { ...item };
-      this.$http.patch(url, this.tempProduct).then(() => {
-        this.getCoupons();
-        this.tempProduct = {};
+      this.tempCoupon = { ...item };
+      this.loadingBtn = this.tempCoupon.id;
+      const url = `${this.path}${this.uuid}/admin/ec/coupon/${item.id}`;
+      this.$http.patch(url, item.enabled).then(() => {
+        this.tempCoupon = {};
+        this.loadingBtn = '';
       });
     },
     openCouponModal(status, item) {
@@ -170,13 +174,11 @@ export default {
         });
     },
     getCoupons(page = 1) {
-      console.log(page);
       this.isLoading = true;
       const url = `${this.path}${this.uuid}/admin/ec/coupons?page=${page}`;
       this.$http.get(url).then((res) => {
         console.log(res);
         this.coupons = res.data.data;
-        console.log(this.coupons[0].deadline.datetime);
         this.pagination = res.data.meta.pagination;
         this.isLoading = false;
       })

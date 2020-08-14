@@ -43,6 +43,9 @@
         <span class="navbar-text">
           <router-link to='/' class="nav-link text-info ">登入前台</router-link>
         </span>
+        <span class="navbar-text">
+          <router-link to='/logout' class="nav-link text-secondary ">登出</router-link>
+        </span>
     </div>
   </nav>
         <router-view v-if="checkSuccess" :token="token"/>

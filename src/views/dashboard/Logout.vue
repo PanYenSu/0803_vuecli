@@ -1,12 +1,13 @@
 <template>
-    <div></div>
+    <div>
+      <loading :active.sync="isLoading"></loading>
+    </div>
 </template>
 <script>
 export default {
   data() {
     return {
       token: '',
-      uuid: process.env.VUE_APP_UUID,
       api: process.env.VUE_APP_APIPATH,
       isLoading: false,
     };
@@ -20,6 +21,7 @@ export default {
         document.cookie = 'hexToken=;expires=;';
         console.log('token 已清除');
         this.isLoading = false;
+        this.$router.push('/login');
       }).catch((error) => {
         this.isLoading = false;
         console.log(error);

@@ -72,6 +72,11 @@ const routes = [
         name: '用戶訂單',
         component: () => import('../views/dashboard/Customer_order.vue'),
       },
+      {
+        path: '',
+        name: '登出管理頁',
+        component: () => import('../views/dashboard/Logout.vue'),
+      },
     ],
   },
 ];
