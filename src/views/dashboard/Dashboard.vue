@@ -1,5 +1,6 @@
 <template>
   <div>
+    <loading :active.sync="isLoading"></loading>
     <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
             <router-link to="/admin" class="navbar-brand">後台管理頁面</router-link>
             <button
@@ -32,19 +33,11 @@
             <router-link to='/admin/customer_order' class="nav-link">模擬下單系統</router-link>
         </li>
         </ul>
-        <!-- <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form> -->
-
-        <!-- <button type="button"
-        class="btn btn-outline-dark btn-sm ml-auto"
-        style="width:8%;" @click='logout'>登出</button> -->
         <span class="navbar-text">
           <router-link to='/' class="nav-link text-info ">登入前台</router-link>
         </span>
         <span class="navbar-text">
-          <router-link to='/logout' class="nav-link text-secondary ">登出</router-link>
+          <a class="nav-link" href="#" @click.prevent="signOut">登出</a>
         </span>
     </div>
   </nav>
@@ -64,6 +57,27 @@ export default {
     };
   },
   methods: {
+    signOut() {
+      // this.$cookies.remove('token');
+      // this.$router.push('/login');
+
+      // this.$bus.$emit('message:push',
+      //   '登出成功',
+      //   'success');
+
+      this.isLoading = true;
+      const url = `${this.api}auth/logout`;
+      this.$http.post(url, { api_token: this.token }).then(() => {
+        document.cookie = 'hexToken=;expires=;';
+        console.log('token 已清除');
+        this.isLoading = false;
+        this.$router.push('/login');
+      }).catch((error) => {
+        this.isLoading = false;
+        console.log(error);
+      });
+    },
+
     check() {
       const url = `${this.api}auth/check`;
       this.$http.post(url, { api_token: this.token }).then((response) => {

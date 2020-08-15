@@ -69,13 +69,13 @@ const routes = [
       },
       {
         path: '/admin/customer_order',
-        name: '用戶訂單',
-        component: () => import('../views/dashboard/Customer_order.vue'),
+        name: '摸擬用戶購物',
+        component: () => import('../views/dashboard/CustomerProdList.vue'),
       },
       {
-        path: '',
-        name: '登出管理頁',
-        component: () => import('../views/dashboard/Logout.vue'),
+        path: '/admin/CustomerCheckout/:id',
+        name: '摸擬用戶下單',
+        component: () => import('../views/dashboard/CustomerCheckout.vue'),
       },
     ],
   },
