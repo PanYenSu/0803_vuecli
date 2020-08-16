@@ -70,10 +70,10 @@ const routes = [
       {
         path: '/admin/customer_order',
         name: '摸擬用戶購物',
-        component: () => import('../views/dashboard/CustomerProdList.vue'),
+        component: () => import('../views/dashboard/CustomerOrder.vue'),
       },
       {
-        path: '/admin/CustomerCheckout/:id',
+        path: '/admin/CustomerCheckout',
         name: '摸擬用戶下單',
         component: () => import('../views/dashboard/CustomerCheckout.vue'),
       },
