@@ -51,6 +51,12 @@ export default {
           // token
           document.cookie = `hexToken=${token}; expires=${new Date(expired * 1000)}; path=/`;
           // window.location = 'products.html';
+          this.$bus.$emit(
+            'message:push',
+            '登入成功',
+            'success',
+          );
+
           this.$router.push('/admin');
         })
         .catch((error) => {
