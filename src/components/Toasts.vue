@@ -1,5 +1,23 @@
 <template>
-    <div clsss='toasts'></div>
+  <div style="position: fixed; top: 20px; right: 20px; min-width: 300px; z-index: 11000;">
+    <div v-for="(item, i) in messages" :id="`toast-${i}`" :key="i"
+      class="toast fade show" role="alert" aria-live="assertive"
+      aria-atomic="true" data-autohide="false">
+      <div class="toast-header">
+        <div class="inline-block rounded mr-2" style="width: 20px; height: 20px"
+          :class="`bg-${ item.status }`"/>
+        <strong class="mr-auto">六角實戰班</strong>
+        <small>現在</small>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast"
+          aria-label="Close" @click="closeToast(`toast-${i}`)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="toast-body">
+        {{ item.message }}
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 /* global $ */
@@ -12,7 +30,7 @@ export default {
   },
   created() {
     // const vm = this;
-    this.$bus.$on('message:bush', (message, status = 'warning') => {
+    this.$bus.$on('message:push', (message, status = 'warning') => {
       this.updateMessage(message, status);
     });
   },
@@ -42,3 +60,12 @@ export default {
   },
 };
 </script>
+<style scope>
+.message-alert {
+  position: fixed;
+  max-width: 50%;
+  top: 56px;
+  right: 20px;
+  z-index: 1100;
+}
+</style>

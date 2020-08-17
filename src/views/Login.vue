@@ -53,7 +53,7 @@ export default {
           // window.location = 'products.html';
           this.$bus.$emit(
             'message:push',
-            '登入成功',
+            `成功訊息: ${response.data.message}`,
             'success',
           );
 
@@ -61,7 +61,9 @@ export default {
         })
         .catch((error) => {
           this.isLoading = false;
-          console.log(error);
+          this.$bus.$emit('message:push',
+            `登入失敗惹，${error}`,
+            'danger');
         });
     },
   },

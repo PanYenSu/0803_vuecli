@@ -84,7 +84,7 @@ export default {
     this.$http.get(`${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/product/${id}`)
       .then((res) => {
         this.product = res.data.data;
-        console.log(this.product);
+        // console.log(this.product);
       });
   },
 };

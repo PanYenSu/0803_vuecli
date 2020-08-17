@@ -69,12 +69,23 @@ export default {
       const url = `${this.api}auth/logout`;
       this.$http.post(url, { api_token: this.token }).then(() => {
         document.cookie = 'hexToken=;expires=;';
-        console.log('token 已清除');
+        this.token = '';
+        console.log(this.token);
+        this.$bus.$emit(
+          'message:push',
+          `成功登出 ${this.token}!!`,
+          'success',
+        );
         this.isLoading = false;
         this.$router.push('/login');
       }).catch((error) => {
         this.isLoading = false;
-        console.log(error);
+        // console.log(error);
+        this.$bus.$emit(
+          'message:push',
+          `出失敗惹，${error}`,
+          'danger',
+        );
       });
     },
 

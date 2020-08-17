@@ -179,15 +179,22 @@ export default {
       // console.log(page);
       const url = `${this.api.path}${this.api.uuid}/admin/ec/products?page=${page}`;
       this.$http.get(url).then((res) => {
-        console.log(res);
+        // console.log(res);
         this.products = res.data.data;
         this.pagination = res.data.meta.pagination;
         this.isLoading = false;
+        this.$bus.$emit(
+          'message:push',
+          '載入成功',
+          'success',
+        );
       //   $('#productModal').modal('hide');
       })
         .catch((error) => {
           this.isLoading = false;
-          console.log(error);
+          this.$bus.$emit('message:push',
+            `載入失敗，${error}`,
+            'danger');
         });
     },
   },
