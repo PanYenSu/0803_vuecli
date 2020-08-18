@@ -1,6 +1,6 @@
 <template>
     <div>
-      <loading :active.sync="isLoading"></loading>
+      <!-- <loading :active.sync="isLoading"></loading> -->
     </div>
 </template>
 <script>

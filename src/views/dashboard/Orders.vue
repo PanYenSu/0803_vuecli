@@ -6,10 +6,10 @@
     <div class="col mt-3 info">
         <h2>訂單列表管理頁</h2>
     </div>
-    <div class="col col-md-auto mt-4">
+    <!-- <div class="col col-md-auto mt-4">
         <button id='cm' type="button" class="btn btn-outline-secondary"
         @click="openOrderModal('new')">訂單模擬</button>
-    </div>
+    </div> -->
     </div>
     <hr>
     <!-- Orders 列表 -->
