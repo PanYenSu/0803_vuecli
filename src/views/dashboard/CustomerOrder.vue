@@ -303,6 +303,9 @@ export default {
     };
   },
   methods: {
+    orderForm() {
+
+    },
     getDetailed(id) {
       this.isLoading = true;
       this.status.loadingItem = id;
@@ -354,7 +357,7 @@ export default {
       const url = `${this.path}${this.uuid}/ec/shopping`;
       this.$http.get(url).then((res) => {
         this.cartProducts = res.data.data;
-        console.log(this.cartProducts);
+        // console.log(this.cartProducts);
         this.isLoading = false;
         // 累加總金額
         this.cartTotal = 0;
@@ -364,7 +367,9 @@ export default {
         $('#cartModal').modal('show');
       }).catch((error) => {
         this.isLoading = false;
-        console.log(error);
+        this.$bus.$emit('message:push',
+          `購物車載入失敗，${error}`,
+          'danger');
       });
     },
     removeAllCartItem() {
@@ -376,9 +381,16 @@ export default {
         // $('#cartModal').modal('hide');
         this.isLoading = false;
         $('#cartModal').modal('show');
+        // this.$bus.$emit(
+        //   'message:push',
+        //   '成功刪除購物車商品！',
+        //   'success',
+        // );
       }).catch((error) => {
         this.isLoading = false;
-        console.log(error);
+        this.$bus.$emit('message:push',
+          `刪除失敗，${error}`,
+          'danger');
       });
       this.quantity = 0;
     },
@@ -393,7 +405,9 @@ export default {
         this.getCartList();
       }).catch((error) => {
         this.isLoading = false;
-        console.log(error);
+        this.$bus.$emit('message:push',
+          `刪除失敗，${error}`,
+          'danger');
       });
     },
     quantityUpdata(id, num) {
@@ -423,15 +437,22 @@ export default {
       this.isLoading = true;
       this.$http.get(`${this.path}${this.uuid}/ec/products?page=${page}`)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           this.isLoading = false;
           this.products = res.data.data;
           this.pagination = res.data.meta.pagination;
           // console.log($('button'));
+          this.$bus.$emit(
+            'message:push',
+            '載入成功',
+            'success',
+          );
         })
         .catch((error) => {
           this.isLoading = false;
-          console.log(error);
+          this.$bus.$emit('message:push',
+            `載入失敗，${error}`,
+            'danger');
         });
     },
   },

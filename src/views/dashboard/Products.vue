@@ -168,10 +168,17 @@ export default {
         $('#delModal').modal('hide');
         this.getProducts();
         this.loadingBtn = '';
+        this.$bus.$emit(
+          'message:push',
+          '商品成功刪除！',
+          'success',
+        );
       })
         .catch((error) => {
-          console.log(error);
           this.loadingBtn = '';
+          this.$bus.$emit('message:push',
+            `商品刪除失敗： ${error}`,
+            'danger');
         });
     },
     getProducts(page = 1) {
@@ -185,7 +192,7 @@ export default {
         this.isLoading = false;
         this.$bus.$emit(
           'message:push',
-          '載入成功',
+          '產品載入成功',
           'success',
         );
       //   $('#productModal').modal('hide');
@@ -193,7 +200,7 @@ export default {
         .catch((error) => {
           this.isLoading = false;
           this.$bus.$emit('message:push',
-            `載入失敗，${error}`,
+            `產品載入失敗，${error}`,
             'danger');
         });
     },

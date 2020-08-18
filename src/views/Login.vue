@@ -60,6 +60,7 @@ export default {
           this.$router.push('/admin');
         })
         .catch((error) => {
+          // const errorData = error.response.data.message;
           this.isLoading = false;
           this.$bus.$emit('message:push',
             `登入失敗惹，${error}`,

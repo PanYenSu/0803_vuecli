@@ -107,14 +107,21 @@ export default {
       this.tempStorage = {};
       const url = `${this.path}${this.uuid}/admin/storage?page=${page}`;
       this.$http.get(url).then((res) => {
-        console.log(res);
         this.storages = res.data.data;
         this.pagination = res.data.meta.pagination;
         this.isLoading = false;
+        this.$bus.$emit(
+          'message:push',
+          'Data載入成功',
+          'success',
+        );
       })
         .catch((error) => {
           this.isLoading = false;
           console.log(error);
+          this.$bus.$emit('message:push',
+            `Data載入失敗，${error}`,
+            'danger');
         });
     },
 

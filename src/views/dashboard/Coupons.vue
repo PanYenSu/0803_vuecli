@@ -177,14 +177,21 @@ export default {
       this.isLoading = true;
       const url = `${this.path}${this.uuid}/admin/ec/coupons?page=${page}`;
       this.$http.get(url).then((res) => {
-        console.log(res);
+        // console.log(res);
         this.coupons = res.data.data;
         this.pagination = res.data.meta.pagination;
         this.isLoading = false;
+        this.$bus.$emit(
+          'message:push',
+          '優惠券載入成功 !',
+          'success',
+        );
       })
         .catch((error) => {
           this.isLoading = false;
-          console.log(error);
+          this.$bus.$emit('message:push',
+            `優惠券載入失敗，${error}`,
+            'danger');
         });
     },
 

@@ -90,20 +90,38 @@ export default {
       this.$http.patch(url, item.id).then(() => {
         this.tempOrder = {};
         this.loadingBtn = '';
-      });
+        this.$bus.$emit(
+          'message:push',
+          '修改成功！',
+          'success',
+        );
+      })
+        .catch((error) => {
+          this.isLoading = false;
+          this.$bus.$emit('message:push',
+            `修改失敗，${error}`,
+            'danger');
+        });
     },
     getOrders(page = 1) {
       this.isLoading = true;
       const url = `${this.path}${this.uuid}/admin/ec/orders?page=${page}`;
       this.$http.get(url).then((res) => {
-        console.log(res);
+        // console.log(res);
         this.orders = res.data.data;
         this.pagination = res.data.meta.pagination;
         this.isLoading = false;
+        this.$bus.$emit(
+          'message:push',
+          '訂單載入成功 !',
+          'success',
+        );
       })
         .catch((error) => {
           this.isLoading = false;
-          console.log(error);
+          this.$bus.$emit('message:push',
+            `訂單載入失敗，${error}`,
+            'danger');
         });
     },
 

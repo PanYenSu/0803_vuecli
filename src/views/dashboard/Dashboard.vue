@@ -68,9 +68,8 @@ export default {
       this.isLoading = true;
       const url = `${this.api}auth/logout`;
       this.$http.post(url, { api_token: this.token }).then(() => {
-        document.cookie = 'hexToken=;expires=;';
         this.token = '';
-        console.log(this.token);
+        document.cookie = 'hexToken=;expires=;';
         this.$bus.$emit(
           'message:push',
           `成功登出 ${this.token}!!`,
