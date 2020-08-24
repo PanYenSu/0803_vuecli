@@ -64,17 +64,17 @@
               </div>
               <hr>
               <div class="form-group">
-                <label for="description">產品描述</label>
+                <label for="description">產品說明</label>
                 <textarea id="description" v-model="tempProduct.description"
                 type="text" class="form-control"
-                  placeholder="請輸入產品描述" >
+                  placeholder="請輸入產品說明" required>
                 </textarea>
               </div>
               <div class="form-group">
-                <label for="content">說明內容</label>
+                <label for="content">產品描述</label>
                 <textarea id="content" v-model="tempProduct.content"
-                type="text" class="form-control"
-                  placeholder="請輸入說明內容" >
+                class="form-control"
+                  placeholder="請輸入描述內容">
                 </textarea>
               </div>
               <div class="form-group">

@@ -146,13 +146,18 @@ export default {
           };
           $('#productModal').modal('show');
           break;
-        case 'edit':
+        case 'edit': {
           this.loadingBtn = item.id;
           this.isNew = false;
-          this.tempProduct = { ...item };
-          $('#productModal').modal('show');
-          this.loadingBtn = '';
+          // this.tempProduct = { ...item };
+          const url = `${this.api.path}${this.api.uuid}/admin/ec/product/${item.id}`;
+          this.$http.get(url).then((res) => {
+            this.tempProduct = res.data.data;
+            $('#productModal').modal('show');
+            this.loadingBtn = '';
+          });
           break;
+        }
         case 'del':
           this.tempProduct = { ...item };
           $('#delModal').modal('show');

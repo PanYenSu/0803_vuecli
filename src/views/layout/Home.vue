@@ -161,18 +161,19 @@
     <div class="container my-7">
       <div class="row">
         <div class="col-md-6">
-          <img src="https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" alt="" class="img-fluid">
+          <img src="https://images.unsplash.com/photo-1556912035-f3b4093412af?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="" class="img-fluid">
         </div>
         <div class="col-md-4 m-auto text-center">
-          <h4 class="mt-4">Lorem ipsum</h4>
-          <p class="text-muted">Lorem ipsum dolor sit amet,
-             consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-              invidunt ut labore et dolore magna.</p>
+          <h4 class="mt-4">一起旅行</h4>
+          <p class="text-muted">愈來愈多人選擇帶著寵物出遊，讓毛孩子享受盡情奔跑的樂趣。
+            而出遊難免遇上毛孩情緒緊繃的時刻，協助狗狗安定可以透過安定背心，或是飼主擁抱的方式，舒緩動物緊繃的肢體和心理。
+          </p>
         </div>
       </div>
       <div class="row flex-row-reverse justify-content-between mt-4">
         <div class="col-md-6">
-          <img src="https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" alt="" class="img-fluid">
+          <!-- https://images.unsplash.com/photo-1551290464-66719418ca54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60 -->
+          <img src="https://images.unsplash.com/photo-1508873696983-2dfd5898f08b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="" class="img-fluid">
         </div>
         <div class="col-md-4 m-auto text-center">
           <h4 class="mt-4">Lorem ipsum</h4>
