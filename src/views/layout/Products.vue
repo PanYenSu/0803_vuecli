@@ -8,7 +8,7 @@
   <div class="card border-0 shadow-sm">
    <div>
     <a href="#" class="text-decoration-none text-secondary" @click.prevent='getDetailed(item.id)'>
-     <div style="height:200px;
+     <div style="height:300px;
         background-size:cover;
         background-position:center;"
         :style="{backgroundImage:`url(${item.imageUrl[0]})`}">
