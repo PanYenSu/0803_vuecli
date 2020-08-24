@@ -2,7 +2,7 @@
   <div>
     <loading :active.sync="isLoading"></loading>
     <div class="position-relative">
-      <div class="position-absolute" style="top:0; bottom:0; left:0; right:0; background-image: url(https://images.unsplash.com/photo-1466995937966-2e6f29c6ed60?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1800&q=60);
+      <div class="position-absolute" style="top:0; bottom:0; left:0; right:0; background-image: url(https://images.unsplash.com/photo-1466995937966-2e6f29c6ed60?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=60);
       background-position: center center; opacity: 0.3;"></div>
       <div class="container d-flex flex-column" style="min-height: 100vh;">
         <!-- <nav class="navbar navbar-expand-lg navbar-light">
@@ -107,12 +107,12 @@
         </div>
       </div>
     </div>
-    <div class="bg-light mt-7">
+    <div class="bg-light mt-7" >
       <div class="container">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
+          <div class="carousel-inner" style="opacity:0.5; weight:100%; background-image:url(https://images.unsplash.com/photo-1555666062-7fc37d5271f1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)">
             <div class="carousel-item active">
-              <div class="row justify-content-center py-7">
+              <div class="row justify-content-center py-7" style="opacity:1;">
                 <div class="col-md-6 text-center">
                   <h3>Lorem ipsum.</h3>
                   <p class="my-5">“Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
@@ -161,7 +161,7 @@
     <div class="container my-7">
       <div class="row">
         <div class="col-md-6">
-          <img src="https://images.unsplash.com/photo-1556912035-f3b4093412af?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="" class="img-fluid">
+          <img src="https://images.unsplash.com/photo-1556912035-f3b4093412af?ixlib=rb-1.2.1&auto=format&fit=crop&w=1960&q=80" alt="" class="img-fluid">
         </div>
         <div class="col-md-4 m-auto text-center">
           <h4 class="mt-4">一起旅行</h4>
@@ -173,7 +173,7 @@
       <div class="row flex-row-reverse justify-content-between mt-4">
         <div class="col-md-6">
           <!-- https://images.unsplash.com/photo-1551290464-66719418ca54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60 -->
-          <img src="https://images.unsplash.com/photo-1508873696983-2dfd5898f08b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="" class="img-fluid">
+          <img src="https://images.unsplash.com/photo-1508873696983-2dfd5898f08b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1960&q=80" alt="" class="img-fluid">
         </div>
         <div class="col-md-4 m-auto text-center">
           <h4 class="mt-4">Lorem ipsum</h4>
@@ -199,26 +199,7 @@
         </div>
       </div>
     </div>
-    <div class="bg-dark py-5">
-      <div class="container">
-        <div class="d-flex align-items-center justify-content-between text-white mb-md-7 mb-4">
-          <a class="text-white h4" href="./index.html" id='logo'>ChaChaBo</a>
-          <ul class="d-flex list-unstyled mb-0 h4">
-            <li><a href="#" class="text-white mx-3"><i class="fab fa-facebook"></i></a></li>
-            <li><a href="#" class="text-white mx-3"><i class="fab fa-instagram"></i></a></li>
-            <li><a href="#" class="text-white ml-3"><i class="fab fa-line"></i></a></li>
-          </ul>
-        </div>
-        <div class="d-flex flex-column flex-md-row justify-content-between
-         align-items-md-end align-items-start text-white">
-          <div class="mb-md-0 mb-1">
-            <p class="mb-0">02-3456-7890</p>
-            <p class="mb-0">service@mail.com</p>
-          </div>
-          <p class="mb-0">© 2020 LOGO All Rights Reserved.</p>
-        </div>
-      </div>
-    </div>
+
   </div>
 </template>
 
