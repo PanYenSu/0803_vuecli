@@ -30,7 +30,7 @@
     </div>
     <div class="container mt-md-5 mt-3 mb-7">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
           <div class="accordion border border-bottom border-top-0 border-left-0 border-right-0 mb-3"
            id="accordionExample">
             <div class="card border-0">
@@ -99,16 +99,22 @@
             </div>
           </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-9">
           <div class="row">
-            <div v-for="(item) in products" :key="item.id" class="col-md-6">
+            <div v-for="(item) in products" :key="item.id" class="col-md-4">
               <div class="card border-0 mb-4 position-relative position-relative">
                 <!-- <img :src="item.imageUrl[0]" class="card-img-top rounded-0" alt="..."> -->
-                <div style="height:250px;
+                <router-link
+                  :to="`/product/${ item.id }`"
+                  class="btn card-btn-box btn-sm"
+                >
+                <div class="pic" style="height:250px;
                     background-size:cover;
                     background-position:center;"
-                    :style="{backgroundImage:`url(${item.imageUrl[0]})`}">
+                    :style="{backgroundImage:`url(${item.imageUrl[0]})`}">查看更多
                 </div>
+
+                </router-link>
                 <a href="#" class="text-dark">
                   <!-- <i class="far fa-heart position-absolute"
                   style="right: 16px; top: 16px;"></i> -->
@@ -257,3 +263,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.pic{width:500px; height:350px;overflow:hidden;}
+.pic {transform:scale(1,1);transition: all 0.5s ease-out;}
+.pic:hover{transform:scale(1.2,1.2);}
+</style>

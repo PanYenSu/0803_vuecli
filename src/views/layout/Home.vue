@@ -2,7 +2,7 @@
   <div>
     <loading :active.sync="isLoading"></loading>
     <div class="position-relative">
-      <div class="position-absolute" style="top:0; bottom:0; left:0; right:0; background-image: url(https://images.unsplash.com/photo-1466995937966-2e6f29c6ed60?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=60);
+      <div class="position-absolute" style="top:0; bottom:0; left:0; right:0; background-image: url(https://images.unsplash.com/photo-1466995937966-2e6f29c6ed60?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1900&q=60);
       background-position: center center; opacity: 0.3;"></div>
       <div class="container d-flex flex-column" style="min-height: 100vh;">
         <!-- <nav class="navbar navbar-expand-lg navbar-light">
@@ -25,7 +25,8 @@
         </nav> -->
         <div class="row justify-content-center my-auto">
           <div class="col-md-4 text-center">
-            <h2>Pet Supplies</h2>
+            <router-link to='/products' class="nav-link">
+            <h2 id='pet'>Pet Supplies</h2></router-link>
             <p class="text-muted mb-0">為親愛的毛小孩專屬設計.</p>
             <!-- <button class="btn btn-dark rounded-0 mt-6">Lorem ipsum.</button> -->
           </div>
@@ -176,10 +177,9 @@
           <img src="https://images.unsplash.com/photo-1508873696983-2dfd5898f08b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1960&q=80" alt="" class="img-fluid">
         </div>
         <div class="col-md-4 m-auto text-center">
-          <h4 class="mt-4">Lorem ipsum</h4>
-          <p class="text-muted">Lorem ipsum dolor sit amet,
-             consetetur sadipscing elitr, sed diam nonumy
-              eirmod tempor invidunt ut labore et dolore magna.</p>
+          <h4 class="mt-4">釋放精力</h4>
+          <p class="text-muted">遊戲時間對狗狗來說是不可或缺的，
+            適當的活動不僅可以讓狗狗身體保持健康強壯、有活力，還可以讓牠們保持心情愉快。</p>
         </div>
       </div>
     </div>
@@ -224,12 +224,17 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Ranchers&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ruslan+Display&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');
 
 #logo {
   /* font-family: 'Ranchers', cursive; */
   font-family: 'Ruslan Display', cursive;
   /* font-family: 'Permanent Marker', cursive; */
   font-size: 24px;
+}
+#pet {
+  font-family: 'Amatic SC', cursive;
+  font-size: 48px;
 }
 .badge-wrapper {
         /* top: -5px;

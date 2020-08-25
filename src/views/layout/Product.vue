@@ -1,31 +1,59 @@
 <template>
-    <div class="container">
+    <div class="container py-3">
+      <loading :active.sync="isLoading"></loading>
         <div class="row align-items-center">
-         <div class="col-6">
-           <img :src="product.imageUrl[0]" class="img-fluid" alt=''>
-         </div>
-           <!-- <h3 class="title">
-             {{ product.title }}
-           </h3> -->
-<!-- demo star -->
-<div class="col-md-5">
-          <!-- <nav aria-label="breadcrumb">
-            <ol class="breadcrumb bg-white px-0 mb-0">
-              <li class="breadcrumb-item"><router-link :to="`/products`">
-                <i class="text-muted"> Products</i>
-                </router-link></li>
-              <li class="breadcrumb-item"><router-link :to="`/product/${product.id}`">
-                <i v-if="status.loadingItem === item.id" class="spinner-grow spinner-grow-sm">
-                  {{ product.title }} Detail</i>
-                </router-link></li>
+         <!-- <div class="col-7" style="height:400px; weight:550px;
+                    background-size:cover;
+                    background-position:center;"
+                    :style="{backgroundImage:`url(${product.imageUrl[0]})`}">
+                </div> -->
+                <div class="col-md-7">
+          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active" >
+                <img :src= "product.imageUrl[0]" style="max-height:430px; object-fit: contain;"
+                class="d-block w-100" alt="...">
+              </div>
+              <div v-for="(item, i) in product.imageUrl" :key="i"
+              class="carousel-item" style="max-height:430px;">
+              <!-- <img :src= "product.imageUrl[i]" style="height:430px; weight:550px;" -->
+                <img :src= "product.imageUrl[i]" style="max-height:430px; object-fit: contain;"
+                class="d-block w-100" alt="...">
+              </div>
+
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls"
+             role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls"
+             role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+
+       <div class="col-md-5">
+         <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-white">
+              <li class="breadcrumb-item">
+                <router-link to='/'>Home</router-link>
+                <!-- <a class="text-muted" href="./index.html">Home</a> -->
+                </li>
+              <li class="breadcrumb-item">
+                <router-link to='/products'>Product</router-link>
+               </li>
+              <li class="breadcrumb-item" aria-current="page">{{ product.title }}</li>
             </ol>
-          </nav> -->
-
+          </nav>
           <h2 class="font-weight-bold h1 mb-1">{{ product.title }}</h2>
+          <hr>
 
-          <p class="font-weight-bold text-left" v-html="product.content"></p>
+          <p class="font-weight-bold text-right py-3" v-html="product.content"></p>
           <p v-if='!product.price' class="h4 font-weight-bold text-right">
-            {{ product.price | currency }} 元</p>
+            NT{{ product.price | currency }}</p>
           <p v-if="product.price" class="mb-0 text-muted text-right"><del>
             NT{{ product.origin_price | currency }}</del></p>
           <p v-if="product.price" class="h4 font-weight-bold text-right">
@@ -52,7 +80,6 @@
           <p class="font-weight-light text-left" > - {{ product.description }}</p>
         </div>
 
-<!-- demo end -->
       <!-- blockquote 無法實現 -->
            <!-- <blockquote class="blockquote">
              <p class="col-sm-9" v-html="product.content"></p>
@@ -61,12 +88,24 @@
              </footer>
            </blockquote> -->
        </div>
+
+       <!-- <div class="row my-5">
+        <div class="col-md-4">
+          <p v-html="product.content"></p>
+        </div>
+        <div class="col-md-3">
+          <p class="text-muted">{{ product.description }}</p>
+        </div>
+      </div> -->
+      <h3 class="font-weight-bold py-5">Lorem ipsum dolor sit amet</h3>
+
     </div>
 </template>
 <script>
 export default {
   data() {
     return {
+      isLoading: false,
       product: {
         num: 1,
       },
@@ -75,17 +114,26 @@ export default {
   methods: {
     addToCart() {
     },
+    getProduct() {
+      // console.log(this.$route);
+      this.isLoading = true;
+      const { id } = this.$route.params;
+      // const aID = this.$route.params.id;
+      console.log(id);
+      this.$http.get(`${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/product/${id}`)
+        .then((res) => {
+          this.product = res.data.data;
+          this.isLoading = false;
+          // console.log(this.product);
+        })
+        .catch((error) => {
+          this.isLoading = false;
+          console.log(error);
+        });
+    },
   },
   created() {
-    console.log(this.$route);
-    const { id } = this.$route.params;
-    // const aID = this.$route.params.id;
-    console.log(id);
-    this.$http.get(`${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/product/${id}`)
-      .then((res) => {
-        this.product = res.data.data;
-        // console.log(this.product);
-      });
+    this.getProduct();
   },
 };
 </script>
