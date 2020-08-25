@@ -11,13 +11,13 @@
           <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active" >
-                <img :src= "product.imageUrl[0]" style="max-height:430px; object-fit: contain;"
+                <img :src= "product.imageUrl[0]" style="max-height:420px; object-fit: contain;"
                 class="d-block w-100" alt="...">
               </div>
               <div v-for="(item, i) in product.imageUrl" :key="i"
-              class="carousel-item" style="max-height:430px;">
+              class="carousel-item" style="max-height:420px;">
               <!-- <img :src= "product.imageUrl[i]" style="height:430px; weight:550px;" -->
-                <img :src= "product.imageUrl[i]" style="max-height:430px; object-fit: contain;"
+                <img :src= "product.imageUrl[i]" style="max-height:420px; object-fit: contain;"
                 class="d-block w-100" alt="...">
               </div>
 
@@ -97,6 +97,32 @@
           <p class="text-muted">{{ product.description }}</p>
         </div>
       </div> -->
+
+      <nav class="py-2">
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
+          href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">產品資訊</a>
+          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
+           role="tab" aria-controls="nav-profile" aria-selected="false">付款方式</a>
+          <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
+           role="tab" aria-controls="nav-contact" aria-selected="false">退換貨服務</a>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home"
+        role="tabpanel" aria-labelledby="nav-home-tab">...</div>
+        <div class="tab-pane fade" id="nav-profile"
+        role="tabpanel" aria-labelledby="nav-profile-tab">
+        付款後，從備貨到寄出商品為 3 個工作天。（不包含假日）信用卡安全加密付款,
+         信用卡安全加密付款, 7-11 ibon 代碼繳費, ATM 轉帳繳費, 全家 FamiPort 代碼繳費,
+          信用卡分期 (3 期零利率), 信用卡分期 (6 期零利率), LINE Pay, Alipay 支付寶</div>
+        <div class="tab-pane fade" id="nav-contact"
+        role="tabpanel" aria-labelledby="nav-contact-tab">
+        退款申請須於收到商品後隔日起算 7 日內提出
+        ，攜帶完好商品、原始包裝、原購物發票到分店退換貨。信用卡付款請本人攜帶原信用卡與簽單。
+        開立統一編號者請攜帶統一發票專用章或公司大小章。</div>
+      </div>
+
       <h3 class="font-weight-bold py-5">Lorem ipsum dolor sit amet</h3>
 
     </div>

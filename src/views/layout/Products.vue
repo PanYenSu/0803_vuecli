@@ -106,12 +106,15 @@
                 <!-- <img :src="item.imageUrl[0]" class="card-img-top rounded-0" alt="..."> -->
                 <router-link
                   :to="`/product/${ item.id }`"
-                  class="btn card-btn-box btn-sm"
-                >
-                <div class="pic" style="height:250px;
+                  class="btn card-btn-box btn-sm">
+                <div class="pic" >
+                  <!-- style="height:250px;
                     background-size:cover;
                     background-position:center;"
-                    :style="{backgroundImage:`url(${item.imageUrl[0]})`}">查看更多
+                    :style="{backgroundImage:`url(${item.imageUrl[0]})`}">
+                    查看更多 -->
+                    <img :src="item.imageUrl[0]"
+                    class="card-img-top rounded-0" alt="...">
                 </div>
 
                 </router-link>
@@ -123,18 +126,18 @@
                 </a>
 
                 <div class="card-body p-0">
-                  <h4 class="mb-0 mt-3">
-                    <router-link :to="`/product/${item.id}`">
-        <i v-if="status.loadingItem === item.id" class="spinner-grow spinner-grow-sm"></i>
+                  <h5 class="mb-0 mt-3">
+                    <router-link :to="`/product/${item.id}`" class="nav-link">
+        <!-- <i v-if="status.loadingItem === item.id" class="spinner-grow spinner-grow-sm"></i> -->
         {{ item.title }}
         </router-link>
                     <!-- <a href="./Product.vue">{{ item.title }}</a> -->
-                    </h4>
-                  <p class="card-text" v-html="item.content">{{ item.content }}</p>
+                    </h5>
+                  <p class="text-muted card-text" v-html="item.content">{{ item.content }}</p>
                   <p v-if="!item.price" class="card-text mb-0">
                     {{ item.origin_price | currency}}
                     </p>
-                  <p v-else class="card-text mb-0">
+                  <p v-else class="card-text mb-0 font-weight-bold">
                     {{ item.price | currency}} <span class="text-muted ">
                     <del>{{ item.origin_price | currency}}</del></span></p>
                   <p class="text-muted mt-3"></p>
@@ -230,6 +233,7 @@ export default {
       path: process.env.VUE_APP_APIPATH,
       status: {
         loadingItem: '',
+        isLoading: false,
       },
     };
   },
@@ -264,7 +268,8 @@ export default {
 };
 </script>
 <style scoped>
-.pic{width:500px; height:350px;overflow:hidden;}
-.pic {transform:scale(1,1);transition: all 0.5s ease-out;}
-.pic:hover{transform:scale(1.2,1.2);}
+.pic{max-width:300px; max-height:180px;overflow:hidden;}
+.pic img{transform:scale(1,1);transition: all 0.5s ease-out;}
+.pic img:hover{transform:scale(1.2,1.2);}
+/* .img{max-width:300px; max-height:200px;overflow:hidden;} */
 </style>
