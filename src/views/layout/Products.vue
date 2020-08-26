@@ -107,13 +107,13 @@
                 <router-link
                   :to="`/product/${ item.id }`"
                   class="btn card-btn-box btn-sm">
-                <div class="pic" >
+                <div class="pic">
                   <!-- style="height:250px;
                     background-size:cover;
                     background-position:center;"
                     :style="{backgroundImage:`url(${item.imageUrl[0]})`}">
                     查看更多 -->
-                    <img :src="item.imageUrl[0]"
+                    <img :src="item.imageUrl[0] "
                     class="card-img-top rounded-0" alt="...">
                 </div>
 

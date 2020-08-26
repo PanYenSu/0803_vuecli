@@ -7,14 +7,22 @@
       <router-link to="/about">About</router-link>
     </div> -->
     <router-view/>
+    <!-- 加入購物車提醒 modal -->
+    <CartAdd />
+    <!-- 已存在購物車提醒 modal -->
+    <CartAlready />
   </div>
 </template>
 <script>
 import Toast from '@/components/Toasts.vue';
+import CartAdd from '@/components/modal/CartAdd.vue';
+import CartAlready from '@/components/modal/CartAlready.vue';
 
 export default {
   components: {
     Toast,
+    CartAlready,
+    CartAdd,
   },
   data() {
     return {

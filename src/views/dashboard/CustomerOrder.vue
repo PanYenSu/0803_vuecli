@@ -239,7 +239,8 @@
         </div>
     </div>
     <!-- 加入購物車提醒 modal -->
-  <div class="modal fade bd-example-modal-sm" id='cartAdd' tabindex="-1" role="dialog">
+    <CartAdd />
+  <!-- <div class="modal fade bd-example-modal-sm" id='cartAdd' tabindex="-1" role="dialog">
     <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -253,9 +254,10 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- 已存在購物車提醒 modal -->
-  <div class="modal fade bd-example-modal-sm border border-danger"
+  <CartAlready />
+  <!-- <div class="modal fade bd-example-modal-sm border border-danger"
        id='cartAlready' tabindex="-1" role="dialog">
       <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -270,7 +272,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
   </div>
 </template>
@@ -278,10 +280,14 @@
 <script>
 /* global $ */
 import Pagination from '@/components/Pagination.vue';
+import CartAdd from '@/components/modal/CartAdd.vue';
+import CartAlready from '@/components/modal/CartAlready.vue';
 
 export default {
   components: {
     Pagination,
+    CartAlready,
+    CartAdd,
   },
   data() {
     return {

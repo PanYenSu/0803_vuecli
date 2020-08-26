@@ -75,9 +75,14 @@
                 </button>
               </div>
             </div>
-            <a href="#" class="btn btn-dark btn-block py-2" @click.prevent="addToCart">加到購物車</a>
+            <a href="#" class="btn btn-dark btn-block py-2" @click.prevent="addToCart">加入購物車</a>
           </div>
-          <p class="font-weight-light text-left" > - {{ product.description }}</p>
+          <div class="d-flex align-items-center">
+            <router-link to='/cart'>立即購買</router-link>
+            <!-- <a href="#" class="btn btn-dark btn-block py-2"
+            @click.prevent="addToCart">立即購買</a> -->
+          </div>
+          <!-- <p class="font-weight-light text-left" > - {{ product.description }}</p> -->
         </div>
 
       <!-- blockquote 無法實現 -->
@@ -101,26 +106,24 @@
       <nav class="py-2">
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
           <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
-          href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">產品資訊</a>
+          href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">商品資訊</a>
           <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
-           role="tab" aria-controls="nav-profile" aria-selected="false">付款方式</a>
+           role="tab" aria-controls="nav-profile" aria-selected="false">購物須知</a>
           <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
-           role="tab" aria-controls="nav-contact" aria-selected="false">退換貨服務</a>
+           role="tab" aria-controls="nav-contact" aria-selected="false">退貨需知</a>
         </div>
       </nav>
       <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-home"
-        role="tabpanel" aria-labelledby="nav-home-tab">...</div>
+        role="tabpanel" aria-labelledby="nav-home-tab">
+        <ul class="text-left"><li><p v-html="product.description" ></p></li></ul>
+        <Prodinfo /></div>
         <div class="tab-pane fade" id="nav-profile"
         role="tabpanel" aria-labelledby="nav-profile-tab">
-        付款後，從備貨到寄出商品為 3 個工作天。（不包含假日）信用卡安全加密付款,
-         信用卡安全加密付款, 7-11 ibon 代碼繳費, ATM 轉帳繳費, 全家 FamiPort 代碼繳費,
-          信用卡分期 (3 期零利率), 信用卡分期 (6 期零利率), LINE Pay, Alipay 支付寶</div>
+        <Shopinfo /></div>
         <div class="tab-pane fade" id="nav-contact"
         role="tabpanel" aria-labelledby="nav-contact-tab">
-        退款申請須於收到商品後隔日起算 7 日內提出
-        ，攜帶完好商品、原始包裝、原購物發票到分店退換貨。信用卡付款請本人攜帶原信用卡與簽單。
-        開立統一編號者請攜帶統一發票專用章或公司大小章。</div>
+        <Returninfo /></div>
       </div>
 
       <h3 class="font-weight-bold py-5">Lorem ipsum dolor sit amet</h3>
@@ -128,17 +131,50 @@
     </div>
 </template>
 <script>
+/* global $ */
+import Shopinfo from '@/components/Shopinfo.vue';
+import Returninfo from '@/components/Returninfo.vue';
+import Prodinfo from '@/components/Prodinfo.vue';
+
 export default {
+  components: {
+    Shopinfo,
+    Returninfo,
+    Prodinfo,
+  },
   data() {
     return {
       isLoading: false,
       product: {
         num: 1,
       },
+      tempProduct: {
+        imageUrl: [],
+      },
+      quantity: 0,
+      cartProducts: {},
+      cartTotal: 0,
+      uuid: process.env.VUE_APP_UUID,
+      path: process.env.VUE_APP_APIPATH,
+      status: {
+        isLoading: false,
+        loadingItem: '',
+      },
     };
   },
   methods: {
-    addToCart() {
+    addToCart(item, quantity = 1) {
+      this.status.isLoading = true;
+      const url = `${this.path}${this.uuid}/ec/shopping`;
+      const cart = {
+        product: item.id,
+        quantity,
+      };
+      this.$http.post(url, cart).then(() => {
+        $('#cartAdd').modal('show');
+        this.status.isLoading = false;
+        this.quantity += cart.quantity;
+      });
     },
     getProduct() {
       // console.log(this.$route);
