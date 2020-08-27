@@ -78,7 +78,11 @@
             <a href="#" class="btn btn-dark btn-block py-2" @click.prevent="addToCart">加入購物車</a>
           </div>
           <div class="d-flex align-items-center">
-            <router-link to='/cart'>立即購買</router-link>
+            <span class="badge-secondary btn btn-dark btn-block py-2">
+              <!-- <i v-if="status.loadingItem === item.id"
+              class="spinner-border spinner-border-sm"></i> -->
+            <router-link class='text-light' to='/cart'>立即購買</router-link></span>
+
             <!-- <a href="#" class="btn btn-dark btn-block py-2"
             @click.prevent="addToCart">立即購買</a> -->
           </div>

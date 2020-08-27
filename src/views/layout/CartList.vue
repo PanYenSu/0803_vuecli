@@ -1,17 +1,18 @@
 <template>
-    <div>
+    <div class="container py-3">
+      <loading :active.sync="isLoading"></loading>
         <!-- cartList modal -->
-    <div id='cartModal' class="modal fade bd-example-modal-lg" tabindex="-1"
+    <!-- <div id='cartModal' class="modal fade bd-example-modal-lg" tabindex="-1"
     role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">購物車</h5>
+        <div class="modal-content"> -->
+          <div class="header">
+            <h5 class="title">購物車</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
+          <div class="body">
           <div class="col-md-12">
               <div class="text-right mb-3">
                 <button type="button" class="btn btn-outline-danger btn-sm"
@@ -82,12 +83,58 @@
           </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">繼續購物</button>
-            <button type="button" class="btn btn-dark"
+            <!-- badge-secondary btn btn-dark nav-link -->
+            <span class="badge-light2 btn btn-dark">
+            <router-link class='text-light' to='/products'>繼續購物</router-link></span>
+            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal"
+             @click=" <router-link to='/cart'></router-link> ">繼續購物</button> -->
+            <button type="button" class="badge-secondary btn btn-dark"
             @click="orderForm()" :disabled="cartTotal===0">確認訂購</button>
           </div>
           </div>
-        </div>
+        <!-- </div>
     </div>
-    </div>
+    </div> -->
 </template>
+<script>
+export default {
+  data() {
+    return {
+      isLoading: false,
+      quantity: 0,
+      cartProducts: {},
+      cartTotal: 0,
+      uuid: process.env.VUE_APP_UUID,
+      path: process.env.VUE_APP_APIPATH,
+    };
+  },
+  methods: {
+    removeCartItem() {},
+    removeAllCartItem() {},
+    quantityUpdata() {},
+    getCartList() {
+      this.isLoading = true;
+      const url = `${this.path}${this.uuid}/ec/shopping`;
+      this.$http.get(url).then((res) => {
+        this.cartProducts = res.data.data;
+        // console.log(this.cartProducts);
+        this.isLoading = false;
+        // 累加總金額
+        this.cartTotal = 0;
+        this.cartProducts.forEach((item) => {
+          this.cartTotal += item.product.price * item.quantity;
+        });
+        // $('#cartModal').modal('show');
+      }).catch((error) => {
+        this.isLoading = false;
+        this.$bus.$emit('message:push',
+          `購物車載入失敗，${error}`,
+          'danger');
+      });
+    },
+  },
+  created() {
+    this.getCartList();
+  },
+};
+</script>
