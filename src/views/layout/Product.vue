@@ -61,27 +61,32 @@
           <div class="d-flex align-items-center">
             <div class="input-group my-3 mr-2 bg-light rounded">
               <div class="input-group-prepend">
-                <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon1">
+                <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon1"
+                @click="CountQuantity(tempQuantity-1)" :disabled="tempQuantity === 1">
                   <i class="fas fa-minus"></i>
                 </button>
               </div>
               <input type="text"
                 class="form-control border-0 text-center my-auto shadow-none bg-light"
                 placeholder="" aria-label="Example text with button addon"
-                aria-describedby="button-addon1" value="1">
+                aria-describedby="button-addon1" :value="quantity"
+                 @keyup.enter="CountQuantity($event.target.value)">
               <div class="input-group-append">
-                <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon2">
+                <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon2"
+                @click="CountQuantity(tempQuantity+1)">
                   <i class="fas fa-plus"></i>
                 </button>
               </div>
             </div>
-            <a href="#" class="btn btn-dark btn-block py-2" @click.prevent="addToCart">加入購物車</a>
+            <a href="#" class="btn btn-dark btn-block py-2"
+            @click.prevent="addToCart(item.product.id, tempQuantity)">加入購物車</a>
           </div>
           <div class="d-flex align-items-center">
-            <span class="badge-secondary btn btn-dark btn-block py-2">
               <!-- <i v-if="status.loadingItem === item.id"
               class="spinner-border spinner-border-sm"></i> -->
-            <router-link class='text-light' to='/cart'>立即購買</router-link></span>
+            <router-link class='text-light btn-block' to='/cart'>
+            <span class="badge-secondary btn btn-dark btn-block py-2">立即購買</span>
+            </router-link>
 
             <!-- <a href="#" class="btn btn-dark btn-block py-2"
             @click.prevent="addToCart">立即購買</a> -->
@@ -135,7 +140,7 @@
     </div>
 </template>
 <script>
-/* global $ */
+// /* global $ */
 import Shopinfo from '@/components/Shopinfo.vue';
 import Returninfo from '@/components/Returninfo.vue';
 import Prodinfo from '@/components/Prodinfo.vue';
@@ -155,9 +160,10 @@ export default {
       tempProduct: {
         imageUrl: [],
       },
-      quantity: 0,
-      cartProducts: {},
-      cartTotal: 0,
+      quantity: 1,
+      tempQuantity: 1,
+      // cartProducts: {},
+      // cartTotal: 0,
       uuid: process.env.VUE_APP_UUID,
       path: process.env.VUE_APP_APIPATH,
       status: {
@@ -167,17 +173,22 @@ export default {
     };
   },
   methods: {
-    addToCart(item, quantity = 1) {
-      this.status.isLoading = true;
+    CountQuantity(quantity) {
+      this.quantity = 0;
+      this.quantity += quantity;
+    },
+    addToCart(item, quantity) {
+      this.quantity = 0;
+      // this.status.isLoading = true;
       const url = `${this.path}${this.uuid}/ec/shopping`;
       const cart = {
         product: item.id,
         quantity,
       };
       this.$http.post(url, cart).then(() => {
-        $('#cartAdd').modal('show');
-        this.status.isLoading = false;
+        // this.status.isLoading = false;
         this.quantity += cart.quantity;
+        this.$bus.$emit('get-cart');
       });
     },
     getProduct() {
