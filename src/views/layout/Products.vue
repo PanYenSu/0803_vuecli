@@ -30,7 +30,7 @@
     </div>
     <div class="container mt-md-5 mt-3 mb-7">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 ">
           <div class="accordion border border-bottom border-top-0 border-left-0 border-right-0 mb-3"
            id="accordionExample">
             <div class="card border-0">
@@ -113,8 +113,10 @@
                     background-position:center;"
                     :style="{backgroundImage:`url(${item.imageUrl[0]})`}">
                     查看更多 -->
-                    <img :src="item.imageUrl[0] "
+
+                    <img :src="item.imageUrl[0]"
                     class="card-img-top rounded-0" alt="...">
+<!-- <p class="text-white  bg-primary">Lorem ipsum dolor sit amet, posuere erat a ante.</p> -->
                 </div>
 
                 </router-link>

@@ -62,7 +62,7 @@
             <div class="input-group my-3 mr-2 bg-light rounded">
               <div class="input-group-prepend">
                 <button class="btn btn-outline-dark border-0 py-2" type="button" id="button-addon1"
-                @click="CountQuantity(tempQuantity-1)" :disabled="tempQuantity === 1">
+                @click="CountQuantity(tempQuantity-1)" :disabled="quantity === 1">
                   <i class="fas fa-minus"></i>
                 </button>
               </div>
@@ -79,7 +79,7 @@
               </div>
             </div>
             <a href="#" class="btn btn-dark btn-block py-2"
-            @click.prevent="addToCart(item.product.id, tempQuantity)">加入購物車</a>
+            @click.prevent="addToCart(product, quantity)">加入購物車</a>
           </div>
           <div class="d-flex align-items-center">
               <!-- <i v-if="status.loadingItem === item.id"
@@ -140,7 +140,7 @@
     </div>
 </template>
 <script>
-// /* global $ */
+/* global $ */
 import Shopinfo from '@/components/Shopinfo.vue';
 import Returninfo from '@/components/Returninfo.vue';
 import Prodinfo from '@/components/Prodinfo.vue';
@@ -161,7 +161,7 @@ export default {
         imageUrl: [],
       },
       quantity: 1,
-      tempQuantity: 1,
+      tempQuantity: 0,
       // cartProducts: {},
       // cartTotal: 0,
       uuid: process.env.VUE_APP_UUID,
@@ -174,11 +174,11 @@ export default {
   },
   methods: {
     CountQuantity(quantity) {
-      this.quantity = 0;
+      // this.quantity = 0;
       this.quantity += quantity;
     },
     addToCart(item, quantity) {
-      this.quantity = 0;
+      // this.quantity = 0;
       // this.status.isLoading = true;
       const url = `${this.path}${this.uuid}/ec/shopping`;
       const cart = {
@@ -187,12 +187,19 @@ export default {
       };
       this.$http.post(url, cart).then(() => {
         // this.status.isLoading = false;
-        this.quantity += cart.quantity;
+        $('#cartAdd').modal('show');
+        // this.quantity += cart.quantity;
         this.$bus.$emit('get-cart');
+      }).catch((error) => {
+      // this.isLoading = false;
+        $('#cartAlready').modal('show');
+        this.status.loadingItem = '';
+        console.log(error.response.data.errors);
       });
     },
     getProduct() {
       // console.log(this.$route);
+      this.quantity = 1;
       this.isLoading = true;
       const { id } = this.$route.params;
       // const aID = this.$route.params.id;
