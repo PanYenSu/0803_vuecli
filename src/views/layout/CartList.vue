@@ -34,7 +34,7 @@
               <tr v-for='item in cartProducts' :key='item.id'>
                 <td class="align-middle">
                 <button type="button" class="btn btn-outline-danger btn-sm"
-                @click="removeCartItem(item.product, item.quantity)">
+                @click="removeCartItem(item.product)">
                   <i class="far fa-trash-alt"></i>
                 </button>
                  </td>
@@ -84,8 +84,9 @@
           </div>
           <div class="modal-footer">
             <!-- badge-secondary btn btn-dark nav-link -->
-            <span class="badge-light2 btn btn-dark">
-            <router-link class='text-light' to='/products'>繼續購物</router-link></span>
+            <router-link class='text-light' to='/products'>
+            <span class="badge-light2 btn btn-dark">繼續購物</span>
+            </router-link>
             <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal"
              @click=" <router-link to='/cart'></router-link> ">繼續購物</button> -->
             <button type="button" class="badge-secondary btn btn-dark"
@@ -109,8 +110,39 @@ export default {
     };
   },
   methods: {
-    removeCartItem() {},
-    removeAllCartItem() {},
+    removeCartItem(item) {
+      this.isLoading = true;
+      const url = `${this.path}${this.uuid}/ec/shopping/${item.id}`;
+      // $('#cartModal').modal('hide');
+      this.$http.delete(url).then(() => {
+        // $('#cartModal').modal('hide');
+        // console.log(item);
+        this.isLoading = false;
+        // this.getCartNum();
+        this.getCartList();
+        this.$bus.$emit('get-cart');
+      }).catch((error) => {
+        this.isLoading = false;
+        console.log(error);
+      });
+    },
+    removeAllCartItem() {
+      this.isLoading = true;
+      this.cartProducts = [];
+      this.cartTotal = 0;
+      // $('#cartModal').modal('hide');
+      const url = `${this.path}${this.uuid}/ec/shopping/all/product`;
+      this.$http.delete(url).then(() => {
+        this.isLoading = false;
+        this.getCartList();
+        this.$bus.$emit('get-cart');
+        // $('#cartModal').modal('show');
+      }).catch((error) => {
+        this.isLoading = false;
+        console.log(error);
+      });
+      this.quantity = 0;
+    },
     quantityUpdata() {},
     getCartList() {
       this.isLoading = true;
