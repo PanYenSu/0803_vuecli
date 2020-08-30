@@ -24,10 +24,11 @@
             <thead>
               <tr>
                 <th scope="col">刪除</th>
+                <th scope="col"></th>
                 <th scope="col">品名</th>
                 <th scope="col" width="150px">數量</th>
                 <th scope="col">單位</th>
-                <th scope="col">單價</th>
+                <th scope="col">金額</th>
               </tr>
             </thead>
             <tbody v-if='cartProducts.length'>
@@ -38,6 +39,14 @@
                   <i class="far fa-trash-alt"></i>
                 </button>
                  </td>
+                <td class="align-middle">
+                  <a @click.prevent="$router.push(`/product/${item.product.id}`)" type="button">
+                  <img height="50" :src="item.product.imageUrl[0]" alt="">
+                  </a>
+                  <!-- <div :style="`background: url(${item.product.imageUrl[0]});`"
+                   class="cart-image"
+                   @click="$router.push(`/product/${item.product.id}`)"></div> -->
+                </td>
                 <td class="align-middle">{{item.product.title}}</td>
                 <td class="align-middle">
                 <div class="input-group">
@@ -65,32 +74,43 @@
                 {{ item.product.unit }}
                 </td>
               <td class="align-middle text-right">
-              {{ item.product.price }}
+              {{ item.product.price * item.quantity | currency }}
             </td>
           </tr>
             </tbody>
-            <tfoot>
-                  <tr>
-                    <td colspan="4" class="text-right">
-                      總計
-                    </td>
-                    <td class="text-right">
-                      {{ cartTotal }}
+            <!-- <tfoot >
+                  <tr class="">
+                    <td class="text-right ">
+                      共 {{ quantity }} 件 / 商品金額總計 /
+                      <strong class="text-danger"> NT {{ cartTotal| currency }} </strong>
                     </td>
                   </tr>
-                </tfoot>
+                </tfoot> -->
           </table>
+          <hr>
+          <div class="d-flex justify-content-end">
+              <p v-if='cartTotal < 1000'>共 {{ quantity }} 件商品 / 運費(1000免運): NT $60</p>
+              <p v-else>共 {{ quantity }} 件商品 / 運費(1000免運): NT $0</p>
+            </div>
+          <div class="d-flex justify-content-end">
+            <p v-if='cartTotal < 1000'>商品金額總計:
+              <strong class="text-danger"> NT {{ cartTotal+60 | currency }} </strong></p>
+            <p v-else>商品金額總計:<strong class="text-danger"> NT {{ cartTotal| currency }} </strong></p>
           </div>
           </div>
-          <div class="modal-footer">
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
             <!-- badge-secondary btn btn-dark nav-link -->
-            <router-link class='text-light' to='/products'>
-            <span class="badge-light2 btn btn-dark">繼續購物</span>
-            </router-link>
-            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal"
-             @click=" <router-link to='/cart'></router-link> ">繼續購物</button> -->
-            <button type="button" class="badge-secondary btn btn-dark"
-            @click="orderForm()" :disabled="cartTotal===0">確認訂購</button>
+            <!-- <router-link to="/products" class="primary text-center d-block my-3">
+                  <i class="returnIcon fas fa-angle-left"></i>
+                  <span>繼續購物</span>
+              </router-link> -->
+            <button type="button" class="w-25 badge-light2 btn btn-light"
+             @click="$router.push(`/products`)">
+             <i class="returnIcon fas fa-angle-left"></i>繼續購物</button>
+            <button type="button" class="w-25 badge-secondary btn btn-dark"
+            @click="orderForm()" :disabled="cartTotal===0">
+            確認訂購<i class="returnIcon fas fa-angle-right"></i></button>
           </div>
           </div>
         <!-- </div>
@@ -143,7 +163,19 @@ export default {
       });
       this.quantity = 0;
     },
-    quantityUpdata() {},
+    quantityUpdata(id, num) {
+      this.isLoading = true;
+      const url = `${this.path}${this.uuid}/ec/shopping`;
+      const cart = {
+        product: id,
+        quantity: num,
+      };
+      this.$http.patch(url, cart).then(() => {
+        this.isLoading = false;
+        this.getCartList();
+        this.$bus.$emit('get-cart');
+      });
+    },
     getCartList() {
       this.isLoading = true;
       const url = `${this.path}${this.uuid}/ec/shopping`;
@@ -153,8 +185,10 @@ export default {
         this.isLoading = false;
         // 累加總金額
         this.cartTotal = 0;
+        this.quantity = 0;
         this.cartProducts.forEach((item) => {
           this.cartTotal += item.product.price * item.quantity;
+          this.quantity += item.quantity;
         });
         // $('#cartModal').modal('show');
       }).catch((error) => {

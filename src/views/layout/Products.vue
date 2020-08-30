@@ -38,9 +38,9 @@
               border-top border-left-0 border-right-0"
               id="headingOne" data-toggle="collapse" data-target="#collapseOne">
                 <div class="d-flex justify-content-between align-items-center pr-1">
-                  <h4 class="mb-0">
-                    Lorem ipsum
-                  </h4>
+                  <h5 class="mb-0">
+                    狗狗用品
+                  </h5>
                   <i class="fas fa-chevron-down"></i>
                 </div>
               </div>
@@ -48,9 +48,10 @@
               data-parent="#accordionExample">
                 <div class="card-body py-0">
                   <ul class="list-unstyled">
-                    <li><a href="#" class="py-2 d-block text-muted">Lorem ipsum</a></li>
-                    <li><a href="#" class="py-2 d-block text-muted">Lorem ipsum</a></li>
-                    <li><a href="#" class="py-2 d-block text-muted">Lorem ipsum</a></li>
+                    <li><a href="#" class="py-2 d-block text-muted">項圈/牽繩</a></li>
+                    <li><a href="#" class="py-2 d-block text-muted">蓋毯/睡墊</a></li>
+                    <li><a href="#" class="py-2 d-block text-muted">衣/帽</a></li>
+                    <li><a href="#" class="py-2 d-block text-muted">玩具</a></li>
                   </ul>
                 </div>
               </div>
@@ -60,9 +61,9 @@
               border-top border-left-0 border-right-0"
               id="headingTwo" data-toggle="collapse" data-target="#collapseTwo">
                 <div class="d-flex justify-content-between align-items-center pr-1">
-                  <h4 class="mb-0">
-                    Lorem ipsum
-                  </h4>
+                  <h5 class="mb-0">
+                    貓咪用品
+                  </h5>
                   <i class="fas fa-chevron-down"></i>
                 </div>
               </div>
@@ -70,8 +71,8 @@
               data-parent="#accordionExample">
                 <div class="card-body py-0">
                   <ul class="list-unstyled">
-                    <li><a href="#" class="py-2 d-block text-muted">Lorem ipsum</a></li>
-                    <li><a href="#" class="py-2 d-block text-muted">Lorem ipsum</a></li>
+                    <li><a href="#" class="py-2 d-block text-muted">衣/帽</a></li>
+                    <li><a href="#" class="py-2 d-block text-muted">玩具</a></li>
                   </ul>
                 </div>
               </div>
@@ -81,9 +82,9 @@
               border-top border-left-0 border-right-0"
               id="headingThree" data-toggle="collapse" data-target="#collapseThree">
                 <div class="d-flex justify-content-between align-items-center pr-1">
-                  <h4 class="mb-0">
-                    Lorem ipsum
-                  </h4>
+                  <h5 class="mb-0">
+                    項圈/牽繩
+                  </h5>
                   <i class="fas fa-chevron-down"></i>
                 </div>
               </div>
@@ -143,6 +144,10 @@
                     {{ item.price | currency}} <span class="text-muted ">
                     <del>{{ item.origin_price | currency}}</del></span></p>
                   <p class="text-muted mt-3"></p>
+                  <div>
+                    <a href="#" class="btn btn-light2 btn-block"
+                    @click.prevent="addToCart(item.id, 1)">加入購物車</a>
+                  </div>
                 </div>
 
 <!-- <div class="card-body col-md-6 d-flex flex-column justify-content-center mt-md-0 mt-3">
@@ -213,7 +218,7 @@
 </template>
 
 <script>
-// /* global $ */
+/* global $ */
 import Pagination from '@/components/Pagination.vue';
 
 export default {
@@ -240,7 +245,25 @@ export default {
     };
   },
   methods: {
-    addToCart() {
+    addToCart(id, quantity) {
+      // this.quantity = 0;
+      // this.status.isLoading = true;
+      const url = `${this.path}${this.uuid}/ec/shopping`;
+      const cart = {
+        product: id,
+        quantity,
+      };
+      this.$http.post(url, cart).then(() => {
+        // this.status.isLoading = false;
+        $('#cartAdd').modal('show');
+        // this.quantity += cart.quantity;
+        this.$bus.$emit('get-cart');
+      }).catch((error) => {
+      // this.isLoading = false;
+        $('#cartAlready').modal('show');
+        this.status.loadingItem = '';
+        console.log(error.response.data.errors);
+      });
     },
     getProducts(page = 1) {
       this.isLoading = true;
