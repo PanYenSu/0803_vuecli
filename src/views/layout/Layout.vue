@@ -15,6 +15,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
         <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
             <router-link to="/" class="nav-link">Home</router-link>
@@ -78,6 +79,8 @@
 </div>
 </template>
 <script>
+// /* global $ */
+
 export default {
   data() {
     return {
@@ -101,6 +104,10 @@ export default {
     },
   },
   created() {
+    // $('.hamBtn').click((e) => {
+    //   e.preventDefault();
+    //   $('.navbar-nav').toggleClass('active2');
+    // });
     this.getCart();
     this.$bus.$on('get-cart', () => {
       this.getCart();
@@ -137,5 +144,8 @@ export default {
         width: 20px;
         height: 18px;
       }
+   /* .nav-link:hover {
+      color: #FFCB75;
+    } */
 
 </style>

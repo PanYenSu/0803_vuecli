@@ -78,7 +78,6 @@ export default {
   },
   props: {
     product: {
-      type: Object,
     },
   },
   created() {
@@ -89,6 +88,7 @@ export default {
       const url = `${this.path}${this.uuid}/ec/products`;
       this.$http.get(url).then((res) => {
         this.products = res.data.data;
+        // console.log(this.product.category);
       }).catch(() => {
         this.$bus.$emit(
           'message:push',
@@ -104,8 +104,10 @@ export default {
   },
   computed: {
     identical() {
+      console.log(this.product.category);
       return this.products.filter(
-        (item) => item.id !== this.product.id && item.category === this.product.category,
+        (item) => ((item.id !== this.product.id)
+         && (item.category === this.product.category || (item.price < 500))),
       );
     },
     swiper() {
