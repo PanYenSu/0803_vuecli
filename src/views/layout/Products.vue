@@ -269,10 +269,10 @@ export default {
       this.isLoading = true;
       this.$http.get(`${this.path}${this.uuid}/ec/products?page=${page}`)
         .then((res) => {
-          // console.log(res);
           this.isLoading = false;
           this.products = res.data.data;
           this.pagination = res.data.meta.pagination;
+          console.log(this.products);
           // this.$bus.$emit(
           //   'message:push',
           //   '載入成功',

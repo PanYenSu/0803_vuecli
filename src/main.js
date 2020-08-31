@@ -17,6 +17,10 @@ import Loading from 'vue-loading-overlay';
 // Import stylesheet
 import 'vue-loading-overlay/dist/vue-loading.css';
 import '@fortawesome/fontawesome-free/css/all.css';
+// import Swiper JS
+import VueAwesomeSwiper from 'vue-awesome-swiper';
+// import Swiper styles
+import 'swiper/css/swiper.css';
 
 import App from './App.vue';
 import router from './router';
@@ -42,6 +46,7 @@ configure({
 localize('tw', zhTW);
 Vue.component('ValidationObserver', ValidationObserver);
 Vue.component('ValidationProvider', ValidationProvider);
+Vue.use(VueAwesomeSwiper);
 
 Vue.filter('currency', (num) => {
   const n = Number(num);

@@ -11,7 +11,7 @@
           <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active" >
-                <img :src= "product.imageUrl[0]" style="max-height:420px; object-fit: contain;"
+                <img :src= "product.imageUrl" style="max-height:420px; object-fit: contain;"
                 class="d-block w-100" alt="...">
               </div>
               <div v-for="(item, i) in product.imageUrl" :key="i"
@@ -97,24 +97,7 @@
           <!-- <p class="font-weight-light text-left" > - {{ product.description }}</p> -->
         </div>
 
-      <!-- blockquote 無法實現 -->
-           <!-- <blockquote class="blockquote">
-             <p class="col-sm-9" v-html="product.content"></p>
-             <footer class="blockquote-footer text-right" >
-               {{ product.description }}
-             </footer>
-           </blockquote> -->
        </div>
-
-       <!-- <div class="row my-5">
-        <div class="col-md-4">
-          <p v-html="product.content"></p>
-        </div>
-        <div class="col-md-3">
-          <p class="text-muted">{{ product.description }}</p>
-        </div>
-      </div> -->
-
       <nav class="py-2">
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
           <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
@@ -138,7 +121,13 @@
         <Returninfo /></div>
       </div>
 
-      <h3 class="font-weight-bold py-5">Lorem ipsum dolor sit amet</h3>
+      <!-- <h3 class="font-weight-bold py-5">你可能會喜歡</h3> -->
+      <section class="col-md-12 sametype-box mb-4 py-5">
+        <h4 class="font-weight-bold mb-3 h4">你可能會喜歡</h4>
+        <Prodmaybe
+          :product="product"
+          @update="getProduct" />
+      </section>
 
     </div>
 </template>
@@ -147,12 +136,14 @@
 import Shopinfo from '@/components/Shopinfo.vue';
 import Returninfo from '@/components/Returninfo.vue';
 import Prodinfo from '@/components/Prodinfo.vue';
+import Prodmaybe from '@/components/Prodmaybe.vue';
 
 export default {
   components: {
     Shopinfo,
     Returninfo,
     Prodinfo,
+    Prodmaybe,
   },
   data() {
     return {
@@ -210,8 +201,9 @@ export default {
       this.$http.get(`${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/product/${id}`)
         .then((res) => {
           this.product = res.data.data;
+          // this.$set(this.product, 'num', 1);
           this.isLoading = false;
-          // console.log(this.product);
+          console.log(this.product);
         })
         .catch((error) => {
           this.isLoading = false;
@@ -224,8 +216,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/* @import '../node_modules/bootstrap/scss/functions';
-@import '../node_modules/bootstrap/scss/bootstrap'; */
-</style>

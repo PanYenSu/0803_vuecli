@@ -41,17 +41,16 @@
                 </div>
       <div class="row mt-5">
         <div class="col-md-4 mt-md-4">
-          <div class="card border-0 mb-4">
+          <div class="card border-0 mb-4" @click="$router.push(`/product/${id[0]}`)" type="button">
             <!-- <img
               src="https://images.unsplash.com/photo-1494256997604-768d1f608cac?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
               class="card-img-top rounded-0"
               alt="..."
             /> -->
-            <div style="height:250px;
-        background-size:cover;
-        background-position:center;"
-        :style="{backgroundImage:'url(https://images.unsplash.com/photo-1474827650307-5aeff1907b88?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'}">
-     </div>
+            <!-- @click.prevent="$router.push(`/product/${item.product.id}`)" type="button" -->
+            <div style="height:250px; background-size:cover; background-position:center;"
+              :style="{backgroundImage:'url(https://images.unsplash.com/photo-1474827650307-5aeff1907b88?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'}">
+            </div>
             <div class="card-body text-center">
               <h4>紅色項圈</h4>
               <div class="d-flex justify-content-between">
@@ -63,17 +62,15 @@
           </div>
         </div>
         <div class="col-md-4 mt-md-4">
-          <div class="card border-0 mb-4">
+          <div class="card border-0 mb-4"  @click="$router.push(`/product/${id[1]}`)" type="button">
             <!-- <img
               src="https://images.unsplash.com/photo-1516222338250-863216ce01ea?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
               class="card-img-top rounded-0"
               alt="..."
             /> -->
-            <div style="height:250px;
-        background-size:cover;
-        background-position:center;"
-        :style="{backgroundImage:'url(https://images.unsplash.com/photo-1548135160-2ddd99526762?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60)'}">
-     </div>
+            <div style="height:250px; background-size:cover; background-position:center;"
+            :style="{backgroundImage:'url(https://images.unsplash.com/photo-1548135160-2ddd99526762?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60)'}">
+           </div>
             <div class="card-body text-center">
               <h4>紅色護目鏡</h4>
               <div class="d-flex justify-content-between">
@@ -85,17 +82,15 @@
           </div>
         </div>
         <div class="col-md-4 mt-md-4">
-          <div class="card border-0 mb-4">
+          <div class="card border-0 mb-4"  @click="$router.push(`/product/${id[2]}`)" type="button">
             <!-- <img
               src="https://images.unsplash.com/photo-1516228726471-54b20a242a5e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
               class="card-img-top rounded-0"
               alt="..."
             /> -->
-            <div style="height:250px;
-        background-size:cover;
-        background-position:center;"
-        :style="{backgroundImage:'url(https://images.unsplash.com/photo-1571486440553-fdabe8ad5db1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)'}">
-     </div>
+            <div style="height:250px; background-size:cover; background-position:center;"
+            :style="{backgroundImage:'url(https://images.unsplash.com/photo-1571486440553-fdabe8ad5db1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)'}">
+            </div>
             <div class="card-body text-center">
               <h4>黑框護目鏡</h4>
               <div class="d-flex justify-content-between">
@@ -210,6 +205,11 @@ export default {
       uuid: process.env.VUE_APP_UUID,
       api: process.env.VUE_APP_APIPATH,
       isLoading: false,
+      id: [
+        'X4mnixiulwnYrQo4eV8AOjloM2M9ZvsfnfF0RgL1r8DDWPdueS9gudYz4Xsyf7wk',
+        'LUFD0r5NWCgLpXpa0n40DeHWFkuBNXmb3lpZbYtWariVUph1zHcNHxzWqiYMXeVQ',
+        '7aPr8Txlxfx85NKh23HextgvOhcSSwufuD3BXqT97ZxCt6c1puZlTb1TN3O7depB',
+      ],
     };
   },
   created() {
