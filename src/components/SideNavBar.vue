@@ -70,3 +70,41 @@
           </div>
     </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      products: [],
+      uuid: process.env.VUE_APP_UUID,
+      path: process.env.VUE_APP_APIPATH,
+    };
+  },
+  created() {
+    this.getProducts();
+  },
+  methods: {
+    getProducts() {
+      const url = `${this.path}${this.uuid}/ec/products?page=1&paged=100`;
+      this.$http.get(url).then((res) => {
+        this.products = res.data.data;
+      }).catch(() => {
+        this.$bus.$emit(
+          'message:push',
+          '資料讀取失敗',
+          'error',
+        );
+      });
+    },
+  },
+  computed: {
+    identical() {
+      return this.products.filter(
+        (item) => ((item.id !== this.product.id)
+        && (item.category === this.product.category
+        || ((item.price + 300 > this.product.price) && (item.price - 200 < this.product.price))
+        )),
+      );
+    },
+  },
+};
+</script>

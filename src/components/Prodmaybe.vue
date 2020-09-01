@@ -77,18 +77,17 @@ export default {
     SwiperSlide,
   },
   props: {
-    product: {
-    },
+    product: {},
   },
   created() {
     this.getProducts();
   },
   methods: {
     getProducts() {
-      const url = `${this.path}${this.uuid}/ec/products`;
+      const url = `${this.path}${this.uuid}/ec/products?page=1&paged=100`;
       this.$http.get(url).then((res) => {
         this.products = res.data.data;
-        // console.log(this.product.category);
+        console.log(this.products.length);
       }).catch(() => {
         this.$bus.$emit(
           'message:push',
@@ -104,10 +103,12 @@ export default {
   },
   computed: {
     identical() {
-      console.log(this.product.category);
+      // console.log(this.product.category);
       return this.products.filter(
         (item) => ((item.id !== this.product.id)
-         && (item.category === this.product.category || (item.price < 500))),
+        && (item.category === this.product.category
+        || ((item.price + 300 > this.product.price) && (item.price - 200 < this.product.price))
+        )),
       );
     },
     swiper() {

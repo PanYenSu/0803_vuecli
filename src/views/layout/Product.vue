@@ -195,7 +195,7 @@ export default {
       this.isLoading = true;
       const { id } = this.$route.params;
       // const aID = this.$route.params.id;
-      console.log(id);
+      console.log(this.$route);
       this.$http.get(`${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/product/${id}`)
         .then((res) => {
           this.product = res.data.data;
@@ -205,7 +205,9 @@ export default {
         })
         .catch((error) => {
           this.isLoading = false;
-          console.log(error);
+          this.$bus.$emit('message:push',
+            `購物車載入失敗，${error}`,
+            'danger');
         });
     },
   },

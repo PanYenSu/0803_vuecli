@@ -202,8 +202,8 @@
 export default {
   data() {
     return {
-      uuid: process.env.VUE_APP_UUID,
-      api: process.env.VUE_APP_APIPATH,
+      // uuid: process.env.VUE_APP_UUID,
+      // api: process.env.VUE_APP_APIPATH,
       isLoading: false,
       id: [
         'X4mnixiulwnYrQo4eV8AOjloM2M9ZvsfnfF0RgL1r8DDWPdueS9gudYz4Xsyf7wk',
