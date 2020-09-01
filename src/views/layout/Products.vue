@@ -17,12 +17,88 @@
       <div class="row">
 
         <div class="col-md-3 ">
-          <SideNavBar/>
+          <!-- <SideNavBar @update="filterCategories(category)"/> -->
+          <div class="accordion border border-bottom border-top-0 border-left-0 border-right-0 mb-3"
+           id="accordionExample">
+            <div class="card border-0">
+              <div class="card-header px-0 py-4 bg-white border border-bottom-0
+              border-top border-left-0 border-right-0"
+              id="headingOne" data-toggle="collapse" data-target="#collapseOne">
+                <div class="d-flex justify-content-between align-items-center pr-1">
+                  <h5 class="mb-0">
+                    狗狗用品
+                  </h5>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+              </div>
+              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+              data-parent="#accordionExample">
+                <div class="card-body py-0">
+                  <ul class="list-unstyled">
+                    <li>
+                      <a href="#" @click.prevent="filterCategory = ''"
+                      :class="{ active: filterCategory === '' }">全部商品</a>
+                    </li>
+                    <li v-for="item in categories" :key="item">
+                      <a href="#" class="py-2 d-block text-muted"
+                      @click.prevent="filterCategory = item"
+                    :class="{ active: item === filterCategory }">{{item}}</a></li>
+                    <!-- <li><a href="#" class="py-2 d-block text-muted">蓋毯/睡墊</a></li>
+                    <li><a href="#" class="py-2 d-block text-muted">衣/帽</a></li>
+                    <li><a href="#" class="py-2 d-block text-muted">玩具/外出用品</a></li> -->
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="card border-0">
+              <div class="card-header px-0 py-4 bg-white border border-bottom-0
+              border-top border-left-0 border-right-0"
+              id="headingTwo" data-toggle="collapse" data-target="#collapseTwo">
+                <div class="d-flex justify-content-between align-items-center pr-1">
+                  <h5 class="mb-0">
+                    貓咪用品
+                  </h5>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+              data-parent="#accordionExample">
+                <div class="card-body py-0">
+                  <ul class="list-unstyled">
+                    <li><a href="#" class="py-2 d-block text-muted">衣/帽</a></li>
+                    <li><a href="#" class="py-2 d-block text-muted">玩具</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="card border-0">
+              <div class="card-header px-0 py-4 bg-white border border-bottom-0
+              border-top border-left-0 border-right-0"
+              id="headingThree" data-toggle="collapse" data-target="#collapseThree">
+                <div class="d-flex justify-content-between align-items-center pr-1">
+                  <h5 class="mb-0">
+                    項圈/牽繩
+                  </h5>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+              </div>
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+              data-parent="#accordionExample">
+                <div class="card-body py-0">
+                  <ul class="list-unstyled">
+                    <li><a href="#" class="py-2 d-block text-muted">Lorem ipsum</a></li>
+                    <li><a href="#" class="py-2 d-block text-muted">Lorem ipsum</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
         <!-- 產品列表 start -->
         <div class="col-md-9">
           <div class="row">
-            <div v-for="(item) in products" :key="item.id" class="col-md-4">
+            <div v-for="(item) in filterCategories" :key="item.id" class="col-md-4">
               <div class="card border-0 mb-4 position-relative position-relative">
                 <!-- <img :src="item.imageUrl[0]" class="card-img-top rounded-0" alt="..."> -->
                 <router-link
@@ -102,17 +178,19 @@
 <script>
 /* global $ */
 import Pagination from '@/components/Pagination.vue';
-import SideNavBar from '@/components/SideNavBar.vue';
+// import SideNavBar from '@/components/SideNavBar.vue';
 
 export default {
   components: {
     Pagination,
-    SideNavBar,
+    // SideNavBar,
   },
   data() {
     return {
       isLoading: false,
       products: [],
+      categories: ['項圈', '犬潮服', '睡墊', '護目鏡', '玩具'],
+      filterCategory: '',
       pagination: {},
       tempProduct: {
         imageUrl: [],
@@ -151,12 +229,21 @@ export default {
     },
     getProducts(page = 1) {
       this.isLoading = true;
-      this.$http.get(`${this.path}${this.uuid}/ec/products?page=${page}`)
+      let url = `${this.path}${this.uuid}/ec/products?page=${page}&paged=100`;
+      if (this.filterCategory === '') {
+        url = `${this.path}${this.uuid}/ec/products?page=${page}&paged=18`;
+      }
+      this.$http.get(url)
         .then((res) => {
           this.isLoading = false;
           this.products = res.data.data;
           this.pagination = res.data.meta.pagination;
           console.log(this.products);
+          console.log(this.$route.params);
+          const { categoryName } = this.$route.params;
+          if (categoryName) {
+            this.filterCategory = categoryName;
+          }
           // this.$bus.$emit(
           //   'message:push',
           //   '載入成功',
@@ -173,6 +260,18 @@ export default {
   },
   created() {
     this.getProducts();
+  },
+  computed: {
+    filterCategories() {
+      if (this.filterCategory) {
+        return this.products.filter((item) => {
+          const data = item.category
+            .includes(this.filterCategory);
+          return data;
+        });
+      }
+      return this.products;
+    },
   },
 };
 </script>

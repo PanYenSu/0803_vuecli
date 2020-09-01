@@ -124,7 +124,7 @@
       <!-- <h3 class="font-weight-bold py-5">你可能會喜歡</h3> -->
       <section class="col-md-12 sametype-box mb-4 py-5">
         <h4 class="font-weight-bold mb-3 h4">你可能會喜歡</h4>
-        <Prodmaybe :product="product" @update="getProduct" />
+        <ProdSwiper :product="product" @update="getProduct" />
       </section>
 
     </div>
@@ -134,14 +134,14 @@
 import Shopinfo from '@/components/Shopinfo.vue';
 import Returninfo from '@/components/Returninfo.vue';
 import Prodinfo from '@/components/Prodinfo.vue';
-import Prodmaybe from '@/components/Prodmaybe.vue';
+import ProdSwiper from '@/components/ProdSwiper.vue';
 
 export default {
   components: {
     Shopinfo,
     Returninfo,
     Prodinfo,
-    Prodmaybe,
+    ProdSwiper,
   },
   data() {
     return {

@@ -17,10 +17,13 @@
               data-parent="#accordionExample">
                 <div class="card-body py-0">
                   <ul class="list-unstyled">
-                    <li><a href="#" class="py-2 d-block text-muted">項圈/牽繩</a></li>
-                    <li><a href="#" class="py-2 d-block text-muted">蓋毯/睡墊</a></li>
+                    <li v-for="item in categories" :key="item">
+                      <a href="#" class="py-2 d-block text-muted"
+                      @click.prevent="showCategory(item)"
+                    :class="{ active: item === filterCategory }">{{item}}</a></li>
+                    <!-- <li><a href="#" class="py-2 d-block text-muted">蓋毯/睡墊</a></li>
                     <li><a href="#" class="py-2 d-block text-muted">衣/帽</a></li>
-                    <li><a href="#" class="py-2 d-block text-muted">玩具/外出用品</a></li>
+                    <li><a href="#" class="py-2 d-block text-muted">玩具/外出用品</a></li> -->
                   </ul>
                 </div>
               </div>
@@ -75,6 +78,8 @@ export default {
   data() {
     return {
       products: [],
+      categories: ['項圈', '犬潮服', '睡墊', '護目鏡'],
+      filterCategory: '',
       uuid: process.env.VUE_APP_UUID,
       path: process.env.VUE_APP_APIPATH,
     };
@@ -83,10 +88,19 @@ export default {
     this.getProducts();
   },
   methods: {
+    showCategory(item) {
+      // this.$router.push(`/products);
+      this.filterCategory = item;
+      this.$emit('update', item);
+    },
     getProducts() {
       const url = `${this.path}${this.uuid}/ec/products?page=1&paged=100`;
       this.$http.get(url).then((res) => {
         this.products = res.data.data;
+        const { categoryName } = this.$route.params;
+        if (categoryName) {
+          this.filterCategory = categoryName;
+        }
       }).catch(() => {
         this.$bus.$emit(
           'message:push',
@@ -95,15 +109,43 @@ export default {
         );
       });
     },
+    // selecCategory(isNew, item) {
+    //   switch (isNew) {
+    //     case '項圈/牽繩':
+    //       return this.products.filter(
+    //         () => ((item.category === '項圈')
+    //         || (item.category === '胸背帶')),
+    //       );
+    //     case '衣/帽':
+    //       return this.products.filter(
+    //         () => ((item.category === '犬潮服')
+    //         || (item.category === '領巾')),
+    //       );
+    //     case '蓋毯/睡墊':
+    //       return this.products.filter(
+    //         () => ((item.category === '睡墊')),
+    //       );
+    //     case '玩具/外出用品':
+    //       return this.products.filter(
+    //         () => ((item.category === '旅行袋')
+    //         || (item.category === '玩具')
+    //         || (item.category === '護目鏡')),
+    //       );
+    //     default:
+    //       break;
+    //   }
+    // },
   },
   computed: {
-    identical() {
-      return this.products.filter(
-        (item) => ((item.id !== this.product.id)
-        && (item.category === this.product.category
-        || ((item.price + 300 > this.product.price) && (item.price - 200 < this.product.price))
-        )),
-      );
+    filterCategories() {
+      if (this.filterCategory) {
+        return this.products.filter((item) => {
+          const data = item.category
+            .includes(this.filterCategory);
+          return data;
+        });
+      }
+      return this.products;
     },
   },
 };
