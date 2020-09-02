@@ -80,6 +80,7 @@ $theme-colors: () !default;
 $theme-colors: map-merge(
   (
     "primary":    #3E456A,
+    "primary2":    #717785,
     "secondary":  $secondary,
     "success":    $success,
     "info":       $info,
@@ -87,7 +88,8 @@ $theme-colors: map-merge(
     "danger":     $danger,
     "light":      $light,
     "dark":       $dark,
-    "light2":    #B3B6B7 ,
+    "light1":    #909799,
+    "light2":    #c7ced1,
   ),
   $theme-colors
 );

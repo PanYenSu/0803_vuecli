@@ -107,8 +107,9 @@
               </router-link> -->
             <button type="button" class="w-25 badge-light2 btn btn-light"
              @click="$router.push(`/products`)">
-             <i class="returnIcon fas fa-angle-left"></i>繼續購物</button>
-            <button type="button" class="w-25 badge-secondary btn btn-dark"
+             <!-- <i class="returnIcon fas fa-angle-left"></i> -->
+             <i class="fas fa-reply px-md-2"></i>繼續購物</button>
+            <button type="button" class="w-25 badge-secondary btn btn-primary"
             @click="$router.push(`/orderForm`)" :disabled="cartTotal===0">
             確認訂購<i class="returnIcon fas fa-angle-right"></i></button>
           </div>

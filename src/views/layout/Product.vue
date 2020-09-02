@@ -78,13 +78,13 @@
                 </button>
               </div>
             </div>
-            <a href="#" class="btn btn-dark btn-block py-2 "
+            <a href="#" class="badge-secondary btn btn-primary btn-block py-2 "
             @click.prevent="addToCart(product, quantity)">加入購物車</a>
           </div>
           <div class="d-flex align-items-center">
               <!-- <i v-if="status.loadingItem === item.id"
               class="spinner-border spinner-border-sm"></i> -->
-              <button type="button" class="btn-block py-2 badge-light2 btn btn-light"
+              <button type="button" class="btn-block py-2 badge-light2 btn btn-light1"
              @click="$router.push('/cart')">
              立即購買</button>
             <!-- <router-link class='text-light btn-block' to='/cart'>

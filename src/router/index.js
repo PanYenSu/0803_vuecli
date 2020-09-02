@@ -37,7 +37,7 @@ const routes = [
       },
       {
         path: '/orderForm',
-        component: () => import('../views/layout/OrderForm.vue'),
+        component: () => import('../views/layout/orderForm.vue'),
       },
     ],
   },

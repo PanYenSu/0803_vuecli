@@ -6,7 +6,24 @@
           <h5 class="title">訂購表單</h5>
 
         </div>
-        <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-4">
+            <p >購物摘要</p>
+            <form >
+            <!-- <div class="form-group">
+              <label for="AAA">AAAAA</label>
+              <input id='AAA' type="text" class="form-control" placeholder="First name">
+            </div> -->
+            <div class="form-group row">
+            <label for='a1' class="col-sm-3">商品數量</label>
+            <div class="col-sm-9">
+                <input id='a1' class="form-control" type="text"
+                placeholder="Readonly input here…" readonly>
+            </div>
+          </div>
+            </form>
+          </div>
+        <div class="col-md-8">
           <!-- 表單送出前進行表單驗證（必要完成），驗證內容包含：
                 姓名：必填
                 Email：須符合格式
@@ -19,14 +36,6 @@
           <form @submit.prevent="createOrder">
             <div class="form-group">
               <!-- input 驗證 -->
-              <validation-provider rules="required" v-slot="{ errors, classes }">
-                <label for="username">收件人姓名</label>
-                <input id="username" v-model="form.name" type="text"
-                 class="form-control" :class="classes">
-                <span v-if="errors[0]" class="text-danger">{{ errors[0] }}</span>
-              </validation-provider>
-            </div>
-            <div class="form-group">
               <validation-provider rules="required|email" v-slot="{ errors, classes, passed }" >
                 <label for="email">Email</label>
                 <input id="email" v-model="form.email" type="email"
@@ -35,23 +44,37 @@
                 <span v-if="passed" class="valid-feedback">Email 正確</span>
               </validation-provider>
             </div>
+            <div class="row">
+              <div class="col">
+            <div class="form-group">
+              <validation-provider rules="required" v-slot="{ errors, classes }">
+                <label for="username">收件人姓名</label>
+                <input id="username" v-model="form.name" type="text"
+                 class="form-control" :class="classes">
+                <span v-if="errors[0]" class="text-danger">{{ errors[0] }}</span>
+              </validation-provider>
+            </div>
+            </div>
+            <div class="col">
             <div class="form-group">
               <validation-provider rules="required|min:8" v-slot="{ errors, classes }" >
-                <label for="tel">電話</label>
+                <label for="tel">連絡電話</label>
                 <input id="tel" v-model="form.tel" type="tel" class="form-control" :class="classes">
                 <span v-if="errors[0]" class="text-danger">{{ errors[0] }}</span>
               </validation-provider>
             </div>
+            </div>
+            </div>
             <div class="form-group">
               <validation-provider rules="required" v-slot="{ errors, classes }">
-                <label for="address">地址</label>
+                <label for="address">收件人地址</label>
                 <input id="address" v-model="form.address" type="text"
                  class="form-control" :class="classes">
                 <span v-if="errors[0]" class="invalid-feedback">{{ errors[0] }}</span>
               </validation-provider>
             </div>
             <div class="form-group">
-              <label for="message">購買方式</label>
+              <label for="message">付款方式</label>
               <select v-model="form.payment" class="form-control" required>
                 <option value="" disabled>
                   請選擇付款方式
@@ -84,18 +107,21 @@
               <textarea id="message" v-model="form.message" class="form-control" cols="30" rows="3">
             </textarea>
             </div>
-            <div class="text-right">
+            <div class="modal-footer d-flex justify-content-center">
                 <button type="button" class="w-25 badge-light2 btn btn-light"
                  @click="$router.push('/cart')">
-                 <i class="returnIcon fas fa-angle-left"></i>回購物車</button>
+                 <i class="returnIcon fas fa-angle-left"></i>返回購物車</button>
 
-                <button type="submit" class="btn btn-primary" :disabled="invalid">
+                <button type="submit"
+                 class="w-25 badge-secondary btn btn-primary" :disabled="invalid">
                     送出表單
                 </button>
             </div>
           </form>
         </validation-observer>
         </div>
+        </div>
+
         </div>
 
         <!-- 訂單送出 modal -->

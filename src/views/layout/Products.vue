@@ -16,7 +16,7 @@
     <div class="container mt-md-5 mt-3 mb-7">
       <div class="row">
 
-        <div class="col-md-3 ">
+        <div class="col-md-2 ">
           <!-- <SideNavBar @update="filterCategories(category)"/> -->
           <div class="accordion border border-bottom border-top-0 border-left-0 border-right-0 mb-3"
            id="accordionExample">
@@ -96,7 +96,7 @@
 
         </div>
         <!-- 產品列表 start -->
-        <div class="col-md-9">
+        <div class="col-md-10">
           <div class="row">
             <div v-for="(item) in filterCategories" :key="item.id" class="col-md-4">
               <div class="card border-0 mb-4 position-relative position-relative">
@@ -141,7 +141,7 @@
                     <del>{{ item.origin_price | currency}}</del></span></p>
                   <p class="text-muted mt-3"></p>
                   <div>
-                    <a href="#" class="btn btn-light2 btn-block"
+                    <a href="#" class="btn btn-light2 badge-light btn-block"
                     @click.prevent="addToCart(item.id, 1)">加入購物車</a>
                   </div>
                 </div>
