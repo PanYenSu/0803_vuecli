@@ -189,7 +189,7 @@ export default {
     return {
       isLoading: false,
       products: [],
-      categories: ['項圈', '犬潮服', '睡墊', '護目鏡', '玩具'],
+      categories: ['胸背帶', '犬潮服', '睡墊', '護目鏡', '玩具'],
       filterCategory: '',
       pagination: {},
       tempProduct: {
@@ -240,10 +240,10 @@ export default {
           this.pagination = res.data.meta.pagination;
           console.log(this.products);
           console.log(this.$route.params);
-          const { categoryName } = this.$route.params;
-          if (categoryName) {
-            this.filterCategory = categoryName;
-          }
+          // const { categoryName } = this.$route.params;
+          // if (categoryName) {
+          //   this.filterCategory = categoryName;
+          // }
           // this.$bus.$emit(
           //   'message:push',
           //   '載入成功',

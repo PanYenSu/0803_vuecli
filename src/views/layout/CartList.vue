@@ -7,7 +7,7 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content"> -->
           <div class="header">
-            <h5 class="title">購物車</h5>
+            <h5 class="title">購物清單</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -90,12 +90,12 @@
           <hr>
           <div class="d-flex justify-content-end">
               <p v-if='cartTotal < 1000'>共 {{ quantity }} 件商品 / 運費(1000免運): NT $60</p>
-              <p v-else>共 {{ quantity }} 件商品 / 運費(1000免運): NT $0</p>
+              <p v-else>共 {{ quantity }} 件商品 / 運費(滿 NT$ 1000 免運): NT $0</p>
             </div>
           <div class="d-flex justify-content-end">
-            <p v-if='cartTotal < 1000'>商品金額總計:
+            <p v-if='cartTotal < 1000'>購物金額計:
               <strong class="text-danger"> NT {{ cartTotal+60 | currency }} </strong></p>
-            <p v-else>商品金額總計:<strong class="text-danger"> NT {{ cartTotal| currency }} </strong></p>
+            <p v-else>購物金額計:<strong class="text-danger"> NT {{ cartTotal| currency }} </strong></p>
           </div>
           </div>
           </div>
@@ -109,7 +109,7 @@
              @click="$router.push(`/products`)">
              <i class="returnIcon fas fa-angle-left"></i>繼續購物</button>
             <button type="button" class="w-25 badge-secondary btn btn-dark"
-            @click="orderForm()" :disabled="cartTotal===0">
+            @click="$router.push(`/orderForm`)" :disabled="cartTotal===0">
             確認訂購<i class="returnIcon fas fa-angle-right"></i></button>
           </div>
           </div>

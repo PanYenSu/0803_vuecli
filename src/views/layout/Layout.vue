@@ -14,19 +14,26 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse"
+         id="navbarSupportedContent">
 
-        <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
+        <ul class="navbar-nav mr-auto d-flex justify-content-center">
+        <!-- <li class="nav-item active">
             <router-link to="/" class="nav-link">Home</router-link>
-            <!-- <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> -->
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li> -->
+        <li class="nav-item">
+            <router-link to='/products' class="nav-link">全部商品</router-link>
+        </li>
+        <li class="nav-item">
+            <router-link to='' class="nav-link">NEW ITEMS</router-link>
+        </li>
+        <li class="nav-item">
+            <router-link to='' class="nav-link">SALES</router-link>
         </li>
         <li class="nav-item">
             <router-link to='/about' class="nav-link">About</router-link>
             <!-- <a class="nav-link" href="#">Link</a> -->
-        </li>
-        <li class="nav-item">
-            <router-link to='/products' class="nav-link">Products</router-link>
         </li>
         <!-- <li class="nav-item">
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
