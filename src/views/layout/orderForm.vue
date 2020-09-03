@@ -8,22 +8,33 @@
         </div>
         <div class="row">
           <div class="col-md-4">
-            <p >購物摘要</p>
-            <form >
-            <!-- <div class="form-group">
-              <label for="AAA">AAAAA</label>
-              <input id='AAA' type="text" class="form-control" placeholder="First name">
-            </div> -->
-            <div class="form-group row">
-            <label for='a1' class="col-sm-3">商品數量</label>
-            <div class="col-sm-9">
-                <input id='a1' class="form-control" type="text"
-                placeholder="Readonly input here…" readonly>
-            </div>
+            <!-- <p >購物摘要</p> -->
+            <div class="card">
+  <div class="card-header">
+    購物摘要
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Cras justo odio</li>
+    <li class="list-group-item">Dapibus ac facilisis in</li>
+    <li class="list-group-item">Vestibulum at eros</li>
+  </ul>
+ <dl class="row">
+  <dt class="col-sm-3">商品總計</dt>
+  <dd class="col-sm-9">A descng terms.</dd>
+
+  <dt class="col-sm-4">運費</dt>
+  <dd class="col-sm-8">Vestibuod sempem nec elit.</dd>
+  </dl>
+
+  <div class="row">
+    <hr size="8px" align="center" width="80%">
+  <p class="col-sm-4">運費</p>
+  <p class="col-sm-8">Vestibuod sempem nec elit.</p>
+ </div>
+</div>
+
           </div>
-            </form>
-          </div>
-        <div class="col-md-8">
+        <div class="col-md-8 card">
           <!-- 表單送出前進行表單驗證（必要完成），驗證內容包含：
                 姓名：必填
                 Email：須符合格式
@@ -32,7 +43,7 @@
                 付款方式：WebATM、ATM、Barcode、Credit、ApplePay、GooglePay
                 留言：非必填 -->
           <!-- 表單進行驗證 -->
-        <validation-observer v-slot="{ invalid }" class="col-md-6">
+        <validation-observer v-slot="{ invalid }" class="col-md-12">
           <form @submit.prevent="createOrder">
             <div class="form-group">
               <!-- input 驗證 -->

@@ -104,7 +104,14 @@
                 <router-link
                   :to="`/product/${ item.id }`"
                   class="btn card-btn-box btn-sm">
-                <div class="pic">
+                  <!-- <button type="tooltip-options" class="" data-toggle="tooltip"
+               data-placement="bottom" data-html="true"  title=
+               '<div class="tooltip" role="tooltip">
+                 <div class="arrow">123131</div>
+                 <div class="tooltip-inner">8888</div>
+                 </div>'>ppppp</button> -->
+                <div class="pic" type="tooltip-options" data-toggle="tooltip"
+               data-placement="" title="">
                   <!-- style="height:250px;
                     background-size:cover;
                     background-position:center;"
@@ -171,6 +178,12 @@
         </div>
       </div>
     </div>
+<!-- goTop -->
+<div class="goTop">
+  <a href="#" class="goTopBtn jq-goTop">
+    <i class="fas fa-arrow-alt-circle-up fa-3x"></i>
+  </a>
+</div>
 
   </div>
 </template>
@@ -280,4 +293,24 @@ export default {
 .pic img{transform:scale(1,1);transition: all 0.5s ease-out;}
 .pic img:hover{transform:scale(1.2,1.2);}
 /* .img{max-width:300px; max-height:200px;overflow:hidden;} */
+.goTop {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  /* //圖示水平移動位置 */
+  /* transform: translateX(0);
+  transition: transform 0.2s; */
+}
+  /* //圖示隱藏 */
+  /* .goTop.hide {
+    transform: translateX(120%);
+  }; */
+  .goTopBtn {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  .fa-arrow-alt-circle-up {color: #e0f3cc;}
+
 </style>
