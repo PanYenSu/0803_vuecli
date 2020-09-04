@@ -79,7 +79,10 @@
               </div>
             </div>
             <a href="#" class="badge-secondary btn btn-primary btn-block py-2 "
-            @click.prevent="addToCart(product, quantity)">加入購物車</a>
+            @click.prevent="addToCart(product, quantity)">
+            <i v-if="status.loadingItem === product.id"
+              class="spinner-border spinner-border-sm"></i>
+            加入購物車</a>
           </div>
           <div class="d-flex align-items-center">
               <!-- <i v-if="status.loadingItem === item.id"
@@ -135,6 +138,7 @@ import Shopinfo from '@/components/Shopinfo.vue';
 import Returninfo from '@/components/Returninfo.vue';
 import Prodinfo from '@/components/Prodinfo.vue';
 import ProdSwiper from '@/components/ProdSwiper.vue';
+import ToastsSweet from '@/utils/ToastsSweet';
 
 export default {
   components: {
@@ -172,6 +176,7 @@ export default {
     addToCart(item, quantity) {
       // this.quantity = 0;
       // this.status.isLoading = true;
+      this.status.loadingItem = item.id;
       const url = `${this.path}${this.uuid}/ec/shopping`;
       const cart = {
         product: item.id,
@@ -179,11 +184,16 @@ export default {
       };
       this.$http.post(url, cart).then(() => {
         // this.status.isLoading = false;
-        $('#cartAdd').modal('show');
-        // this.quantity += cart.quantity;
+        // $('#cartAdd').modal('show');
         this.$bus.$emit('get-cart');
+        ToastsSweet.fire({
+          title: '已成功加入購物車',
+          icon: 'success',
+        });
+        this.status.loadingItem = '';
       }).catch((error) => {
       // this.isLoading = false;
+        this.status.loadingItem = '';
         $('#cartAlready').modal('show');
         this.status.loadingItem = '';
         console.log(error.response.data.errors);

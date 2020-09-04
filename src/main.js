@@ -21,6 +21,7 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
 // import Swiper styles
 import 'swiper/css/swiper.css';
+// import { default as swal } from 'sweetalert2';
 
 import App from './App.vue';
 import router from './router';

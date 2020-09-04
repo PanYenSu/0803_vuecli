@@ -21,10 +21,10 @@
           <div class="accordion border border-bottom border-top-0 border-left-0 border-right-0 mb-3"
            id="accordionExample">
             <div class="card border-0">
-              <div class="card-header px-0 py-4 bg-white border border-bottom-0
+              <div class="card-header px-0 py-2 bg-white border border-bottom-0
               border-top border-left-0 border-right-0"
               id="headingOne" data-toggle="collapse" data-target="#collapseOne">
-                <div class="d-flex justify-content-between align-items-center pr-1">
+                <div class="d-flex justify-content-between align-items-center pr-1 btn-light">
                   <h5 class="mb-0">
                     狗狗用品
                   </h5>
@@ -51,10 +51,10 @@
               </div>
             </div>
             <div class="card border-0">
-              <div class="card-header px-0 py-4 bg-white border border-bottom-0
+              <div class="card-header px-0 py-2 bg-white border border-bottom-0
               border-top border-left-0 border-right-0"
               id="headingTwo" data-toggle="collapse" data-target="#collapseTwo">
-                <div class="d-flex justify-content-between align-items-center pr-1">
+                <div class="d-flex justify-content-between align-items-center pr-1 btn-light">
                   <h5 class="mb-0">
                     貓咪用品
                   </h5>
@@ -72,10 +72,10 @@
               </div>
             </div>
             <div class="card border-0">
-              <div class="card-header px-0 py-4 bg-white border border-bottom-0
+              <div class="card-header px-0 py-2 bg-white border border-bottom-0
               border-top border-left-0 border-right-0"
               id="headingThree" data-toggle="collapse" data-target="#collapseThree">
-                <div class="d-flex justify-content-between align-items-center pr-1">
+                <div class="d-flex justify-content-between align-items-center pr-1 btn-light">
                   <h5 class="mb-0">
                     項圈/牽繩
                   </h5>
@@ -104,12 +104,6 @@
                 <router-link
                   :to="`/product/${ item.id }`"
                   class="btn card-btn-box btn-sm">
-                  <!-- <button type="tooltip-options" class="" data-toggle="tooltip"
-               data-placement="bottom" data-html="true"  title=
-               '<div class="tooltip" role="tooltip">
-                 <div class="arrow">123131</div>
-                 <div class="tooltip-inner">8888</div>
-                 </div>'>ppppp</button> -->
                 <div class="pic" type="tooltip-options" data-toggle="tooltip"
                data-placement="" title="">
                   <!-- style="height:250px;
@@ -149,7 +143,11 @@
                   <p class="text-muted mt-3"></p>
                   <div>
                     <a href="#" class="btn btn-light2 badge-light btn-block"
-                    @click.prevent="addToCart(item.id, 1)">加入購物車</a>
+                    @click.prevent="addToCart(item.id, 1)">
+                    <i v-if="status.loadingItem === item.id"
+                     class="spinner-border spinner-border-sm"></i>
+                    加入購物車
+                    </a>
                   </div>
                 </div>
 
@@ -192,6 +190,7 @@
 /* global $ */
 import Pagination from '@/components/Pagination.vue';
 // import SideNavBar from '@/components/SideNavBar.vue';
+import ToastsSweet from '@/utils/ToastsSweet';
 
 export default {
   components: {
@@ -223,6 +222,7 @@ export default {
     addToCart(id, quantity) {
       // this.quantity = 0;
       // this.status.isLoading = true;
+      this.status.loadingItem = id;
       const url = `${this.path}${this.uuid}/ec/shopping`;
       const cart = {
         product: id,
@@ -230,11 +230,16 @@ export default {
       };
       this.$http.post(url, cart).then(() => {
         // this.status.isLoading = false;
-        $('#cartAdd').modal('show');
-        // this.quantity += cart.quantity;
         this.$bus.$emit('get-cart');
+        // $('#cartAdd').modal('show');
+        ToastsSweet.fire({
+          title: '已成功加入購物車',
+          icon: 'success',
+        });
+        this.status.loadingItem = '';
       }).catch((error) => {
       // this.isLoading = false;
+        this.status.loadingItem = '';
         $('#cartAlready').modal('show');
         this.status.loadingItem = '';
         console.log(error.response.data.errors);
