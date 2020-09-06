@@ -87,7 +87,7 @@ export default {
       const url = `${this.path}${this.uuid}/ec/products?page=1&paged=100`;
       this.$http.get(url).then((res) => {
         this.products = res.data.data;
-        console.log(this.products.length);
+        // console.log(this.products.length);
       }).catch(() => {
         this.$bus.$emit(
           'message:push',

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="bg-dark py-1">
+        <div class="bg-warm py-1">
       <div class="container">
         <div class="d-flex align-items-center justify-content-between text-white mb-md-7 mb-4">
           <a class="text-white h4" href="./index.html" id='logo'>ChaChaBo</a>
@@ -16,7 +16,7 @@
             <p class="mb-0">02-3456-7890</p>
             <p class="mb-0">service@mail.com</p>
           </div>
-          <p class="mb-0">© 2020 LOGO All Rights Reserved.</p>
+          <p class="mb-0 justify-content-md-center">無商業用途，僅供學習使用</p>
         </div>
       </div>
     </div>

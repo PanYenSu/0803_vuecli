@@ -100,7 +100,6 @@
           <div class="row">
             <div v-for="(item) in filterCategories" :key="item.id" class="col-md-4">
               <div class="card border-0 mb-4 position-relative position-relative">
-                <!-- <img :src="item.imageUrl[0]" class="card-img-top rounded-0" alt="..."> -->
                 <router-link
                   :to="`/product/${ item.id }`"
                   class="btn card-btn-box btn-sm">
@@ -114,15 +113,14 @@
 
                     <img :src="item.imageUrl[0]"
                     class="card-img-top rounded-0" alt="...">
-<!-- <p class="text-white  bg-primary">Lorem ipsum dolor sit amet, posuere erat a ante.</p> -->
                 </div>
 
                 </router-link>
                 <a href="#" class="text-dark">
                   <!-- <i class="far fa-heart position-absolute"
                   style="right: 16px; top: 16px;"></i> -->
-                  <i class="fas fa-heart position-absolute"
-                  style="right: 16px; top: 16px; color: red;"></i>
+                  <!-- <i class="fas fa-heart position-absolute"
+                  style="right: 16px; top: 16px; color: red;"></i> -->
                 </a>
 
                 <div class="card-body p-0">
@@ -131,7 +129,6 @@
       <!-- <i v-if="status.loadingItem === item.id" class="spinner-grow spinner-grow-sm"></i> -->
                     {{ item.title }}
                     </router-link>
-                    <!-- <a href="./Product.vue">{{ item.title }}</a> -->
                     </h5>
                   <p class="text-muted card-text" v-html="item.content">{{ item.content }}</p>
                   <p v-if="!item.price" class="card-text mb-0">
@@ -161,20 +158,7 @@
       </div>
     </div>
     <div class="bg-light py-4">
-      <div class="container">
-        <div class="d-flex flex-column flex-md-row justify-content-between
-        align-items-md-center align-items-start">
-          <p class="mb-0 font-weight-bold">Lorem ipsum dolor sit amet.</p>
-          <div class="input-group w-md-50 mt-md-0 mt-3">
-            <input type="text" class="form-control rounded-0" placeholder="" />
-            <div class="input-group-append">
-              <button class="btn btn-dark rounded-0" type="button" id="search">
-                Lorem ipsum
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Subscription />
     </div>
 <!-- goTop -->
 <div class="goTop">
@@ -189,13 +173,14 @@
 <script>
 /* global $ */
 import Pagination from '@/components/Pagination.vue';
+import Subscription from '@/components/frontend/Subscription.vue';
 // import SideNavBar from '@/components/SideNavBar.vue';
 import ToastsSweet from '@/utils/ToastsSweet';
 
 export default {
   components: {
     Pagination,
-    // SideNavBar,
+    Subscription,
   },
   data() {
     return {
@@ -256,8 +241,8 @@ export default {
           this.isLoading = false;
           this.products = res.data.data;
           this.pagination = res.data.meta.pagination;
-          console.log(this.products);
-          console.log(this.$route.params);
+          // console.log(this.products);
+          // console.log(this.$route.params);
           // const { categoryName } = this.$route.params;
           // if (categoryName) {
           //   this.filterCategory = categoryName;
@@ -316,6 +301,6 @@ export default {
     outline: none;
     cursor: pointer;
   }
-  .fa-arrow-alt-circle-up {color: #e0f3cc;}
+  .fa-arrow-alt-circle-up {color: #cab7ab;}
 
 </style>

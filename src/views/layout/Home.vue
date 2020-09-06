@@ -39,7 +39,7 @@
                   <h3>Hot Sales</h3>
                   <p><small>— 熱賣商品 —</small></p>
                 </div>
-      <div class="row mt-5">
+      <div class="row mt-1">
         <div class="col-md-4 mt-md-4">
           <div class="card border-0 mb-4" @click="$router.push(`/product/${id[0]}`)" type="button">
             <!-- <img
@@ -103,7 +103,7 @@
         </div>
       </div>
     </div>
-    <div class="bg-light mt-7" >
+    <!-- <div class="bg-light mt-7" >
       <div class="container">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner" style="opacity:0.5; weight:100%; background-image:url(https://images.unsplash.com/photo-1555666062-7fc37d5271f1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)">
@@ -153,10 +153,11 @@
           </a>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="container my-7">
+      <hr>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6  mt-5">
           <img src="https://images.unsplash.com/photo-1556912035-f3b4093412af?ixlib=rb-1.2.1&auto=format&fit=crop&w=1960&q=80" alt="" class="img-fluid">
         </div>
         <div class="col-md-4 m-auto text-center">
@@ -178,52 +179,19 @@
         </div>
       </div>
     </div>
-    <div class="bg-light py-4">
-      <div class="container">
-        <div class="d-flex flex-column flex-md-row justify-content-between
-         align-items-md-center align-items-start">
-          <!-- <p class="mb-0 font-weight-bold  w-10">訂閱我們</p> -->
-
-<!-- <div class="input-group w-md-50 mt-md-0 mt-3">
-          <validation-provider rules="required|email" v-slot="{ errors, classes, passed }" >
-                <label for="email" class="col-sm-2 col-form-label">訂閱我們</label>
-                <input id="email" v-model="email" type="email"
-                 class="form-control rounded-0"
-                  placeholder="輸入E-MAIL訂閱獲取最新活動.優惠訊息" required/>
-                <span v-if="errors[0]" class="text-danger">{{ errors[0] }}</span>
-                <span v-if="passed" class="valid-feedback">Email 正確</span>
-              </validation-provider>
-              <div class="input-group-append">
-              <button class="btn btn-dark rounded-0" type="button" id="search"
-              @click="subscription">
-                送出
-              </button>
-            </div>
-          </div> -->
-
-          <div class="input-group w-md-50 mt-md-0 mt-3">
-            <label for='email' class="col-sm-2 col-form-label">訂閱我們</label>
-            <input id='email' v-model="email" type="email" name='email'
-             class="form-control rounded-0"
-             placeholder="輸入E-MAIL訂閱獲取最新活動.優惠訊息" required/>
-            <div class="input-group-append">
-              <button class="btn btn-dark rounded-0" type="button" id="search"
-              @click="subscription">
-                送出
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="bg-light py-4  mt-5">
+      <Subscription />
     </div>
-
   </div>
 </template>
 
 <script>
-import ToastsSweet from '@/utils/ToastsSweet';
+import Subscription from '@/components/frontend/Subscription.vue';
 
 export default {
+  components: {
+    Subscription,
+  },
   data() {
     return {
       // uuid: process.env.VUE_APP_UUID,
@@ -238,14 +206,7 @@ export default {
     };
   },
   methods: {
-    subscription() {
-      // http://mishengqiang.com/sweetalert2/
-      // https://github.com/Wendy03/ec_coffee/blob/master/src/views/Layout.vue
-      ToastsSweet.fire({
-        title: '電子報訂閱成功！',
-        icon: 'success',
-      });
-    },
+
   },
   created() {
     this.isLoading = true;

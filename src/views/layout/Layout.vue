@@ -1,21 +1,20 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-            <router-link to="/" class="navbar-brand" rel="stylesheet" id='titlefont'>
-            ChaChaBo</router-link>
-            <button
+        <router-link to="/" class="navbar-brand" rel="stylesheet" id='titlefont'>
+        ChaChaBo</router-link>
+        <button
           class="navbar-toggler"
           type="button"
           data-toggle="collapse"
           data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
+          aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse d-flex justify-content-center"
-         id="navbarSupportedContent">
+        id="navbarSupportedContent">
         <div class="">
         <ul class="navbar-nav mr-auto ">
         <!-- <li class="nav-item active">
@@ -32,56 +31,43 @@
             <router-link to='' class="nav-link btn-light">SALES</router-link>
         </li>
         <li class="nav-item px-md-3">
-            <router-link to='/about' class="nav-link btn-light">健康知識</router-link>
+            <router-link to='/policy' class="nav-link btn-light">關於我們</router-link>
             <!-- <a class="nav-link" href="#">Link</a> -->
         </li>
         <!-- <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
         </li> -->
         </ul>
         </div>
         </div>
         <div class="">
         <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control mr-sm-2" type="search"
+          placeholder="Search" aria-label="Search">
         <button class="btn badge-light2 btn-light1 my-2 my-sm-0" type="submit">
           <i class="fas fa-search"></i></button>
         </form>
-
         </div>
         <div class="col-1 ">
-          <!-- test tooltip -->
-          <!-- <button id="cart" type="tooltip-options" class="" data-toggle="tooltip"
-               data-placement="bottom" data-html="true" title=
-               '<div class="tooltip" role="tooltip">
-                 <div class="arrow">123131</div>
-                 <div class="tooltip-inner">8888</div>
-                 </div>'>ppppp</button> -->
-
             <a class="navbar-brand text-dark" href="#" @click.prevent="$router.push('/cart')">
-                <!-- <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-cart3" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
-              </svg> -->
                 <i class="fas fa-shopping-cart" ></i>
               <span class="badge badge-light badge-wrapper" v-if="carts.length"
               style="transform: translateX(-2px) translatey(0px)">{{quantity}}</span>
             </a>
-          <!-- </button> -->
         </div>
 
-    <span class="navbar-text">
+        <span class="navbar-text">
           <router-link to='/login' class="nav-link text-info">登入後台</router-link>
         </span>
-  </nav>
-  <!-- <section class="container py-2 mb-3"> -->
-        <router-view/>
+    </nav>
 
-        <!-- </section> -->
+        <router-view/>
         <Footer />
 
-</div>
+  </div>
 </template>
 <script>
-/* global $ */
+// /* global $ */
 import Footer from '@/components/frontend/Footer.vue';
 
 export default {
@@ -105,7 +91,7 @@ export default {
         this.carts.forEach((i) => {
           this.quantity += i.quantity;
         });
-        console.log(this.carts);
+        // console.log(this.carts);
       });
     },
   },
@@ -118,8 +104,6 @@ export default {
     this.$bus.$on('get-cart', () => {
       this.getCart();
     });
-    $("[data-toggle='tooltip']").tooltip();
-    // $(".tooltip-options").tooltip({html : true });
   },
 };
 </script>
@@ -141,8 +125,6 @@ export default {
   font-size: 24px;
 }
 .badge-wrapper {
-        /* top: -5px;
-        right: -5px; */
         position: absolute;
         display: inline-block;
         background-color: #f16c5d;
@@ -152,8 +134,4 @@ export default {
         width: 20px;
         height: 18px;
       }
-   /* .nav-link:hover {
-      color: #FFCB75;
-    } */
-
 </style>

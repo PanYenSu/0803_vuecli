@@ -1,40 +1,92 @@
 <template>
     <div class="container py-3">
         <loading :active.sync="isLoading"></loading>
+    <!-- 進度條 -->
+        <div class="progress">
+          <div class="progress-bar bg-warm3 progress-bar-striped progress-bar-animated"
+          role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+           style="width: 60%">
+            <span class="sr-only">60% 完成</span>
+          </div>
+        </div>
+
         <div class="content">
         <div class="header">
-          <h5 class="title">訂購表單</h5>
-
+          <h5 class="title py-3">訂購表單</h5>
         </div>
         <div class="row">
-          <div class="col-md-4">
-            <!-- <p >購物摘要</p> -->
-            <div class="card">
-  <div class="card-header">
-    購物摘要
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Cras justo odio</li>
-    <li class="list-group-item">Dapibus ac facilisis in</li>
-    <li class="list-group-item">Vestibulum at eros</li>
-  </ul>
- <dl class="row">
-  <dt class="col-sm-3">商品總計</dt>
-  <dd class="col-sm-9">A descng terms.</dd>
-
-  <dt class="col-sm-4">運費</dt>
-  <dd class="col-sm-8">Vestibuod sempem nec elit.</dd>
-  </dl>
-
-  <div class="row">
-    <hr size="8px" align="center" width="80%">
-  <p class="col-sm-4">運費</p>
-  <p class="col-sm-8">Vestibuod sempem nec elit.</p>
- </div>
-</div>
-
+          <!--cartDetailContent -->
+          <div class="col-md-5">
+            <div class="border p-3 mx-2 mb-4 order-card">
+              <h4 class="mb-4 font-weight-bold">購物明細</h4>
+              <hr size="8px" align="center" width="100%">
+          <div v-for="item in cartProducts" :key="item.product.id + 1">
+            <div class="d-flex mb-2 bg-light">
+              <img :src="item.product.imageUrl[0]" alt="" class="mr-2"
+                    style="width: 48px; height: 48px; object-fit: cover">
+              <div class="w-100">
+                <div class="d-flex justify-content-between font-weight-bold">
+                  <p class="mb-0">{{ item.product.title }}</p>
+                  <p class="mb-0">x{{ item.quantity }}</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <small class="mb-0 text-muted">
+                    {{ item.product.price | currency }} / {{ item.product.unit }}
+                  </small>
+                </div>
+              </div>
+            </div>
+            <hr size="8px" align="center" width="100%">
           </div>
-        <div class="col-md-8 card">
+        <!-- payable -->
+         <ul class="pb-2 mb-2 border-bottom">
+            <li class="d-flex justify-content-between">
+                <span class="fz-2 lh-4">商品金額</span>
+                <span class="fz-2 lh-4">{{ cartTotal | currency }}</span>
+            </li>
+            <li class="d-flex justify-content-between">
+                <div class="input-group mt-3 input-group-sm">
+                    <input type="text" class="form-control"
+                      v-model="couponCode" placeholder="我的優惠碼" />
+                    <div class="input-group-append">
+                      <button class="btn btn-warm" type="button"
+                        @click.prevent="getCoupon" :disabled="isEnable">
+                        <i v-if='isEnable === true'
+                     class="spinner-border spinner-border-sm"></i>套用優惠
+                      </button>
+                    </div>
+                  </div>
+              </li>
+          </ul>
+   <!-- <hr size="8px" align="center" width="80%"> -->
+      <ul class="pb-2 mb-2 border-bottom">
+          <li class="d-flex justify-content-between">
+              <span class="fz-2 lh-4">優惠折扺</span>
+              <span v-if="coupon.enabled" class="fz-2 lh-4" >
+                - {{ discount | currency }}</span>
+              <span v-else class="fz-2 lh-4">{{ 0 | currency }} </span>
+            </li>
+          <li class="d-flex justify-content-between">
+              <span class="fz-2 lh-4">運費</span>
+              <!-- <span v-if="(cartTotal-discount) < 1000" class="fz-2 lh-4">NT$60</span> -->
+              <span class="fz-2 lh-4">
+                {{(cartTotal - discount)>=1000 ?'您已到達免運門檻  $0' : '$60'}}</span>
+            </li>
+        </ul>
+        <div class="d-flex justify-content-between">
+            <p class="mb-0 h5 font-weight-bold">應付金額</p>
+                <!-- <p v-if="coupon.enabled"
+                  class="mb-0 h4 font-weight-bold">
+                  {{ cartTotal * (coupon.percent / 100) | currency }}
+                </p> -->
+                <p class="mb-0 h4 font-weight-bold">
+                  {{ payable | currency }}
+                </p>
+          </div>
+        </div>
+    </div>
+        <!-- 表單驗證 -->
+        <div class="col-md-7 card">
           <!-- 表單送出前進行表單驗證（必要完成），驗證內容包含：
                 姓名：必填
                 Email：須符合格式
@@ -121,11 +173,11 @@
             <div class="modal-footer d-flex justify-content-center">
                 <button type="button" class="w-25 badge-light2 btn btn-light"
                  @click="$router.push('/cart')">
-                 <i class="returnIcon fas fa-angle-left"></i>返回購物車</button>
+                 <i class="returnIcon fas fa-angle-left"></i>回購物車</button>
 
-                <button type="submit"
+                <button type="submit" @click.prevent="createOrder"
                  class="w-25 badge-secondary btn btn-primary" :disabled="invalid">
-                    送出表單
+                    送出訂單
                 </button>
             </div>
           </form>
@@ -136,7 +188,7 @@
         </div>
 
         <!-- 訂單送出 modal -->
-        <div id='orderSuccessModal' class="modal fade bd-example-modal-sm"
+        <!-- <div id='orderSuccessModal' class="modal fade bd-example-modal-sm"
             tabindex="-1" role="dialog">
             <div class="modal-dialog modal-sm modal-dialog-centered"
             role="document">
@@ -152,12 +204,14 @@
                 </div>
             </div>
             </div>
-        </div>
+        </div> -->
 
  </div>
 </template>
 <script>
-/* global $ */
+// /* global $ */
+import ToastsSweet from '@/utils/ToastsSweet';
+
 export default {
   data() {
     return {
@@ -169,24 +223,121 @@ export default {
         payment: '',
         message: '',
       },
+      isLoading: false,
+      quantity: 0,
+      cartProducts: {},
+      cartTotal: 0,
+      coupon: {},
+      couponCode: '',
+      discount: 0,
+      payable: 0,
+      shippingFee: 0,
+      isEnable: false,
+      uuid: process.env.VUE_APP_UUID,
+      path: process.env.VUE_APP_APIPATH,
     };
   },
   methods: {
+    getCoupon() {
+      this.isEnable = true;
+      this.discount = 0;
+      const url = `${this.path}${this.uuid}/ec/coupon/search`;
+      this.$http.post(url, { code: this.couponCode }).then((res) => {
+        this.isEnable = false;
+        this.coupon = res.data.data;
+        this.discount = this.cartTotal * (this.coupon.percent / 100);
+        this.getCartList();
+        ToastsSweet.fire({
+          text: `成功套用優惠卷${this.couponCode}_${this.discount}`,
+          icon: 'success',
+        });
+      }).catch((error) => {
+        this.isEnable = false;
+        this.getCartList();
+        const errorData = error.response.data.errors;
+        if (errorData) {
+          errorData.code.forEach((errmsg) => {
+            ToastsSweet.fire({
+              title: `${errmsg}`,
+              icon: 'error',
+            });
+          });
+        } else {
+          const { message } = error.response.data;
+          ToastsSweet.fire({
+            title: `${message}`,
+            icon: 'error',
+          });
+          // this.isEnable = false;
+        }
+      });
+    },
     createOrder() {
       this.isLoading = true;
       const url = `${this.path}${this.uuid}/ec/orders`;
       this.$http.post(url, this.form).then((response) => {
         if (response.data.data.id) {
           this.isLoading = false;
-          console.log('送出表單');
-          console.log(response);
-          this.getCartNum();
+          this.$router.push('/products');
+          this.$bus.$emit('get-cart');
+          ToastsSweet.fire({
+            text: '您已完成訂單!',
+            icon: 'success',
+          });
         }
-        $('#orderSuccessModal').modal('show');
+        // $('#orderSuccessModal').modal('show');
       }).catch((error) => {
         this.isLoading = false;
         console.log(error.response.data.errors);
       });
+    },
+    getCartList() {
+      this.isLoading = true;
+      const url = `${this.path}${this.uuid}/ec/shopping`;
+      this.$http.get(url).then((res) => {
+        this.cartProducts = res.data.data;
+        // console.log(this.cartProducts);
+        this.isLoading = false;
+        // 累加總金額
+        this.cartTotal = 0;
+        this.quantity = 0;
+        this.payable = 0;
+        this.cartProducts.forEach((item) => {
+          this.cartTotal += item.product.price * item.quantity;
+          this.quantity += item.quantity;
+          // this.getDiscount();
+        });
+        this.payable = this.cartTotal - this.discount;
+        if (this.payable < 1000) {
+          this.shippingFee = 60;
+        } else {
+          this.shippingFee = 0;
+        }
+        this.payable += this.shippingFee;
+        this.couponCode = '';
+        // $('#cartModal').modal('show');
+      }).catch((error) => {
+        this.isLoading = false;
+        this.$bus.$emit('message:push',
+          `購物車載入失敗，${error}`,
+          'danger');
+      });
+    },
+  },
+  created() {
+    this.getCartList();
+  },
+  computed: {
+    getDiscount() {
+      if (this.coupon.enabled) {
+        // return this.discount(() => {
+        // const data = item.category
+        //   .includes(this.filterCategory);
+        // return data;
+        return this.cartTotal * (this.coupon.percent / 100);
+        // });
+      }
+      return this.discount;
     },
   },
 };
