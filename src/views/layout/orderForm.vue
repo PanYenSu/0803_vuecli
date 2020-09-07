@@ -104,7 +104,7 @@
                 <input id="email" v-model="form.email" type="email"
                  class="form-control" :class="classes">
                 <span v-if="errors[0]" class="text-danger">{{ errors[0] }}</span>
-                <span v-if="passed" class="valid-feedback">Email 正確</span>
+                <span v-if="passed" class="valid-feedback"></span>
               </validation-provider>
             </div>
             <div class="row">
@@ -167,7 +167,8 @@
             </div>
             <div class="form-group">
               <label for="message">留言</label>
-              <textarea id="message" v-model="form.message" class="form-control" cols="30" rows="3">
+              <textarea id="message" v-model="form.message"
+               class="form-control" cols="30" rows="6">
             </textarea>
             </div>
             <div class="modal-footer d-flex justify-content-center">
@@ -176,7 +177,8 @@
                  <i class="returnIcon fas fa-angle-left"></i>回購物車</button>
 
                 <button type="submit" @click.prevent="createOrder"
-                 class="w-25 badge-secondary btn btn-primary" :disabled="invalid">
+                 class="w-25 badge-secondary btn btn-primary"
+                 @click="$router.push('/checkout')" :disabled="invalid">
                     送出訂單
                 </button>
             </div>

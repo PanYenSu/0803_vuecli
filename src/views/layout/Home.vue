@@ -103,57 +103,7 @@
         </div>
       </div>
     </div>
-    <!-- <div class="bg-light mt-7" >
-      <div class="container">
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner" style="opacity:0.5; weight:100%; background-image:url(https://images.unsplash.com/photo-1555666062-7fc37d5271f1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)">
-            <div class="carousel-item active">
-              <div class="row justify-content-center py-7" style="opacity:1;">
-                <div class="col-md-6 text-center">
-                  <h3>Lorem ipsum.</h3>
-                  <p class="my-5">“Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                     sed diam nonumy eirmod tempor invidunt
-                      ut labore et dolore magna aliquyam erat.”</p>
-                  <p><small>—Lorem ipsum dolor sit amet.—</small></p>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="row justify-content-center py-7">
-                <div class="col-md-6 text-center">
-                  <h3>Lorem ipsum.</h3>
-                  <p class="my-5">“Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                     sed diam nonumy eirmod tempor invidunt
-                      ut labore et dolore magna aliquyam erat.”</p>
-                  <p><small>—Lorem ipsum dolor sit amet.—</small></p>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="row justify-content-center py-7">
-                <div class="col-md-6 text-center">
-                  <h3>Lorem ipsum.</h3>
-                  <p class="my-5">“Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                     sed diam nonumy eirmod tempor invidunt
-                      ut labore et dolore magna aliquyam erat.”</p>
-                  <p><small>—888888888888888888888.—</small></p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <a class="carousel-control-prev" href="#carouselExampleControls"
-            role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleControls"
-           role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
-      </div>
-    </div> -->
+
     <div class="container my-7">
       <hr>
       <div class="row">

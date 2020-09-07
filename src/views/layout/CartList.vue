@@ -129,6 +129,78 @@
             <!-- <i class="returnIcon fas fa-angle-right"></i> -->
             </button>
           </div>
+
+          <!-- test info -->
+           <div class="bg-light mt-7" >
+      <div class="container">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+
+          <div class="carousel-inner">
+                  <img src="https://images.unsplash.com/photo-1545387804-ff58d3817f91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                   alt="" class="mr-2"
+                   style="width: 1070px; height:170px; object-fit: cover;opacity:0.5;">
+                  <!-- </div> -->
+          <!-- <div class="carousel-inner" style="opacity:0.5; weight:1200px;
+           background-image:url(https://images.unsplash.com/photo-1545387804-ff58d3817f91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60)"> -->
+            <div class="carousel-item active">
+              <div class="row justify-content-center py-7" style="opacity:1;">
+                <div class="col-md-6 text-center text-light">
+                  <h3 class="py-1">狗狗會感冒嗎？</h3>
+                  <p class="my-1">“當然會囉！,
+                     此外，幼犬也容易得到一種名為
+                      犬傳染性氣管支氣管炎的疾病，
+                      也就是俗稱的「犬窩咳」。”</p>
+                  <p><small>—<a href="https://reurl.cc/gm2z5R" class="text-light"
+                   target="_blank" style="text-decoration:none;">
+                   新手狗爸媽的常見QA｜專業獸醫—吳展祥</a>—</small></p>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="row justify-content-center py-7">
+                <div class="col-md-6 text-center text-light">
+                  <h3 class="py-1">狗狗多久洗一次澡？</h3>
+                  <p class="my-1">“一般建議7-10天洗一次即可。
+                    由於狗狗的皮膚表層和人類不同，
+                    洗得太勤反而會破壞表皮的細菌生態，
+                    反而引起皮膚方面的疾病。”</p>
+                  <p><small>—<a href="https://reurl.cc/gm2z5R" class="text-light"
+                   target="_blank" style="text-decoration:none;">
+                   新手狗爸媽的常見QA｜專業獸醫—吳展祥</a>—</small></p>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="row justify-content-center py-7">
+                <div class="col-md-8 text-center text-light">
+                  <h3 class="py-1">狗狗也有分血型嗎？</h3>
+                  <p class="my-1">“狗狗的血型可分成13種，
+                    若不小心輸錯血，狗狗身體小、血液循環快，
+                    很可能造成體內免疫系統失衡，
+                    而由壁蝨帶原的「焦蟲症」，
+                    會破壞紅血球，導致氧氣難以被運送，
+                    若紅血球指數低於15%，就需要馬上輸血！”</p>
+                  <p><small>—<a href="https://reurl.cc/gm2z5R" class="text-light"
+                   target="_blank" style="text-decoration:none;">
+                   新手狗爸媽的常見QA｜專業獸醫—吳展祥</a>—</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleControls"
+            role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleControls"
+           role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
           </div>
         <!-- </div>
     </div>

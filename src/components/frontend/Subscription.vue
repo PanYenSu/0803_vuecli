@@ -54,7 +54,7 @@ export default {
         Swal.fire({
           icon: 'success',
           title: '電子報訂閱成功！',
-          text: '優惠碼: good88',
+          text: '優惠碼: GOODDAY',
         });
         this.email = '';
       } else {

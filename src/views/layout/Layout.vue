@@ -25,10 +25,7 @@
             <router-link to='/products' class="nav-link btn-light">全部商品</router-link>
         </li>
         <li class="nav-item px-md-3">
-            <router-link to='' class="nav-link btn-light">NEW ITEMS</router-link>
-        </li>
-        <li class="nav-item px-md-3">
-            <router-link to='' class="nav-link btn-light">SALES</router-link>
+            <router-link to='/health' class="nav-link btn-light">寵物健康</router-link>
         </li>
         <li class="nav-item px-md-3">
             <router-link to='/policy' class="nav-link btn-light">關於我們</router-link>
