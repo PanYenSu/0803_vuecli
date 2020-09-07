@@ -1,10 +1,65 @@
 <template>
-  <div>
-    <loading :active.sync="isLoading"></loading>
-    <div class="container ec-container my-5">
-      <div class="row">
-        <div class="col-md-6"
-             v-if="order.paid">
+  <div class="container py-3">
+      <loading :active.sync="isLoading"></loading>
+  <!-- 進度條 -->
+      <div class="progress">
+        <div class="progress-bar bg-warm3 progress-bar-striped progress-bar-animated"
+        role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+          style="width: 80%">
+          <span class="sr-only">80% 完成</span>
+        </div>
+      </div>
+
+        <div class="content">
+          <div class="header">
+          <h4 class="py-3">確認購買與付款方式</h4>
+          </div>
+        <div class="row">
+        <!--cartDetailContent -->
+          <div class="col-md-6">
+            <div class="border p-3 mx-2 mb-4 order-card">
+             <div class="card rounded-0 py-4 mb-2">
+            <div class="card-header border-bottom-0 bg-white px-4 py-0">
+              <h4 class="font-weight-bold mb-2">
+                訂單明細
+              </h4>
+              <hr>
+            </div>
+
+            <div class="card-body px-4 py-0">
+              <ul class="list-group list-group-flush">
+                <li v-for="(item, i) in order.products" :key="i"
+                    class="list-group-item px-0">
+                  <div class="d-flex mt-1">
+                    <img :src="item.product.imageUrl[0]"
+                         alt="" class="mr-2"
+                         style="width: 60px; height: 60px; object-fit: cover">
+                    <div class="w-100 d-flex flex-column">
+                      <div class="d-flex justify-content-between font-weight-bold">
+                        <h6>{{ item.product.title }}</h6>
+                        <p class="mb-0">x{{ item.quantity }}</p>
+                      </div>
+                      <div class="text-right">
+                        <p class="mb-0">
+                          {{ item.product.price | currency }}/{{ item.product.unit }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <hr>
+              <div class="d-flex justify-content-between">
+                <p class="mb-0 h5 font-weight-bold">應付金額</p>
+                <p class="mb-0 h5 font-weight-bold">
+                  {{ order.amount | currency }}
+                </p>
+              </div>
+            </div>
+
+        </div>
+        <!-- 訂單完成切換 -->
+        <div v-if="order.paid">
           <h2 class="text-brown font-weight-bold">訂單完成</h2>
           <div class="mt-4">
             <h5>感謝訂購</h5>
@@ -13,52 +68,46 @@
                     height: 300px;
                     background-size: cover;
                     background-position: center;
-                    backgroundImage: url('https://images.unsplash.com/photo-1495774856032-8b90bbb32b32?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80')">
+                    backgroundImage: url('https://images.unsplash.com/photo-1554830072-52d78d0d4c18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60')">
             </div>
           </div>
           <router-link to="/"
-                       class="btn btn-outline-dark mr-2 rounded-0 mt-4">
+            class="btn btn-outline-dark mr-2 rounded-0 mt-4">
             回到首頁
           </router-link>
         </div>
-        <div class="col-md-6"
-             v-else>
-          <h2 class="mb-5 text-brown font-weight-bold">付款</h2>
-          <p>差一步完成訂單，點選確認付款完成訂單</p>
-          <p>對於咖啡豆品質要求，收到訂單開始製作，
-            大約 1 ~ 2天出貨
+
+        <div v-else>
+          <!-- <h2 class="mb-5 text-brown font-weight-bold py-3">確認購買與付款方式</h2> -->
+          <hr>
+          <div>
+          <p class='text-left px-4'>下單前請再次確認您的購買明細及配送資訊，訂單成立後無法異動訂單內容
           </p>
+          <div class="form-group form-check text-left px-5">
+          <input v-model='enabled' type="checkbox" class="form-check-input" id="Check">
+          <label class="form-check-label" for="Check">
+            <p>我同意接受服務條款和隱私權政策</p></label>
+          </div>
         </div>
-        <div class="col-md-6 mt-3">
-          <div class="card rounded-0 py-4 mb-2">
+          <!-- <p class='text-left px-4'>我同意接受服務條款和隱私權政策</p> -->
+        </div>
+
+        </div>
+        </div>
+
+        <!-- order.payment -->
+        <div class="col-md-6">
+            <div class="border p-3 mx-2 mb-4 order-card">
+             <div class="card rounded-0 py-4 mb-2">
             <div class="card-header border-bottom-0 bg-white px-4 py-0">
-              <h2 class="text-brown font-weight-bold mb-5">
-                訂單資料
-              </h2>
+              <h4 class="font-weight-bold mb-2">
+                付款資訊確認
+              </h4>
+              <hr>
             </div>
             <div class="card-body px-4 py-0">
               <ul class="list-group list-group-flush">
-                <li v-for="( product, i ) in order.products"
-                    :key="i"
-                    class="list-group-item px-0">
-                  <div class="d-flex mt-2">
-                    <img :src="product.product.imageUrl[0]"
-                         alt=""
-                         class="mr-2"
-                         style="width: 60px; height: 60px; object-fit: cover">
-                    <div class="w-100 d-flex flex-column">
-                      <div class="d-flex justify-content-between font-weight-bold">
-                        <h5>{{ product.product.title }}</h5>
-                        <p class="mb-0">x{{ product.quantity }}</p>
-                      </div>
-                      <div class="text-right">
-                        <p class="mb-0">
-                          {{ product.product.price | money }}/{{ product.product.unit }}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </li>
+
                 <li class="list-group-item px-0 pb-0">
                   <table class="table">
                     <tbody>
@@ -93,6 +142,7 @@
                     </tbody>
                   </table>
                 </li>
+
                 <li class="list-group-item px-0 pb-0">
                   <table class="table">
                     <tbody>
@@ -102,7 +152,7 @@
                           付款金額
                         </th>
                         <td class="text-right border-0 px-0">
-                          {{ order.amount | money }}
+                          {{ order.amount | currency }}
                         </td>
                       </tr>
                       <tr>
@@ -124,7 +174,7 @@
                       </tr>
                     </tbody>
                   </table>
-                  <div class="text-right"
+                  <!-- <div class="text-right"
                        v-if="order.paid === false">
                     <button class="btn btn-danger"
                             @click.prevent="payOrder"
@@ -134,21 +184,36 @@
                          v-if="isProcessing">
                       </i>
                     </button>
-                  </div>
+                  </div> -->
                 </li>
+
               </ul>
             </div>
           </div>
-          <a href="#"
+          <!-- <a href="#"
              @click.prevent="backHome"
              class="btn btn-outline-dark mr-2 rounded-0 mb-4"
              v-if="order.paid === false">
             回到首頁
-          </a>
+          </a> -->
+<!-- justify-content-center -->
+          <div class="modal-footer d-flex justify-content-between">
+                <button type="button" class="w-40 badge-light2 btn btn-light"
+                 @click.prevent="backHome">
+                 <i class="returnIcon fas fa-angle-left"></i>回到首頁</button>
+                 <button  v-show="order.paid === false" type="submit"
+                  class="w-40 badge-secondary btn btn-primary"
+                  @click.prevent="payOrder" :disabled="!enabled===true">
+                    確認付款
+                    <i class="fas fa-spinner fa-spin" v-if="isProcessing"></i>
+                </button>
+            </div>
         </div>
+        </div>
+
+      </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -164,20 +229,21 @@ export default {
       uuid: process.env.VUE_APP_UUID,
       path: process.env.VUE_APP_APIPATH,
       orderId: '',
+      enabled: false,
       isLoading: false,
       isProcessing: false,
     };
   },
   created() {
-    this.orderId = this.$route.params.orderId;
+    this.orderId = this.$route.params.id;
+    console.log(this.orderId);
     this.getOrder();
   },
   methods: {
     getOrder() {
       const url = `${this.path}${this.uuid}/ec/orders/${this.orderId}`;
       this.isLoading = true;
-      this.$http
-        .get(url)
+      this.$http.get(url)
         .then((res) => {
           this.order = res.data.data;
           this.isLoading = false;
@@ -191,10 +257,9 @@ export default {
         });
     },
     payOrder() {
-      const url = `${process.env.VUE_APP_APIPATH}${process.env.VUE_APP_UUID}/ec/orders/${this.orderId}/paying`;
+      const url = `${this.path}${this.uuid}/ec/orders/${this.orderId}/paying`;
       this.isProcessing = true;
-      this.$http
-        .post(url)
+      this.$http.post(url)
         .then((res) => {
           if (res.data.data.paid) {
             this.getOrder();

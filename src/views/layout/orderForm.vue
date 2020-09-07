@@ -12,7 +12,7 @@
 
         <div class="content">
         <div class="header">
-          <h5 class="title py-3">訂購表單</h5>
+          <h4 class="py-3">訂購表單</h4>
         </div>
         <div class="row">
           <!--cartDetailContent -->
@@ -177,8 +177,7 @@
                  <i class="returnIcon fas fa-angle-left"></i>回購物車</button>
 
                 <button type="submit" @click.prevent="createOrder"
-                 class="w-25 badge-secondary btn btn-primary"
-                 @click="$router.push('/checkout')" :disabled="invalid">
+                 class="w-25 badge-secondary btn btn-primary" :disabled="invalid">
                     送出訂單
                 </button>
             </div>
@@ -276,14 +275,18 @@ export default {
     },
     createOrder() {
       this.isLoading = true;
+      // const { id } = this.$route.params;
       const url = `${this.path}${this.uuid}/ec/orders`;
       this.$http.post(url, this.form).then((response) => {
+        console.log(response.data.data);
+        const { id } = response.data.data;
+        console.log(id);
         if (response.data.data.id) {
           this.isLoading = false;
-          this.$router.push('/products');
+          this.$router.push(`/checkout/${id}`);
           this.$bus.$emit('get-cart');
           ToastsSweet.fire({
-            text: '您已完成訂單!',
+            text: '您已送出訂單!',
             icon: 'success',
           });
         }

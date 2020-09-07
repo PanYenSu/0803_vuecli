@@ -44,7 +44,7 @@ const routes = [
         component: () => import('../views/layout/orderForm.vue'),
       },
       {
-        path: '/checkout',
+        path: '/checkout/:id',
         component: () => import('../views/layout/Checkout.vue'),
       },
     ],
