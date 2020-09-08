@@ -9,11 +9,7 @@
             <span class="sr-only">30% 完成</span>
           </div>
         </div>
-        <!-- cartList modal -->
-    <!-- <div id='cartModal' class="modal fade bd-example-modal-lg" tabindex="-1"
-    role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content"> -->
+        <!-- cartList -->
           <div class="header">
             <h5 class="title py-3">購物清單</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -51,11 +47,6 @@
                   <a @click.prevent="$router.push(`/product/${item.product.id}`)" type="button">
                   <img :src="item.product.imageUrl[0]" alt="" class="mr-2"
                    style="width: 80px; height: 60px; object-fit: cover">
-                   <!-- <div class="pic" type="tooltip-options" data-toggle="tooltip"
-                  style="height:50px;
-                    background-size:cover;
-                    background-position:center;"
-                    :style="{backgroundImage:`url(${item.product.imageUrl[0]})`}"> -->
                   </a>
                   <!-- <div :style="`background: url(${item.product.imageUrl[0]});`"
                    class="cart-image"
@@ -114,11 +105,6 @@
           </div>
           </div>
           <div class="modal-footer d-flex justify-content-center">
-            <!-- badge-secondary btn btn-dark nav-link -->
-            <!-- <router-link to="/products" class="primary text-center d-block my-3">
-                  <i class="returnIcon fas fa-angle-left"></i>
-                  <span>繼續購物</span>
-              </router-link> -->
             <button type="button" class="w-25 badge-light2 btn btn-light"
              @click="$router.push(`/products`)">
              <!-- <i class="returnIcon fas fa-angle-left"></i> -->
@@ -126,7 +112,6 @@
             <button type="button" class="w-25 badge-secondary btn btn-primary"
             @click="$router.push(`/orderForm`)" :disabled="cartTotal===0">
             確認訂購
-            <!-- <i class="returnIcon fas fa-angle-right"></i> -->
             </button>
           </div>
 

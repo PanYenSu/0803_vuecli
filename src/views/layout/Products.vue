@@ -100,22 +100,16 @@
           <div class="row">
             <div v-for="(item) in filterCategories" :key="item.id" class="col-md-4">
               <div class="card border-0 mb-4 position-relative position-relative">
-                <router-link
-                  :to="`/product/${ item.id }`"
+
+                <router-link :to="`/product/${ item.id }`"
                   class="btn card-btn-box btn-sm">
                 <div class="pic" type="tooltip-options" data-toggle="tooltip"
-               data-placement="" title="">
-                  <!-- style="height:250px;
-                    background-size:cover;
-                    background-position:center;"
-                    :style="{backgroundImage:`url(${item.imageUrl[0]})`}">
-                    查看更多 -->
-
+                  data-placement="" title="">
                     <img :src="item.imageUrl[0]"
                     class="card-img-top rounded-0" alt="...">
                 </div>
-
                 </router-link>
+
                 <a href="#" class="text-dark">
                   <!-- <i class="far fa-heart position-absolute"
                   style="right: 16px; top: 16px;"></i> -->
