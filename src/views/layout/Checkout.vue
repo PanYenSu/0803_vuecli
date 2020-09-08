@@ -3,10 +3,17 @@
       <loading :active.sync="isLoading"></loading>
   <!-- 進度條 -->
       <div class="progress">
-        <div class="progress-bar bg-warm3 progress-bar-striped progress-bar-animated"
+        <div v-if="isPaid===false"
+         class="progress-bar bg-warm3 progress-bar-striped progress-bar-animated"
         role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
           style="width: 80%">
           <span class="sr-only">80% 完成</span>
+        </div>
+        <div v-else
+         class="progress-bar bg-warm3 progress-bar-striped progress-bar-animated"
+        role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+          style="width: 100%">
+          <span class="sr-only">100% 完成</span>
         </div>
       </div>
 
@@ -18,7 +25,44 @@
         <!--cartDetailContent -->
           <div class="col-md-6">
             <div class="border p-3 mx-2 mb-4 order-card">
+
+<!-- 訂單完成切換 -->
+<div class="card rounded-0 py-4 mb-2">
+        <div v-if="order.paid">
+          <h4 class="text-brown font-weight-bold">~ 感謝訂購 ~</h4>
+          <div class="">
+            <p>訂單付款完成預計1~2天出貨</p>
+            <div style="
+                    height: 400px;
+                    background-size: cover;
+                    background-position: center;
+                    backgroundImage: url('https://images.unsplash.com/photo-1554830072-52d78d0d4c18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60')">
+            </div>
+          </div>
+          <!-- <router-link to="/"
+            class="btn btn-outline-dark mr-2 rounded-0 mt-4">
+            回到首頁
+          </router-link> -->
+        </div>
+
+        <div v-else>
+          <!-- <h2 class="mb-5 text-brown font-weight-bold py-3">確認購買與付款方式</h2> -->
+          <hr>
+          <div>
+          <p class='text-left px-4'>付款前請再次確認您的購買明細及配送資訊，訂單成立後無法異動訂單內容
+          </p>
+          <div class="form-group form-check text-left px-5">
+          <input v-model='enabled' type="checkbox" class="form-check-input" id="Check">
+          <label class="form-check-label" for="Check">
+            <p>我同意接受服務條款和隱私權政策</p></label>
+          </div>
+        </div>
+          <!-- <p class='text-left px-4'>我同意接受服務條款和隱私權政策</p> -->
+        </div>
+        </div>
+
              <div class="card rounded-0 py-4 mb-2">
+
             <div class="card-header border-bottom-0 bg-white px-4 py-0">
               <h4 class="font-weight-bold mb-2">
                 訂單明細
@@ -57,39 +101,6 @@
               </div>
             </div>
 
-        </div>
-        <!-- 訂單完成切換 -->
-        <div v-if="order.paid">
-          <h2 class="text-brown font-weight-bold">訂單完成</h2>
-          <div class="mt-4">
-            <h5>感謝訂購</h5>
-            <p class="ml-2">訂單完成預計1~2天出貨</p>
-            <div style="
-                    height: 300px;
-                    background-size: cover;
-                    background-position: center;
-                    backgroundImage: url('https://images.unsplash.com/photo-1554830072-52d78d0d4c18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60')">
-            </div>
-          </div>
-          <router-link to="/"
-            class="btn btn-outline-dark mr-2 rounded-0 mt-4">
-            回到首頁
-          </router-link>
-        </div>
-
-        <div v-else>
-          <!-- <h2 class="mb-5 text-brown font-weight-bold py-3">確認購買與付款方式</h2> -->
-          <hr>
-          <div>
-          <p class='text-left px-4'>下單前請再次確認您的購買明細及配送資訊，訂單成立後無法異動訂單內容
-          </p>
-          <div class="form-group form-check text-left px-5">
-          <input v-model='enabled' type="checkbox" class="form-check-input" id="Check">
-          <label class="form-check-label" for="Check">
-            <p>我同意接受服務條款和隱私權政策</p></label>
-          </div>
-        </div>
-          <!-- <p class='text-left px-4'>我同意接受服務條款和隱私權政策</p> -->
         </div>
 
         </div>
@@ -198,15 +209,16 @@
           </a> -->
 <!-- justify-content-center -->
           <div class="modal-footer d-flex justify-content-between">
-                <button type="button" class="w-40 badge-light2 btn btn-light"
-                 @click.prevent="backHome">
-                 <i class="returnIcon fas fa-angle-left"></i>回到首頁</button>
-                 <button  v-show="order.paid === false" type="submit"
-                  class="w-40 badge-secondary btn btn-primary"
-                  @click.prevent="payOrder" :disabled="!enabled===true">
-                    確認付款
-                    <i class="fas fa-spinner fa-spin" v-if="isProcessing"></i>
-                </button>
+              <button  v-show="order.paid === false" type="submit"
+                class="w-100 badge-secondary btn btn-primary rounded-0"
+                @click.prevent="payOrder" :disabled="!enabled===true">
+                  確認付款
+                  <i class="fas fa-spinner fa-spin" v-if="isPaid"></i>
+              </button>
+              <button v-if="order.paid === true" type="button"
+                class="w-100 btn btn-outline-dark mr-2 rounded-0 mt-4"
+                @click.prevent="backHome">
+                <i class="returnIcon fas fa-angle-left"></i>繼續購物</button>
             </div>
         </div>
         </div>
@@ -231,26 +243,30 @@ export default {
       orderId: '',
       enabled: false,
       isLoading: false,
-      isProcessing: false,
+      isPaid: false,
     };
   },
   created() {
     this.orderId = this.$route.params.id;
-    console.log(this.orderId);
     this.getOrder();
   },
   methods: {
     getOrder() {
       const url = `${this.path}${this.uuid}/ec/orders/${this.orderId}`;
       this.isLoading = true;
+      this.isPaid = false;
       this.$http.get(url)
         .then((res) => {
           this.order = res.data.data;
+          if (this.order.paid === true) {
+            this.isPaid = true;
+          }
+
           this.isLoading = false;
         })
         .catch(() => {
           ToastsSweet.fire({
-            title: '無法取得資料，稍後再試',
+            title: '無法取得資料！',
             icon: 'error',
           });
           this.isLoading = false;
@@ -258,32 +274,41 @@ export default {
     },
     payOrder() {
       const url = `${this.path}${this.uuid}/ec/orders/${this.orderId}/paying`;
-      this.isProcessing = true;
+      this.isPaid = false;
       this.$http.post(url)
         .then((res) => {
           if (res.data.data.paid) {
+            this.isPaid = true;
             this.getOrder();
             ToastsSweet.fire({
-              title: '完成付款',
+              title: '感謝您完成付款！',
               icon: 'success',
             });
           }
-          this.isProcessing = false;
+          this.enabled = false;
         })
         .catch(() => {
           ToastsSweet.fire({
-            title: '付款失敗，稍後再試',
+            title: '唉呀 付款失敗!',
             icon: 'error',
           });
-          this.isProcessing = false;
+          this.isPaid = false;
+          this.enabled = false;
         });
     },
     backHome() {
-      this.$router.push('/');
-      Swal.fire({
-        icon: 'warning',
-        title: '尚未付款',
-      });
+      if (this.isPaid === false) {
+        Swal.fire({
+          icon: 'warning',
+          title: '您尚未完成付款！',
+        });
+      } else {
+        this.$router.push('/');
+        ToastsSweet.fire({
+          title: 'Hi~ 歡迎繼續選購！',
+          icon: 'success',
+        });
+      }
     },
   },
 };

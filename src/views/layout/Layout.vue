@@ -21,7 +21,7 @@
             <router-link to="/" class="nav-link">Home</router-link>
             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li> -->
-        <li class="nav-item px-md-3">
+        <li class="navFont nav-item px-md-3">
             <router-link to='/products' class="nav-link btn-light">全部商品</router-link>
         </li>
         <li class="nav-item px-md-3">
@@ -131,4 +131,7 @@ export default {
         width: 20px;
         height: 18px;
       }
+/* .navFont:hover {
+    font-size: 24px;
+} */
 </style>

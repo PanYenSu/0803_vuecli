@@ -7,7 +7,7 @@
       >
         <div class="shopping border-0" type="button"
         @click.prevent="getDetail(item.id)">
-          <div class="over-hidden">
+          <div class="over-hidden test1">
             <div style="height: 200px; background-size: cover; background-position: center"
               :style="{ backgroundImage: `url(${item.imageUrl[0]})` }"
             >
@@ -120,3 +120,14 @@ export default {
   },
 };
 </script>
+<style scoped>
+.test1 {
+    opacity:0.7;
+    /* background-color: rgb(85, 82, 78); */
+}
+.test1:hover {
+    opacity:1;
+    margin-top: -2px;
+    /* background-color: burlywood; */
+}
+</style>
