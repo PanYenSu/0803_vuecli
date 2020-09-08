@@ -17,10 +17,6 @@
         id="navbarSupportedContent">
         <div class="">
         <ul class="navbar-nav mr-auto ">
-        <!-- <li class="nav-item active">
-            <router-link to="/" class="nav-link">Home</router-link>
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li> -->
         <li class="navFont nav-item px-md-3">
             <router-link to='/products' class="nav-link btn-light">全部商品</router-link>
         </li>

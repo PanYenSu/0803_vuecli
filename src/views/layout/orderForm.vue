@@ -68,17 +68,12 @@
             </li>
           <li class="d-flex justify-content-between">
               <span class="fz-2 lh-4">運費</span>
-              <!-- <span v-if="(cartTotal-discount) < 1000" class="fz-2 lh-4">NT$60</span> -->
               <span class="fz-2 lh-4">
                 {{(cartTotal - discount)>=1000 ?'您已到達免運門檻  $0' : '$60'}}</span>
             </li>
         </ul>
         <div class="d-flex justify-content-between">
             <p class="mb-0 h5 font-weight-bold">應付金額</p>
-                <!-- <p v-if="coupon.enabled"
-                  class="mb-0 h4 font-weight-bold">
-                  {{ cartTotal * (coupon.percent / 100) | currency }}
-                </p> -->
                 <p class="mb-0 h4 font-weight-bold">
                   {{ payable | currency }}
                 </p>
@@ -269,7 +264,6 @@ export default {
             title: `${message}`,
             icon: 'error',
           });
-          // this.isEnable = false;
         }
       });
     },
@@ -278,9 +272,9 @@ export default {
       // const { id } = this.$route.params;
       const url = `${this.path}${this.uuid}/ec/orders`;
       this.$http.post(url, this.form).then((response) => {
-        console.log(response.data.data);
+        // console.log(response.data.data);
         const { id } = response.data.data;
-        console.log(id);
+        // console.log(id);
         if (response.data.data.id) {
           this.isLoading = false;
           this.$router.push(`/checkout/${id}`);
@@ -303,7 +297,6 @@ export default {
         this.cartProducts = res.data.data;
         // console.log(this.cartProducts);
         this.isLoading = false;
-        // 累加總金額
         this.cartTotal = 0;
         this.quantity = 0;
         this.payable = 0;
@@ -335,12 +328,7 @@ export default {
   computed: {
     getDiscount() {
       if (this.coupon.enabled) {
-        // return this.discount(() => {
-        // const data = item.category
-        //   .includes(this.filterCategory);
-        // return data;
         return this.cartTotal * (this.coupon.percent / 100);
-        // });
       }
       return this.discount;
     },

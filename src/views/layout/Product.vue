@@ -40,7 +40,6 @@
             <ol class="breadcrumb bg-white">
               <li class="breadcrumb-item">
                 <router-link to='/'>Home</router-link>
-                <!-- <a class="text-muted" href="./index.html">Home</a> -->
                 </li>
               <li class="breadcrumb-item">
                 <router-link to='/products'>Product</router-link>
@@ -90,11 +89,7 @@
             <!-- <router-link class='text-light btn-block' to='/cart'>
             <span class="badge-secondary btn btn-dark btn-block py-2">立即購買</span>
             </router-link> -->
-
-            <!-- <a href="#" class="btn btn-dark btn-block py-2"
-            @click.prevent="addToCart">立即購買</a> -->
           </div>
-          <!-- <p class="font-weight-light text-left" > - {{ product.description }}</p> -->
         </div>
 
        </div>
@@ -121,7 +116,6 @@
         <Returninfo /></div>
       </div>
 
-      <!-- <h3 class="font-weight-bold py-5">你可能會喜歡</h3> -->
       <section class="col-md-12 sametype-box mb-4 py-5">
         <h4 class="font-weight-bold mb-3 h4">你可能會喜歡</h4>
         <ProdSwiper :product="product" @update="getProduct" />
@@ -154,8 +148,6 @@ export default {
       },
       quantity: 1,
       tempQuantity: 0,
-      // cartProducts: {},
-      // cartTotal: 0,
       uuid: process.env.VUE_APP_UUID,
       path: process.env.VUE_APP_APIPATH,
       status: {
@@ -166,24 +158,18 @@ export default {
   },
   methods: {
     CountQuantity(quantity) {
-      // this.quantity = 0;
       this.quantity += quantity;
     },
     addToCart(item, quantity) {
-      // this.quantity = 0;
-      // this.status.isLoading = true;
       const url = `${this.path}${this.uuid}/ec/shopping`;
       const cart = {
         product: item.id,
         quantity,
       };
       this.$http.post(url, cart).then(() => {
-        // this.status.isLoading = false;
         $('#cartAdd').modal('show');
-        // this.quantity += cart.quantity;
         this.$bus.$emit('get-cart');
       }).catch((error) => {
-      // this.isLoading = false;
         $('#cartAlready').modal('show');
         this.status.loadingItem = '';
         console.log(error.response.data.errors);

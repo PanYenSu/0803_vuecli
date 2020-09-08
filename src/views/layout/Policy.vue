@@ -163,7 +163,6 @@ export default {
   components: {
     Subscription,
   },
-  name: 'About',
   data() {
     return {
     };

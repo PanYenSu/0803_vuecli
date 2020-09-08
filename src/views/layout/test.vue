@@ -8,17 +8,36 @@
 
 <div class="article test1 bd-content-title bg-warm h3 "
  type="tooltip-options" data-toggle="tooltip"
-               data-placement="" title=""
-                  style="color:white;
-                  height:250px;
-                    background-size:cover;
-                    background-position:center;
-                    backgroundImage:url(https://images.unsplash.com/photo-1570402383251-9f8a173630da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60)">
+        data-placement="" title=""
+          style="color:white;
+          height:250px;
+          background-size:cover;
+          background-position:center;
+          backgroundImage:url(https://images.unsplash.com/photo-1570402383251-9f8a173630da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60)">
 <p>6666666</p>
 <div class="more">
   <a href="#" target="_blank" title="777"  style="color:white;">view more</a>
   </div>
 </div>
+
+              <!-- test imgfont -->
+              <div>
+                  <img src="https://images.unsplash.com/photo-1545387804-ff58d3817f91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                   alt="" class="mr-2"
+                   style="width: 1070px; height:170px; object-fit: cover;opacity:0.5;">
+                <div class="carousel-item active">
+                <div class="row justify-content-center py-7 " style="opacity:1;">
+                  <div class="col-md-6 text-center text-light">
+                    <h3 class="py-1">狗狗會感冒嗎？</h3>
+                    <p class="my-1">“當然會囉！</p>
+                    <p><small>—<a href="https://reurl.cc/gm2z5R" class="text-light"
+                    target="_blank" style="text-decoration:none;">
+                    新手狗爸媽</a>—</small></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
     </div>
     </div>
 </template>

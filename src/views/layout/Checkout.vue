@@ -26,27 +26,39 @@
           <div class="col-md-6">
             <div class="border p-3 mx-2 mb-4 order-card">
 
-<!-- 訂單完成切換 -->
-<div class="card rounded-0 py-4 mb-2">
+    <!-- 訂單完成切換 -->
+    <div class="card rounded-0 py-4 mb-2">
         <div v-if="order.paid">
-          <h4 class="text-brown font-weight-bold">~ 感謝訂購 ~</h4>
+          <!-- <h4 class="text-brown font-weight-bold">~ 感謝訂購 ~</h4>
           <div class="">
             <p>訂單付款完成預計1~2天出貨</p>
-            <div style="
-                    height: 400px;
+            <div style="height: 400px;
                     background-size: cover;
                     background-position: center;
                     backgroundImage: url('https://images.unsplash.com/photo-1554830072-52d78d0d4c18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60')">
             </div>
+          </div> -->
+           <div>
+             <img src="https://images.unsplash.com/photo-1554830072-52d78d0d4c18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+                alt="" class="mr-2"
+                style="width: 400px; opacity:0.7; object-fit: cover;">
+            <div class="carousel-item active">
+            <div class="row justify-content-center py-7 " style="opacity:1;">
+              <div class="col-md-6 text-center text-light">
+                <h3 class="py-1">~ 感謝訂購 ~</h3>
+                <!-- <p class="my-1">訂單付款完成預計1~2天出貨</p> -->
+                <p id="logo"><small>
+                  <!-- <a href="https://reurl.cc/gm2z5R" class="text-light"
+                target="_blank" style="text-decoration:none;"> -->
+                <router-link to="/" class="text-light"> - ChaChaBo -</router-link>
+                </small></p>
+              </div>
+            </div>
           </div>
-          <!-- <router-link to="/"
-            class="btn btn-outline-dark mr-2 rounded-0 mt-4">
-            回到首頁
-          </router-link> -->
         </div>
+      </div>
 
         <div v-else>
-          <!-- <h2 class="mb-5 text-brown font-weight-bold py-3">確認購買與付款方式</h2> -->
           <hr>
           <div>
           <p class='text-left px-4'>付款前請再次確認您的購買明細及配送資訊，訂單成立後無法異動訂單內容
@@ -57,55 +69,51 @@
             <p>我同意接受服務條款和隱私權政策</p></label>
           </div>
         </div>
-          <!-- <p class='text-left px-4'>我同意接受服務條款和隱私權政策</p> -->
         </div>
         </div>
 
-             <div class="card rounded-0 py-4 mb-2">
+        <div class="card rounded-0 py-4 mb-2">
+          <div class="card-header border-bottom-0 bg-white px-4 py-0">
+            <h4 class="font-weight-bold mb-2">
+              訂單明細
+            </h4>
+            <hr>
+          </div>
 
-            <div class="card-header border-bottom-0 bg-white px-4 py-0">
-              <h4 class="font-weight-bold mb-2">
-                訂單明細
-              </h4>
-              <hr>
-            </div>
-
-            <div class="card-body px-4 py-0">
-              <ul class="list-group list-group-flush">
-                <li v-for="(item, i) in order.products" :key="i"
-                    class="list-group-item px-0">
-                  <div class="d-flex mt-1">
-                    <img :src="item.product.imageUrl[0]"
-                         alt="" class="mr-2"
-                         style="width: 60px; height: 60px; object-fit: cover">
-                    <div class="w-100 d-flex flex-column">
-                      <div class="d-flex justify-content-between font-weight-bold">
-                        <h6>{{ item.product.title }}</h6>
-                        <p class="mb-0">x{{ item.quantity }}</p>
-                      </div>
-                      <div class="text-right">
-                        <p class="mb-0">
-                          {{ item.product.price | currency }}/{{ item.product.unit }}
-                        </p>
-                      </div>
+          <div class="card-body px-4 py-0">
+            <ul class="list-group list-group-flush">
+              <li v-for="(item, i) in order.products" :key="i"
+                  class="list-group-item px-0">
+                <div class="d-flex mt-1">
+                  <img :src="item.product.imageUrl[0]"
+                        alt="" class="mr-2"
+                        style="width: 60px; height: 60px; object-fit: cover">
+                  <div class="w-100 d-flex flex-column">
+                    <div class="d-flex justify-content-between font-weight-bold">
+                      <h6>{{ item.product.title }}</h6>
+                      <p class="mb-0">x{{ item.quantity }}</p>
+                    </div>
+                    <div class="text-right">
+                      <p class="mb-0">
+                        {{ item.product.price | currency }}/{{ item.product.unit }}
+                      </p>
                     </div>
                   </div>
-                </li>
-              </ul>
-              <hr>
-              <div class="d-flex justify-content-between">
-                <p class="mb-0 h5 font-weight-bold">應付金額</p>
-                <p class="mb-0 h5 font-weight-bold">
-                  {{ order.amount | currency }}
-                </p>
-              </div>
+                </div>
+              </li>
+            </ul>
+            <hr>
+            <div class="d-flex justify-content-between">
+              <p class="mb-0 h5 font-weight-bold">應付金額</p>
+              <p class="mb-0 h5 font-weight-bold">
+                {{ order.amount | currency }}
+              </p>
             </div>
-
+          </div>
         </div>
 
         </div>
         </div>
-
         <!-- order.payment -->
         <div class="col-md-6">
             <div class="border p-3 mx-2 mb-4 order-card">
@@ -118,7 +126,6 @@
             </div>
             <div class="card-body px-4 py-0">
               <ul class="list-group list-group-flush">
-
                 <li class="list-group-item px-0 pb-0">
                   <table class="table">
                     <tbody>
@@ -180,24 +187,14 @@
                         <td class="text-right border-0 px-0 pt-0">
                           <span v-if="!order.paid">尚未付款</span>
                           <strong v-else
-                                  class="text-success">付款完成</strong>
+                                  class="text-success">付款完成
+                                  </strong>
                         </td>
                       </tr>
                     </tbody>
                   </table>
-                  <!-- <div class="text-right"
-                       v-if="order.paid === false">
-                    <button class="btn btn-danger"
-                            @click.prevent="payOrder"
-                            :disabled="isProcessing">
-                      確認付款
-                      <i class="fas fa-spinner fa-spin"
-                         v-if="isProcessing">
-                      </i>
-                    </button>
-                  </div> -->
+                  <strong  v-show="isPaid" class="my-1 text-dark">訂單付款完成預計1~2天出貨</strong >
                 </li>
-
               </ul>
             </div>
           </div>
@@ -207,15 +204,14 @@
              v-if="order.paid === false">
             回到首頁
           </a> -->
-<!-- justify-content-center -->
           <div class="modal-footer d-flex justify-content-between">
               <button  v-show="order.paid === false" type="submit"
                 class="w-100 badge-secondary btn btn-primary rounded-0"
-                @click.prevent="payOrder" :disabled="!enabled===true">
+                @click="payOrder" :disabled="!enabled===true">
                   確認付款
                   <i class="fas fa-spinner fa-spin" v-if="isPaid"></i>
               </button>
-              <button v-if="order.paid === true" type="button"
+              <button type="button"
                 class="w-100 btn btn-outline-dark mr-2 rounded-0 mt-4"
                 @click.prevent="backHome">
                 <i class="returnIcon fas fa-angle-left"></i>繼續購物</button>
@@ -303,7 +299,7 @@ export default {
           title: '您尚未完成付款！',
         });
       } else {
-        this.$router.push('/');
+        this.$router.push('/products');
         ToastsSweet.fire({
           title: 'Hi~ 歡迎繼續選購！',
           icon: 'success',
@@ -315,6 +311,12 @@ export default {
 </script>
 
 <style scoped>
+#logo {
+  /* font-family: 'Ranchers', cursive; */
+  font-family: 'Ruslan Display', cursive;
+  /* font-family: 'Permanent Marker', cursive; */
+  font-size: 24px;
+}
   .ec-container {
     min-height: calc(100vh - 56px - 76px);
   }
