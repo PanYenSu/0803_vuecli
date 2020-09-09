@@ -47,7 +47,7 @@
             <li class="d-flex justify-content-between">
                 <div class="input-group mt-3 input-group-sm">
                     <input type="text" class="form-control"
-                      v-model="couponCode" placeholder="我的優惠碼" />
+                      v-model="couponCode" placeholder="我的優惠碼 GOODDAY" />
                     <div class="input-group-append">
                       <button class="btn btn-warm" type="button"
                         @click.prevent="getCoupon" :disabled="isEnable">
