@@ -64,7 +64,8 @@
                         </div>
                         <input id="inlineFormInputGroupUsername" type="text"
                         class="form-control text-center" :value="item.quantity"
-                        @keyup.enter="quantityUpdata(item.product.id, $event.target.value)">
+                        @keyup.enter="quantityUpdata(item.product.id, $event.target.value)"
+                         disabled>
                         <div class="input-group-append">
                           <button class="btn btn-outline-primary"
                             type="button"
