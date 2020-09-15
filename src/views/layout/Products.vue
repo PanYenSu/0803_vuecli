@@ -7,7 +7,8 @@
     <div class="position-relative d-flex align-items-center justify-content-center"
     style="min-height: 300px;">
     <!-- https://images.unsplash.com/photo-1577345995528-93e37eee8d8c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1800&q=60 -->
-      <div class="position-absolute" style="top:0; bottom: 0; left: 0; right: 0;
+      <div data-aos="zoom-out"
+      class="position-absolute" style="top:0; bottom: 0; left: 0; right: 0;
        background-image: url(https://images.unsplash.com/photo-1558041042-c80ca522a949?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1300&q=60);
         background-position: center center; opacity: 0.3;"></div>
       <!-- <h5 class="font-weight-bold">
@@ -98,7 +99,8 @@
         <!-- 產品列表 start -->
         <div class="col-md-10">
           <div class="row">
-            <div v-for="(item) in filterCategories" :key="item.id" class="col-md-4">
+            <div data-aos="fade-up"
+             v-for="(item) in filterCategories" :key="item.id" class="col-md-4">
               <div class="card border-0 mb-4 position-relative position-relative">
 
                 <router-link :to="`/product/${ item.id }`"
@@ -155,7 +157,7 @@
       <Subscription />
     </div>
 <!-- goTop -->
-<div class="goTop">
+<div data-aos="slide-left" class="goTop">
   <a href="#" class="goTopBtn jq-goTop">
     <i class="fas fa-arrow-alt-circle-up fa-3x"></i>
   </a>

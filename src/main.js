@@ -22,6 +22,8 @@ import VueAwesomeSwiper from 'vue-awesome-swiper';
 // import Swiper styles
 import 'swiper/css/swiper.css';
 // import { default as swal } from 'sweetalert2';
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
 
 import App from './App.vue';
 import router from './router';
@@ -58,6 +60,13 @@ Vue.filter('currency', (num) => {
 });
 
 new Vue({
+  created() {
+    AOS.init(
+      {
+        duration: 2000,
+      },
+    );
+  },
   router,
   render: (h) => h(App),
 }).$mount('#app');

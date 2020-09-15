@@ -42,7 +42,7 @@
                       class="d-block w-100" alt="...">
                     </div>
                     </div>
-      <div class="col-6 py-5 text-left">
+      <div data-aos="fade" class="col-6 py-5 text-left">
             <p> 我們所販售的每一樣產品都是經過嚴格的挑選，
               <br>想為大多數人與毛孩創造更美好的生活，
               <br>將潮流風格與設計品味在寵物用品上作呈現，

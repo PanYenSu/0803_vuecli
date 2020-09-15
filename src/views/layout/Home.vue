@@ -2,7 +2,7 @@
   <div>
     <loading :active.sync="isLoading"></loading>
     <div class="position-relative">
-      <div class="position-absolute" style="top:0; bottom:0; left:0; right:0; background-image: url(https://images.unsplash.com/photo-1466995937966-2e6f29c6ed60?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1900&q=60);
+      <div data-aos="zoom-out" class="position-absolute" style="top:0; bottom:0; left:0; right:0; background-image: url(https://images.unsplash.com/photo-1466995937966-2e6f29c6ed60?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1900&q=60);
       background-position: center center; opacity: 0.3;"></div>
       <div class="container d-flex flex-column" style="min-height: 100vh;">
         <!-- <nav class="navbar navbar-expand-lg navbar-light">
@@ -23,7 +23,8 @@
             </div>
           </div>
         </nav> -->
-        <div class="row justify-content-center my-auto">
+        <div data-aos="fade-up"
+        class="row justify-content-center my-auto">
           <div class="col-md-4 text-center">
             <router-link to='/products' class="nav-link">
             <h2 id='pet'>Pet Supplies</h2></router-link>
@@ -35,11 +36,11 @@
     </div>
   <div></div>
     <div class="container">
-      <div class="mt-5 text-center">
+      <div data-aos="fade-up" class="mt-5 text-center">
                   <h3>Hot Sales</h3>
                   <p><small>— 熱賣商品 —</small></p>
                 </div>
-      <div class="row mt-1">
+      <div data-aos="fade-up" class="row mt-1">
         <div class="col-md-4 mt-md-4">
           <div class="card border-0 mb-4" @click="$router.push(`/product/${id[0]}`)" type="button">
             <!-- <img
@@ -107,7 +108,7 @@
     <div class="container my-7">
       <hr>
       <div class="row">
-        <div class="col-md-6  mt-5">
+        <div data-aos="fade-right" class="col-md-6  mt-5">
           <img src="https://images.unsplash.com/photo-1556912035-f3b4093412af?ixlib=rb-1.2.1&auto=format&fit=crop&w=1960&q=80" alt="" class="img-fluid">
         </div>
         <div class="col-md-4 m-auto text-center">
@@ -120,7 +121,7 @@
       <div class="row flex-row-reverse justify-content-between mt-4">
         <div class="col-md-6">
           <!-- https://images.unsplash.com/photo-1551290464-66719418ca54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60 -->
-          <img src="https://images.unsplash.com/photo-1508873696983-2dfd5898f08b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1960&q=80" alt="" class="img-fluid">
+          <img data-aos="fade-left" src="https://images.unsplash.com/photo-1508873696983-2dfd5898f08b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1960&q=80" alt="" class="img-fluid">
         </div>
         <div class="col-md-4 m-auto text-center">
           <h4 class="mt-4">釋放精力</h4>

@@ -5,8 +5,14 @@
 <!-- test hover-->
 <!-- style="text-align:center; width:300px;height:100px" -->
 <!-- <div class="article test1 bd-content-title bg-warm h3" -->
+<div data-aos="fade-up">
+  <h1 >Lorem ipsum dolor sit amet consectetur
+     adipisicing elit. Incidunt, autem.
+  </h1>
+</div>
+<div data-aos="slide-left"
 
-<div class="article test1 bd-content-title bg-warm h3 "
+  class="article test1 bd-content-title bg-warm h3 "
  type="tooltip-options" data-toggle="tooltip"
         data-placement="" title=""
           style="color:white;
@@ -19,9 +25,16 @@
   <a href="#" target="_blank" title="777"  style="color:white;">view more</a>
   </div>
 </div>
-
+<div>
+  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+     Placeat nomnis ut provident<br>
+     eaque cumque suscipit autem doloribus.</p><br>
+     <p>Lorem ing elit.<br>
+     Placeat nisi pariatur blanditiis omnis ut provident
+     eaque cumque suscipit autem doloribus.</p><br>
+</div>
               <!-- test imgfont -->
-              <div>
+              <div data-aos="fade-up-right" data-aos-duration="4000">
                   <img src="https://images.unsplash.com/photo-1545387804-ff58d3817f91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
                    alt="" class="mr-2"
                    style="width: 1070px; height:170px; object-fit: cover;opacity:0.5;">
@@ -66,4 +79,8 @@ display: none;  /* 平常設定不要顯示 */
     /* 放大 */
     /* transform:scale(1.2); */
 }
+/* body[data-aos-duration='4000'] [data-aos],
+  [data-aos][data-aos][data-aos-duration='4000'] {
+    transition-duration: 8000ms;
+  } */
 </style>
