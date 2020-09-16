@@ -12,9 +12,6 @@
         <!-- cartList -->
           <div class="header">
             <h5 class="title py-3">購物清單</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
           </div>
           <div class="body">
           <div class="col-md-12">
@@ -58,8 +55,9 @@
                         <div class="input-group-prepend">
                           <button class="btn btn-outline-primary"
                             type="button"
-                            @click="quantityUpdata(item.product.id, item.quantity + 1)">
-                            +
+                            @click="quantityUpdata(item.product.id, item.quantity - 1)"
+                            :disabled="item.quantity === 1">
+                            -
                           </button>
                         </div>
                         <input id="inlineFormInputGroupUsername" type="text"
@@ -69,9 +67,8 @@
                         <div class="input-group-append">
                           <button class="btn btn-outline-primary"
                             type="button"
-                            @click="quantityUpdata(item.product.id, item.quantity - 1)"
-                            :disabled="item.quantity === 1">
-                            -
+                           @click="quantityUpdata(item.product.id, item.quantity + 1)">
+                            +
                           </button>
                         </div>
                       </div>
@@ -84,14 +81,6 @@
             </td>
           </tr>
             </tbody>
-            <!-- <tfoot >
-                  <tr class="">
-                    <td class="text-right ">
-                      共 {{ quantity }} 件 / 商品金額總計 /
-                      <strong class="text-danger"> NT {{ cartTotal| currency }} </strong>
-                    </td>
-                  </tr>
-                </tfoot> -->
           </table>
           <hr>
           <div class="d-flex justify-content-end">

@@ -27,6 +27,7 @@ import 'aos/dist/aos.css'; // You can also use <link> for styles
 
 import App from './App.vue';
 import router from './router';
+import currencyFilter from './filters/currency';
 
 window.$ = jquery;
 
@@ -51,13 +52,15 @@ Vue.component('ValidationObserver', ValidationObserver);
 Vue.component('ValidationProvider', ValidationProvider);
 Vue.use(VueAwesomeSwiper);
 
-Vue.filter('currency', (num) => {
-  const n = Number(num);
-  return `$${n.toFixed(0).replace(/./g, (c, i, a) => {
-    const currency = (i && c !== '.' && ((a.length - i) % 3 === 0) ? `, ${c}`.replace(/\s/g, '') : c);
-    return currency;
-  })}`;
-});
+Vue.filter('currency', currencyFilter);
+// Vue.filter('currency', (num) => {
+//   const n = Number(num);
+//   return `$${n.toFixed(0).replace(/./g, (c, i, a) => {
+//     const currency =
+//  (i && c !== '.' && ((a.length - i) % 3 === 0) ? `, ${c}`.replace(/\s/g, '') : c);
+//     return currency;
+//   })}`;
+// });
 
 new Vue({
   created() {
