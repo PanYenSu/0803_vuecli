@@ -13,8 +13,8 @@
             >
             </div>
           </div>
-          <div class="same-content">
-            <h5 class="mb-3">
+          <div class="same-content mt-3">
+            <h5 class="mb-3 ">
               {{ item.title }}
             </h5>
             <div class="">

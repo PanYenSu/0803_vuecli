@@ -12,13 +12,13 @@
             <div class="carousel-inner">
               <div class="carousel-item active" >
                 <img :src= "product.imageUrl" style="max-height:420px; object-fit: contain;"
-                class="d-block w-100" alt="...">
+                class="d-block w-100" :alt="product.title">
               </div>
               <div v-for="(item, i) in product.imageUrl" :key="i"
               class="carousel-item" style="max-height:420px;">
               <!-- <img :src= "product.imageUrl[i]" style="height:430px; weight:550px;" -->
                 <img :src= "product.imageUrl[i]" style="max-height:420px; object-fit: contain;"
-                class="d-block w-100" alt="...">
+                class="d-block w-100" :alt="product.title">
               </div>
 
             </div>

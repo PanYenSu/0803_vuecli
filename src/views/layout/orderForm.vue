@@ -90,7 +90,7 @@
                 付款方式：WebATM、ATM、Barcode、Credit、ApplePay、GooglePay
                 留言：非必填 -->
           <!-- 表單進行驗證 -->
-        <validation-observer v-slot="{ invalid }" class="col-md-12">
+        <validation-observer v-slot="{ invalid }" class="col-md-12 text-left mt-3">
           <form @submit.prevent="createOrder">
             <div class="form-group">
               <!-- input 驗證 -->
@@ -269,6 +269,8 @@ export default {
     },
     createOrder() {
       this.isLoading = true;
+      const s = this.payable.toString();
+      this.$bus.$emit('get-pay', s);
       // const { id } = this.$route.params;
       const url = `${this.path}${this.uuid}/ec/orders`;
       this.$http.post(url, this.form).then((response) => {
@@ -295,11 +297,11 @@ export default {
       const url = `${this.path}${this.uuid}/ec/shopping`;
       this.$http.get(url).then((res) => {
         this.cartProducts = res.data.data;
-        // console.log(this.cartProducts);
+        console.log(this.cartProducts);
         this.isLoading = false;
         this.cartTotal = 0;
         this.quantity = 0;
-        this.payable = 0;
+        // this.payable = 0;
         this.cartProducts.forEach((item) => {
           this.cartTotal += item.product.price * item.quantity;
           this.quantity += item.quantity;

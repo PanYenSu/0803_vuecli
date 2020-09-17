@@ -170,7 +170,8 @@
                           付款金額
                         </th>
                         <td class="text-right border-0 px-0">
-                          {{ order.amount | currency }}
+                           {{ payable | currency }}
+                          <!-- {{ order.amount | currency }} -->
                         </td>
                       </tr>
                       <tr>
@@ -240,14 +241,30 @@ export default {
       enabled: false,
       isLoading: false,
       isPaid: false,
+      payable: 0,
+      test: [],
     };
   },
   created() {
     this.orderId = this.$route.params.id;
     this.getOrder();
+    // this.$bus.$on('get-pay', (e) => {
+    //   this.test.push(e);
+    //   console.log(this.test);
+    // });
+    // console.log(this.test);
   },
   methods: {
+    // test(e) {
+    //   this.payable = parseInt(e);
+    //   console.log(this.payable);
+    // },
     getOrder() {
+      this.$bus.$on('get-pay', (e) => {
+        this.test.push(e);
+        console.log(this.test);
+      });
+      console.log(this.test);
       const url = `${this.path}${this.uuid}/ec/orders/${this.orderId}`;
       this.isLoading = true;
       this.isPaid = false;
